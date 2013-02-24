@@ -11,11 +11,11 @@ This is a work in progress.
 In App Delegate
 
 // switch this to run normal box2d demos
- if (0){
-     [scene addChild: [MenuLayer menuWithEntryID:0]];
- }else{
-     [scene  addChild: [[CCBox2DView alloc] initWithEntryID:0]]; 
- }
+	 if (0){
+	     [scene addChild: [MenuLayer menuWithEntryID:0]];
+	 }else{
+	     [scene  addChild: [[CCBox2DView alloc] initWithEntryID:0]]; 
+	 }
 
 
 Podfile
