@@ -42,8 +42,7 @@
 
         [self addChild: world];
         
-        
-        
+       
         CCBodySprite* ground = [CCBodySprite node];
 		ground.physicsType = kStatic;
         [world addChild:ground];
@@ -51,28 +50,33 @@
         // Define the ground box shape.
         CCArray* bottom = [[CCArray alloc]initWithCapacity:4];
 		[bottom addObject:[NSValue valueWithCGPoint:ccp(0, 0)]];
+        [bottom addObject:[NSValue valueWithCGPoint:ccp(1, 1)]];
         [bottom addObject:[NSValue valueWithCGPoint:ccp(screenSize.width, 0)]];
         CCShape *ccBottom = [CCShape polygonWithVertices:bottom];
         [ground addShape:ccBottom named:@"bottom"];
         
 		CCArray* top = [CCArray arrayWithCapacity:4];
 		[top addObject:[NSValue valueWithCGPoint:ccp(0, screenSize.height)]];
+        [top addObject:[NSValue valueWithCGPoint:ccp(1, screenSize.height-1)]];
 		[top addObject:[NSValue valueWithCGPoint:ccp(screenSize.width, screenSize.height)]];
+         [top addObject:[NSValue valueWithCGPoint:ccp(screenSize.width, screenSize.height-1)]];
         [ground addShape:[CCShape polygonWithVertices:top] named:@"top"];
         
 		CCArray* left = [CCArray arrayWithCapacity:4];
 		[left addObject:[NSValue valueWithCGPoint:ccp(0, screenSize.height)]];
 		[left addObject:[NSValue valueWithCGPoint:ccp(0, 0)]];
+        [left addObject:[NSValue valueWithCGPoint:ccp(1, 1)]];
 		[ground addShape:[CCShape polygonWithVertices:left] named:@"left"];
 		
 		CCArray* right = [CCArray arrayWithCapacity:4];
 		[right addObject:[NSValue valueWithCGPoint:ccp(screenSize.width, screenSize.height)]];
+        [right addObject:[NSValue valueWithCGPoint:ccp(screenSize.width-1, screenSize.height)]];
 		[right addObject:[NSValue valueWithCGPoint:ccp(screenSize.width, 0)]];
         [ground addShape:[CCShape polygonWithVertices:right] named:@"right"];
 		
  
         CCBodySprite *bd = [CCBodySprite node];
-        CCShape *polygonShape = [CCShape boxWithRect:CGRectMake(0, 0, 1.5f, 1.5f)];
+        CCShape *polygonShape = [CCShape boxWithRect:CGRectMake(0, 0, 15.0f, 15.0f)];
         [bd addShape:polygonShape named:@"polygonShape"];
         bd.position = ccp(-40.0f, 5.0f);
         bd.bullet = YES;
