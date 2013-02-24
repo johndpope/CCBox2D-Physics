@@ -1,18 +1,23 @@
 //
 //  main.m
-//  CCBox2D Test
+//  Box2D
 //
-//  Created by John Pope on 24/02/13.
-//  Copyright (c) 2013 Bell George. All rights reserved.
+//  Created by Simon Oliver on 14/01/2009.
+//  Copyright HandCircus 2009. All rights reserved.
 //
+
+//
+// File modified for cocos2d integration
+// http://www.cocos2d-iphone.org
+//
+
 
 #import <UIKit/UIKit.h>
 
-#import "BGAppDelegate.h"
+int main(int argc, char *argv[]) {
 
-int main(int argc, char *argv[])
-{
-    @autoreleasepool {
-        return UIApplicationMain(argc, argv, nil, NSStringFromClass([BGAppDelegate class]));
-    }
+    NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
+    int retVal = UIApplicationMain(argc, argv, nil, @"Box2DAppDelegate");
+    [pool release];
+    return retVal;
 }
