@@ -40,6 +40,7 @@
 		836FFE8416DA097500EE2A69 /* r2-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 836FFE7216DA097500EE2A69 /* r2-hd.png */; };
 		836FFE8516DA097500EE2A69 /* r2-ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 836FFE7316DA097500EE2A69 /* r2-ipad.png */; };
 		836FFE8616DA097500EE2A69 /* r2.png in Resources */ = {isa = PBXBuildFile; fileRef = 836FFE7416DA097500EE2A69 /* r2.png */; };
+		836FFE8B16DA2ACB00EE2A69 /* CCBox2DView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 836FFE8A16DA2ACA00EE2A69 /* CCBox2DView.mm */; };
 		B6B0BBFECE1F45E3A9CC5EA9 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 91D1B226CAFA40E6AC4DC9C5 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -130,6 +131,8 @@
 		836FFE7216DA097500EE2A69 /* r2-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "r2-hd.png"; sourceTree = "<group>"; };
 		836FFE7316DA097500EE2A69 /* r2-ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "r2-ipad.png"; sourceTree = "<group>"; };
 		836FFE7416DA097500EE2A69 /* r2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = r2.png; sourceTree = "<group>"; };
+		836FFE8916DA2AC900EE2A69 /* CCBox2DView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCBox2DView.h; sourceTree = "<group>"; };
+		836FFE8A16DA2ACA00EE2A69 /* CCBox2DView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CCBox2DView.mm; sourceTree = "<group>"; };
 		91D1B226CAFA40E6AC4DC9C5 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -184,11 +187,11 @@
 		836FFDB116D9EB1000EE2A69 /* CCBox2D Test */ = {
 			isa = PBXGroup;
 			children = (
+				836FFE8916DA2AC900EE2A69 /* CCBox2DView.h */,
+				836FFE8A16DA2ACA00EE2A69 /* CCBox2DView.mm */,
+				836FFE8716DA26CF00EE2A69 /* c++ */,
 				836FFDC816D9EEB000EE2A69 /* Box2DAppDelegate.h */,
 				836FFDC916D9EEB000EE2A69 /* Box2DAppDelegate.mm */,
-				836FFDD416D9EF7E00EE2A69 /* iPhoneTest.h */,
-				836FFDD516D9EF7F00EE2A69 /* iPhoneTest.mm */,
-				836FFDD616D9EF7F00EE2A69 /* iPhoneTestEntries.mm */,
 				836FFDCE16D9EF7200EE2A69 /* Box2DView.h */,
 				836FFDCF16D9EF7300EE2A69 /* Box2DView.mm */,
 				836FFDCB16D9EF2600EE2A69 /* BaseAppController.h */,
@@ -289,6 +292,16 @@
 				836FFE7416DA097500EE2A69 /* r2.png */,
 			);
 			path = Images;
+			sourceTree = "<group>";
+		};
+		836FFE8716DA26CF00EE2A69 /* c++ */ = {
+			isa = PBXGroup;
+			children = (
+				836FFDD416D9EF7E00EE2A69 /* iPhoneTest.h */,
+				836FFDD516D9EF7F00EE2A69 /* iPhoneTest.mm */,
+				836FFDD616D9EF7F00EE2A69 /* iPhoneTestEntries.mm */,
+			);
+			name = "c++";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -400,6 +413,7 @@
 				836FFDD816D9EF8000EE2A69 /* iPhoneTest.mm in Sources */,
 				836FFDD916D9EF8000EE2A69 /* iPhoneTestEntries.mm in Sources */,
 				836FFDDD16D9F00100EE2A69 /* GLES-Render.mm in Sources */,
+				836FFE8B16DA2ACB00EE2A69 /* CCBox2DView.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

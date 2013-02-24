@@ -15,6 +15,8 @@
 #import "Box2DAppDelegate.h"
 #import "Box2DView.h"
 #import "cocos2d.h"
+#import "CCBox2DView.h"
+#import "CCWorldLayer.h"
 
 @implementation Box2DAppDelegate
 
@@ -36,8 +38,14 @@
 		CCLOG(@"Retina Display Not supported");
 
 	CCScene *scene = [CCScene node];
-	[scene addChild: [MenuLayer menuWithEntryID:0]];
-
+    // switch this to run normal box2d demos
+    if (0){
+        [scene addChild: [MenuLayer menuWithEntryID:0]];
+    }else{
+        [scene  addChild: [[CCBox2DView alloc] initWithEntryID:0]]; 
+    }
+	
+  
 	[director_ pushScene: scene];
 
 	return YES;

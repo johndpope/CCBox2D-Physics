@@ -1,3 +1,6 @@
+#import "CCShape.h"
+#import "CCBodySprite.h"
+
 
 #ifndef AddPair_H
 #define AddPair_H
@@ -21,7 +24,7 @@ public:
 			float minY = 4.0f;
 			float maxY = 6.0f;
 
-			for (int32 i = 0; i < 400; ++i)
+			for (int32 i = 0; i < 100; ++i)
 			{
 				b2BodyDef bd;
 				bd.type = b2_dynamicBody;
@@ -34,13 +37,24 @@ public:
 		{
 			b2PolygonShape shape;
 			shape.SetAsBox(1.5f, 1.5f);
-			b2BodyDef bd;
+			/*b2BodyDef bd;
 			bd.type = b2_dynamicBody;
 			bd.position.Set(-40.0f,5.0f);
 			bd.bullet = true;
 			b2Body* body = m_world->CreateBody(&bd);
 			body->CreateFixture(&shape, 1.0f);
-			body->SetLinearVelocity(b2Vec2(150.0f, 0.0f));
+			body->SetLinearVelocity(b2Vec2(150.0f, 0.0f));*/
+            
+            
+            CCBodySprite *bd = [[CCBodySprite alloc]init];
+            CCShape *polygonShape = [CCShape boxWithRect:CGRectMake(0, 0, 1.5f, 1.5f)];
+            [bd addShape:polygonShape named:@"polygonShape"];
+            //[polygonShape addFixtureToBody:bd];
+            // [bd createBody]; - automatically taken care of on enter frame
+            bd.position = ccp(-40.0f, 5.0f);
+            bd.bullet = YES;
+            [bd setVelocity:ccp(150.0f, 0.0f)];
+ 
 		}
 	}
 
