@@ -1,0 +1,288 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		836FFDAC16D9EB1000EE2A69 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 836FFDAB16D9EB1000EE2A69 /* UIKit.framework */; };
+		836FFDAE16D9EB1000EE2A69 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 836FFDAD16D9EB1000EE2A69 /* Foundation.framework */; };
+		836FFDB016D9EB1000EE2A69 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 836FFDAF16D9EB1000EE2A69 /* CoreGraphics.framework */; };
+		836FFDB616D9EB1000EE2A69 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 836FFDB416D9EB1000EE2A69 /* InfoPlist.strings */; };
+		836FFDB816D9EB1000EE2A69 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 836FFDB716D9EB1000EE2A69 /* main.m */; };
+		836FFDBC16D9EB1000EE2A69 /* BGAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 836FFDBB16D9EB1000EE2A69 /* BGAppDelegate.m */; };
+		836FFDBE16D9EB1000EE2A69 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 836FFDBD16D9EB1000EE2A69 /* Default.png */; };
+		836FFDC016D9EB1000EE2A69 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 836FFDBF16D9EB1000EE2A69 /* Default@2x.png */; };
+		836FFDC216D9EB1000EE2A69 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 836FFDC116D9EB1000EE2A69 /* Default-568h@2x.png */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		836FFDA816D9EB1000EE2A69 /* CCBox2D Test.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "CCBox2D Test.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		836FFDAB16D9EB1000EE2A69 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		836FFDAD16D9EB1000EE2A69 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		836FFDAF16D9EB1000EE2A69 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		836FFDB316D9EB1000EE2A69 /* CCBox2D Test-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CCBox2D Test-Info.plist"; sourceTree = "<group>"; };
+		836FFDB516D9EB1000EE2A69 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		836FFDB716D9EB1000EE2A69 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		836FFDB916D9EB1000EE2A69 /* CCBox2D Test-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CCBox2D Test-Prefix.pch"; sourceTree = "<group>"; };
+		836FFDBA16D9EB1000EE2A69 /* BGAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BGAppDelegate.h; sourceTree = "<group>"; };
+		836FFDBB16D9EB1000EE2A69 /* BGAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BGAppDelegate.m; sourceTree = "<group>"; };
+		836FFDBD16D9EB1000EE2A69 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		836FFDBF16D9EB1000EE2A69 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		836FFDC116D9EB1000EE2A69 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		836FFDA516D9EB1000EE2A69 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				836FFDAC16D9EB1000EE2A69 /* UIKit.framework in Frameworks */,
+				836FFDAE16D9EB1000EE2A69 /* Foundation.framework in Frameworks */,
+				836FFDB016D9EB1000EE2A69 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		836FFD9F16D9EB1000EE2A69 = {
+			isa = PBXGroup;
+			children = (
+				836FFDB116D9EB1000EE2A69 /* CCBox2D Test */,
+				836FFDAA16D9EB1000EE2A69 /* Frameworks */,
+				836FFDA916D9EB1000EE2A69 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		836FFDA916D9EB1000EE2A69 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				836FFDA816D9EB1000EE2A69 /* CCBox2D Test.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		836FFDAA16D9EB1000EE2A69 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				836FFDAB16D9EB1000EE2A69 /* UIKit.framework */,
+				836FFDAD16D9EB1000EE2A69 /* Foundation.framework */,
+				836FFDAF16D9EB1000EE2A69 /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		836FFDB116D9EB1000EE2A69 /* CCBox2D Test */ = {
+			isa = PBXGroup;
+			children = (
+				836FFDBA16D9EB1000EE2A69 /* BGAppDelegate.h */,
+				836FFDBB16D9EB1000EE2A69 /* BGAppDelegate.m */,
+				836FFDB216D9EB1000EE2A69 /* Supporting Files */,
+			);
+			path = "CCBox2D Test";
+			sourceTree = "<group>";
+		};
+		836FFDB216D9EB1000EE2A69 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				836FFDB316D9EB1000EE2A69 /* CCBox2D Test-Info.plist */,
+				836FFDB416D9EB1000EE2A69 /* InfoPlist.strings */,
+				836FFDB716D9EB1000EE2A69 /* main.m */,
+				836FFDB916D9EB1000EE2A69 /* CCBox2D Test-Prefix.pch */,
+				836FFDBD16D9EB1000EE2A69 /* Default.png */,
+				836FFDBF16D9EB1000EE2A69 /* Default@2x.png */,
+				836FFDC116D9EB1000EE2A69 /* Default-568h@2x.png */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		836FFDA716D9EB1000EE2A69 /* CCBox2D Test */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 836FFDC516D9EB1000EE2A69 /* Build configuration list for PBXNativeTarget "CCBox2D Test" */;
+			buildPhases = (
+				836FFDA416D9EB1000EE2A69 /* Sources */,
+				836FFDA516D9EB1000EE2A69 /* Frameworks */,
+				836FFDA616D9EB1000EE2A69 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "CCBox2D Test";
+			productName = "CCBox2D Test";
+			productReference = 836FFDA816D9EB1000EE2A69 /* CCBox2D Test.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		836FFDA016D9EB1000EE2A69 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = BG;
+				LastUpgradeCheck = 0460;
+				ORGANIZATIONNAME = "Bell George";
+			};
+			buildConfigurationList = 836FFDA316D9EB1000EE2A69 /* Build configuration list for PBXProject "CCBox2D Test" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 836FFD9F16D9EB1000EE2A69;
+			productRefGroup = 836FFDA916D9EB1000EE2A69 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				836FFDA716D9EB1000EE2A69 /* CCBox2D Test */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		836FFDA616D9EB1000EE2A69 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				836FFDB616D9EB1000EE2A69 /* InfoPlist.strings in Resources */,
+				836FFDBE16D9EB1000EE2A69 /* Default.png in Resources */,
+				836FFDC016D9EB1000EE2A69 /* Default@2x.png in Resources */,
+				836FFDC216D9EB1000EE2A69 /* Default-568h@2x.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		836FFDA416D9EB1000EE2A69 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				836FFDB816D9EB1000EE2A69 /* main.m in Sources */,
+				836FFDBC16D9EB1000EE2A69 /* BGAppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		836FFDB416D9EB1000EE2A69 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				836FFDB516D9EB1000EE2A69 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		836FFDC316D9EB1000EE2A69 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		836FFDC416D9EB1000EE2A69 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		836FFDC616D9EB1000EE2A69 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "CCBox2D Test/CCBox2D Test-Prefix.pch";
+				INFOPLIST_FILE = "CCBox2D Test/CCBox2D Test-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		836FFDC716D9EB1000EE2A69 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "CCBox2D Test/CCBox2D Test-Prefix.pch";
+				INFOPLIST_FILE = "CCBox2D Test/CCBox2D Test-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		836FFDA316D9EB1000EE2A69 /* Build configuration list for PBXProject "CCBox2D Test" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				836FFDC316D9EB1000EE2A69 /* Debug */,
+				836FFDC416D9EB1000EE2A69 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		836FFDC516D9EB1000EE2A69 /* Build configuration list for PBXNativeTarget "CCBox2D Test" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				836FFDC616D9EB1000EE2A69 /* Debug */,
+				836FFDC716D9EB1000EE2A69 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 836FFDA016D9EB1000EE2A69 /* Project object */;
+}
