@@ -114,10 +114,10 @@ void Test::DrawTitle(int x, int y, const char *string)
     m_debugDraw.DrawString(x, y, string);
 }
 
-class QueryCallback : public b2QueryCallback
+class TestQueryCallback : public b2QueryCallback
 	{
 	public:
-		QueryCallback(const b2Vec2& point)
+		TestQueryCallback(const b2Vec2& point)
 		{
 			m_point = point;
 			m_fixture = NULL;
@@ -163,7 +163,7 @@ bool Test::MouseDown(const b2Vec2& p)
 	aabb.upperBound = p + d;
 
 	// Query the world for overlapping shapes.
-	QueryCallback callback(p);
+	TestQueryCallback callback(p);
 	m_world->QueryAABB(&callback, aabb);
 
 	if (callback.m_fixture)
