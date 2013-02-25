@@ -154,11 +154,7 @@ class Test : public b2ContactListener
 		virtual bool MouseDown(const b2Vec2& p); // cocos2d modifications
 		virtual void MouseUp(const b2Vec2& p);
 		void MouseMove(const b2Vec2& p);
-		void LaunchBomb();
-		void LaunchBomb(const b2Vec2& position, const b2Vec2& velocity);
-
-		void SpawnBomb(const b2Vec2& worldPt);
-		void CompleteBombSpawn(const b2Vec2& p);
+		
 
 		// Let derived tests know that a joint was destroyed.
 		virtual void JointDestroyed(b2Joint* joint) { B2_NOT_USED(joint); }
@@ -181,18 +177,19 @@ class Test : public b2ContactListener
 		friend class ContactListener;
 
 		b2Body* m_groundBody;
-		b2AABB m_worldAABB;
+		//b2AABB m_worldAABB;
 		ContactPoint m_points[k_maxContactPoints];
 		int32 m_pointCount;
 		DestructionListener m_destructionListener;
 		GLESDebugDraw m_debugDraw;
 		int32 m_textLine;
-		b2Body* m_bomb;
 		b2MouseJoint* m_mouseJoint;
-		b2Vec2 m_bombSpawnPoint;
-		bool m_bombSpawning;
 		b2Vec2 m_mouseWorld;
 		int32 m_stepCount;
+        
+        //b2Body* m_bomb;
+        //b2Vec2 m_bombSpawnPoint;
+		//bool m_bombSpawning;
 	};
 
 #endif

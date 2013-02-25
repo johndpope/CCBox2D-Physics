@@ -26,26 +26,22 @@
         
 		//entry = g_testEntries + entryId;
 		//test = entry->createFcn();
-        
-        
+ 
 		CGSize screenSize = [CCDirector sharedDirector].winSize;
 		CCLOG(@"Screen width %0.2f screen height %0.2f",screenSize.width,screenSize.height);
-        
-        
-        CCWorldLayer *world = [[CCWorldLayer alloc] init];
+
+
         // Define the gravity vector.
-		world.gravity = ccp(0.0f, -320.0f);
+		/*self.gravity = ccp(0.0f, -320.0f);
 		
 		// Define the simulation accuracy
-		world.velocityIterations = 8;
-		world.positionIterations = 1;
+		self.velocityIterations = 8;
+		self.positionIterations = 1;
 
-        [self addChild: world];
-        
-       
-        CCBodySprite* ground = [CCBodySprite node];
+        return self;
+         CCBodySprite* ground = [CCBodySprite node];
 		ground.physicsType = kStatic;
-        [world addChild:ground];
+        [self addChild:ground];
         
         // Define the ground box shape.
         CCArray* bottom = [[CCArray alloc]initWithCapacity:4];
@@ -75,13 +71,17 @@
         [ground addShape:[CCShape polygonWithVertices:right] named:@"right"];
 		
  
-        CCBodySprite *bd = [CCBodySprite node];
+       CCBodySprite *bd = [CCBodySprite node];
+       // bd.world = self;
         CCShape *polygonShape = [CCShape boxWithRect:CGRectMake(0, 0, 15.0f, 15.0f)];
         [bd addShape:polygonShape named:@"polygonShape"];
         bd.position = ccp(-40.0f, 5.0f);
         bd.bullet = YES;
         [bd setVelocity:ccp(150.0f, 0.0f)];
-        [world addChild:bd];
+        [self addChild:bd];
+        
+        CCSpriteBatchNode *batch = [CCSpriteBatchNode batchNodeWithFile:@"blocks.png" capacity:150];
+		[self addChild:batch z:0 tag:1];*/
         
     }
     
@@ -97,8 +97,8 @@
 {
 	//test->Step(&settings);
 }
-
-/*-(void) draw
+/*
+-(void) draw
 {
 	[super draw];
     
@@ -107,7 +107,7 @@
 	kmGLPushMatrix();
     
 	//test->m_world->DrawDebugData();
-    
+    //[world draw];
 	kmGLPopMatrix();
     
 	CHECK_GL_ERROR_DEBUG();
@@ -115,7 +115,9 @@
 
 - (void)dealloc
 {
+
 	//delete test;
+
     [super dealloc];
 }
 

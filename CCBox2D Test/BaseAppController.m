@@ -36,7 +36,8 @@
 	director_ = (CCDirectorIOS*)[CCDirector sharedDirector];
 	[director_ setDisplayStats:NO];
 	[director_ setAnimationInterval:1.0/60];
-	
+
+    
 	// GL View
 	CCGLView *__glView = [CCGLView viewWithFrame:[window_ bounds]
 									 pixelFormat:kEAGLColorFormatRGB565
@@ -59,8 +60,8 @@
 	navController_.navigationBarHidden = YES;
 
 	// AddSubView doesn't work on iOS6
-	[window_ addSubview:navController_.view];
-//	[window_ setRootViewController:navController_];
+//	[window_ addSubview:navController_.view];
+	[window_ setRootViewController:navController_];
 
 	[window_ makeKeyAndVisible];
 

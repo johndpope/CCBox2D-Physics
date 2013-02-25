@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		834F392C16DB71E800307AB3 /* CCTestLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 834F392B16DB71E700307AB3 /* CCTestLayer.mm */; };
+		834F393016DB810D00307AB3 /* CCAddPair.mm in Sources */ = {isa = PBXBuildFile; fileRef = 834F392F16DB810D00307AB3 /* CCAddPair.mm */; };
 		836FFDAC16D9EB1000EE2A69 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 836FFDAB16D9EB1000EE2A69 /* UIKit.framework */; };
 		836FFDAE16D9EB1000EE2A69 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 836FFDAD16D9EB1000EE2A69 /* Foundation.framework */; };
 		836FFDB016D9EB1000EE2A69 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 836FFDAF16D9EB1000EE2A69 /* CoreGraphics.framework */; };
@@ -46,6 +48,10 @@
 
 /* Begin PBXFileReference section */
 		02D99875F5E74F17B89F9CF7 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
+		834F392A16DB71E700307AB3 /* CCTestLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCTestLayer.h; sourceTree = "<group>"; };
+		834F392B16DB71E700307AB3 /* CCTestLayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CCTestLayer.mm; sourceTree = "<group>"; };
+		834F392E16DB80B800307AB3 /* CCAddPair.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CCAddPair.h; path = "CCBox2D Test/CCBox2DTests/CCAddPair.h"; sourceTree = "<group>"; };
+		834F392F16DB810D00307AB3 /* CCAddPair.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = CCAddPair.mm; path = "CCBox2D Test/CCBox2DTests/CCAddPair.mm"; sourceTree = "<group>"; };
 		836FFDA816D9EB1000EE2A69 /* CCBox2D Test.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "CCBox2D Test.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		836FFDAB16D9EB1000EE2A69 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		836FFDAD16D9EB1000EE2A69 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -152,9 +158,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		834F392D16DB80AC00307AB3 /* CCBox2DTests */ = {
+			isa = PBXGroup;
+			children = (
+				834F392E16DB80B800307AB3 /* CCAddPair.h */,
+				834F392F16DB810D00307AB3 /* CCAddPair.mm */,
+			);
+			name = CCBox2DTests;
+			sourceTree = "<group>";
+		};
 		836FFD9F16D9EB1000EE2A69 = {
 			isa = PBXGroup;
 			children = (
+				834F392D16DB80AC00307AB3 /* CCBox2DTests */,
 				836FFDDE16D9F05400EE2A69 /* Box2DTests */,
 				836FFDB116D9EB1000EE2A69 /* CCBox2D Test */,
 				836FFDAA16D9EB1000EE2A69 /* Frameworks */,
@@ -187,6 +203,8 @@
 		836FFDB116D9EB1000EE2A69 /* CCBox2D Test */ = {
 			isa = PBXGroup;
 			children = (
+				834F392A16DB71E700307AB3 /* CCTestLayer.h */,
+				834F392B16DB71E700307AB3 /* CCTestLayer.mm */,
 				836FFE8716DA26CF00EE2A69 /* c++ */,
 				836FFDC816D9EEB000EE2A69 /* Box2DAppDelegate.h */,
 				836FFDC916D9EEB000EE2A69 /* Box2DAppDelegate.mm */,
@@ -414,6 +432,8 @@
 				836FFDD916D9EF8000EE2A69 /* iPhoneTestEntries.mm in Sources */,
 				836FFDDD16D9F00100EE2A69 /* GLES-Render.mm in Sources */,
 				836FFE8B16DA2ACB00EE2A69 /* CCBox2DView.mm in Sources */,
+				834F392C16DB71E800307AB3 /* CCTestLayer.mm in Sources */,
+				834F393016DB810D00307AB3 /* CCAddPair.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -17,6 +17,8 @@
 #import "cocos2d.h"
 #import "CCBox2DView.h"
 #import "CCWorldLayer.h"
+#import "CCTestLayer.h"
+#import "CCAddPair.h"
 
 @implementation Box2DAppDelegate
 
@@ -41,7 +43,11 @@
     // switch this to run normal box2d demos
     if (0){
         [scene addChild: [MenuLayer menuWithEntryID:0]];
-    }else{
+    }
+    if (1) {
+        [scene addChild: [[CCAddPair alloc]init]];
+    }
+    if (0) {
         [scene  addChild: [[CCBox2DView alloc] initWithEntryID:0]]; 
     }
 	
