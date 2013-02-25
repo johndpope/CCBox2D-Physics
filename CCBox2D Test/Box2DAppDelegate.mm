@@ -23,6 +23,11 @@
 
 @implementation Box2DAppDelegate
 
+enum {
+	kTagBox2DNode,
+};
+
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
 	[super application:application didFinishLaunchingWithOptions:launchOptions];
@@ -49,16 +54,16 @@
     }
     if (1) {
         
+        //CCAddPair *view =[[CCAddPair alloc]init];
         CCApplyForce *view =[[CCApplyForce alloc]init];
         [view setScale:15];
 		[view setAnchorPoint:ccp(0,0)];
 		[view setPosition:ccp(s.width/2, s.height/3)];
-        [scene addChild: view];
+        [scene addChild:view z:0 tag:kTagBox2DNode];
+
         
     }
-    if (0) {
-        [scene  addChild: [[CCBox2DView alloc] initWithEntryID:0]]; 
-    }
+   
 	
   
 	[director_ pushScene: scene];

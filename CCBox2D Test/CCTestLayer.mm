@@ -6,6 +6,7 @@
 #import "iPhoneTest.h"
 
 
+
 @implementation CCTestLayer {
 
    // CCDestructionListener m_destructionListener;
@@ -13,6 +14,10 @@
     DebugDraw *_debugDraw;
 }
 
+
+enum {
+	kTagBox2DNode,
+};
 
 -(id) init
 {
@@ -90,12 +95,15 @@
 
 -(void) registerWithTouchDispatcher
 {
+    NSLog(@"registerWithTouchDispatcher");
 	CCDirector *director = [CCDirector sharedDirector];
 	[[director touchDispatcher] addTargetedDelegate:self priority:0 swallowsTouches:YES];
 }
 
+/*
 -(BOOL) ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event
 {
+    NSLog(@"ccTouchBegan");
 	return YES;
 }
 
@@ -117,27 +125,128 @@
     
 	CGPoint diff = ccpSub(touchLocation,prevLocation);
     
-	/*CCNode *node = [self getChildByTag:kTagBox2DNode];
+	CCNode *node = [self getChildByTag:kTagBox2DNode];
 	CGPoint currentPos = [node position];
-	[node setPosition: ccpAdd(currentPos, diff)];*/
+	[node setPosition: ccpAdd(currentPos, diff)];
+}
+*/
+
+
+- (BOOL) ccTouchBegan:(UITouch*)touch withEvent:(UIEvent*)event
+{
+
+	CGPoint touchLocation=[touch locationInView:[touch view]];
+	touchLocation=[[CCDirector sharedDirector] convertToGL:touchLocation];
+	CGPoint nodePosition = [self convertToNodeSpace: touchLocation];
+	NSLog(@"pos: %f,%f -> %f,%f", touchLocation.x, touchLocation.y, nodePosition.x, nodePosition.y);
+    
+	return [self mouseDown:(b2Vec2(nodePosition.x,nodePosition.y))];
 }
 
+- (void) ccTouchMoved:(UITouch*)touch withEvent:(UIEvent*)event
+{
+	CGPoint touchLocation=[touch locationInView:[touch view]];
+	touchLocation=[[CCDirector sharedDirector] convertToGL:touchLocation];
+	CGPoint nodePosition = [self convertToNodeSpace: touchLocation];
+    
+	[self mouseMove:(b2Vec2(nodePosition.x,nodePosition.y))];
+}
+
+- (void) ccTouchEnded:(UITouch*)touch withEvent:(UIEvent*)event
+{
+	CGPoint touchLocation=[touch locationInView:[touch view]];
+	touchLocation=[[CCDirector sharedDirector] convertToGL:touchLocation];
+	CGPoint nodePosition = [self convertToNodeSpace: touchLocation];
+    
+	[self mouseUp:(b2Vec2(nodePosition.x,nodePosition.y))];
+}
 
 -(void) onOverlapBody:(CCBodySprite *)sprite1 andBody:(CCBodySprite *)sprite2
 {
- //   NSLog(@"onOverlapBody");
+    NSLog(@"onOverlapBody");
 }
 
 -(void) onSeparateBody:(CCBodySprite *)sprite1 andBody:(CCBodySprite *)sprite2
 {
-  //  NSLog(@"onSeparateBody");
+    NSLog(@"onSeparateBody");
 }
 
 -(void) onCollideBody:(CCBodySprite *)sprite1 andBody:(CCBodySprite *)sprite2 withForce:(float)force withFrictionForce:(float)frictionForce;
 {
- //   NSLog(@"onCollideBody");
+    NSLog(@"onCollideBody");
 }
 
+
+
+
+-(BOOL)mouseDown:( b2Vec2 )p
+{
+	m_mouseWorld = p;
+    
+	if (m_mouseJoint != NULL)
+	{
+		return NO;
+	}
+    
+	// Make a small box.
+	b2AABB aabb;
+	b2Vec2 d;
+	d.Set(0.001f, 0.001f);
+	aabb.lowerBound = p - d;
+	aabb.upperBound = p + d;
+    
+	// Query the world for overlapping shapes.
+	TestQueryCallback callback(p);
+	m_world->QueryAABB(&callback, aabb);
+    
+	if (callback.m_fixture)
+	{
+		b2Body* body = callback.m_fixture->GetBody();
+		b2MouseJointDef md;
+		md.bodyA = m_groundBody;
+		md.bodyB = body;
+		md.target = p;
+		md.maxForce = 1000.0f * body->GetMass();
+        
+		m_mouseJoint = (b2MouseJoint*)m_world->CreateJoint(&md);
+		body->SetAwake(true);
+        
+		return true;
+	}
+    
+	return false;
+}
+
+-(void)shiftMouseDown:( b2Vec2 )p
+{
+	m_mouseWorld = p;
+    
+	if (m_mouseJoint != NULL)
+	{
+		return;
+	}
+    
+}
+
+-(void)mouseUp:( b2Vec2 )p
+{
+	if (m_mouseJoint)
+	{
+		m_world->DestroyJoint(m_mouseJoint);
+		m_mouseJoint = NULL;
+	}
+
+}
+
+-(void)mouseMove:( b2Vec2 )p
+{
+	m_mouseWorld = p;
+    
+	if (m_mouseJoint)
+	{
+		m_mouseJoint->SetTarget(p);
+	}
+}
 
 
 //Debug Test Bed stuff
@@ -176,7 +285,7 @@
     
 	m_world->Step(timeStep, settings->velocityIterations, settings->positionIterations);
     
-    //	m_world->DrawDebugData();
+    //m_world->DrawDebugData();
     
 	if (timeStep > 0.0f)
 	{
