@@ -19,6 +19,7 @@
 #import "CCWorldLayer.h"
 #import "CCTestLayer.h"
 #import "CCAddPair.h"
+#import "CCApplyForce.h"
 
 @implementation Box2DAppDelegate
 
@@ -36,16 +37,24 @@
 //	[director_ setProjection:kCCDirectorProjection3D];
 
 	// Enables High Res mode (Retina Display) on iPhone 4 and maintains low res on all other devices
-	if( ! [director_ enableRetinaDisplay:NO] )
+	//if( ! [director_ enableRetinaDisplay:NO] )
 		CCLOG(@"Retina Display Not supported");
 
 	CCScene *scene = [CCScene node];
+    CGSize s = [[CCDirector sharedDirector] winSize];
+    
     // switch this to run normal box2d demos
     if (0){
         [scene addChild: [MenuLayer menuWithEntryID:0]];
     }
     if (1) {
-        [scene addChild: [[CCAddPair alloc]init]];
+        
+        CCApplyForce *view =[[CCApplyForce alloc]init];
+        [view setScale:15];
+		[view setAnchorPoint:ccp(0,0)];
+		[view setPosition:ccp(s.width/2, s.height/3)];
+        [scene addChild: view];
+        
     }
     if (0) {
         [scene  addChild: [[CCBox2DView alloc] initWithEntryID:0]]; 

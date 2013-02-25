@@ -39,7 +39,7 @@ enum {
 
 		entryID = entryId;
 
-		self.isTouchEnabled = YES;
+		self.touchEnabled = YES;
 
 		Box2DView *view = [Box2DView viewWithEntryID:entryId];
 		[self addChild:view z:0 tag:kTagBox2DNode];
@@ -72,7 +72,7 @@ enum {
 	CCScene *s = [CCScene node];
 	id box = [MenuLayer menuWithEntryID:entryID];
 	[s addChild:box];
-	[[CCDirector sharedDirector] replaceScene: s];
+	[[CCDirector sharedDirfector] replaceScene: s];
 }
 
 -(void) nextCallback: (id) sender

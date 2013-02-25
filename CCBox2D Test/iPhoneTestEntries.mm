@@ -70,6 +70,7 @@
 
 TestEntry g_testEntries[] =
 {
+    {"Apply Force", ApplyForce::Create},
 	{"Gears", Gears::Create},
 	{"Character Collision", CharacterCollision::Create},
 	{"Edge Test", EdgeTest::Create},
@@ -77,7 +78,6 @@ TestEntry g_testEntries[] =
 	{"Shape Editing", ShapeEditing::Create},
 	{"Tiles", Tiles::Create},
 	{"Car", Car::Create},
-	{"Apply Force", ApplyForce::Create},
 	{"Prismatic", Prismatic::Create},
 	{"Vertical Stack", VerticalStack::Create},
 	{"SphereStack", SphereStack::Create},
