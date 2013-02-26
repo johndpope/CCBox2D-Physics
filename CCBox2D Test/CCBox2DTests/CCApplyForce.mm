@@ -118,7 +118,7 @@
 				jd.localAnchorB.SetZero();
 				jd.bodyA = ground.body;
 				jd.bodyB = bd.body;
-				jd.collideConnected = false;
+				jd.collideConnected = true;
 				jd.maxForce = mass * gravity;
 				jd.maxTorque = mass * radius * gravity;
 
