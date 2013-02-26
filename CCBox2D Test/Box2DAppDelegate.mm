@@ -54,13 +54,10 @@ enum {
     }
     if (1) {
         
-        //CCAddPair *view =[[CCAddPair alloc]init];
         CCApplyForce *view =[[CCApplyForce alloc]init];
-        [view setScale:15];
+        [view setScale:1];
 		[view setAnchorPoint:ccp(0,0)];
-		[view setPosition:ccp(s.width/2, s.height/3)];
         [scene addChild:view z:0 tag:kTagBox2DNode];
-
         
     }
    

@@ -52,7 +52,7 @@ enum {
         
 		// update every frame
 		[self scheduleUpdate];
-   
+   		[self scheduleOnce:@selector(zoomInOnPlayer:) delay:2.0f];
 	}
 	return self;
 }
@@ -90,9 +90,6 @@ enum {
 	[self step:settings];
 }
 
-
-
-
 -(void) registerWithTouchDispatcher
 {
     NSLog(@"registerWithTouchDispatcher");
@@ -100,36 +97,6 @@ enum {
 	[[director touchDispatcher] addTargetedDelegate:self priority:0 swallowsTouches:YES];
 }
 
-/*
--(BOOL) ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event
-{
-    NSLog(@"ccTouchBegan");
-	return YES;
-}
-
--(void) ccTouchEnded:(UITouch *)touch withEvent:(UIEvent *)event
-{
-}
-
--(void) ccTouchCancelled:(UITouch *)touch withEvent:(UIEvent *)event
-{
-}
-
--(void) ccTouchMoved:(UITouch *)touch withEvent:(UIEvent *)event
-{
-	CGPoint touchLocation = [touch locationInView: [touch view]];
-	CGPoint prevLocation = [touch previousLocationInView: [touch view]];
-    
-	touchLocation = [[CCDirector sharedDirector] convertToGL: touchLocation];
-	prevLocation = [[CCDirector sharedDirector] convertToGL: prevLocation];
-    
-	CGPoint diff = ccpSub(touchLocation,prevLocation);
-    
-	CCNode *node = [self getChildByTag:kTagBox2DNode];
-	CGPoint currentPos = [node position];
-	[node setPosition: ccpAdd(currentPos, diff)];
-}
-*/
 
 
 - (BOOL) ccTouchBegan:(UITouch*)touch withEvent:(UIEvent*)event
@@ -145,6 +112,7 @@ enum {
 
 - (void) ccTouchMoved:(UITouch*)touch withEvent:(UIEvent*)event
 {
+   // NSLog(@"ccTouchMoved");
 	CGPoint touchLocation=[touch locationInView:[touch view]];
 	touchLocation=[[CCDirector sharedDirector] convertToGL:touchLocation];
 	CGPoint nodePosition = [self convertToNodeSpace: touchLocation];
@@ -154,6 +122,7 @@ enum {
 
 - (void) ccTouchEnded:(UITouch*)touch withEvent:(UIEvent*)event
 {
+    NSLog(@"ccTouchEnded");
 	CGPoint touchLocation=[touch locationInView:[touch view]];
 	touchLocation=[[CCDirector sharedDirector] convertToGL:touchLocation];
 	CGPoint nodePosition = [self convertToNodeSpace: touchLocation];
@@ -163,17 +132,17 @@ enum {
 
 -(void) onOverlapBody:(CCBodySprite *)sprite1 andBody:(CCBodySprite *)sprite2
 {
-    NSLog(@"onOverlapBody");
+  //  NSLog(@"onOverlapBody");
 }
 
 -(void) onSeparateBody:(CCBodySprite *)sprite1 andBody:(CCBodySprite *)sprite2
 {
-    NSLog(@"onSeparateBody");
+ //   NSLog(@"onSeparateBody");
 }
 
 -(void) onCollideBody:(CCBodySprite *)sprite1 andBody:(CCBodySprite *)sprite2 withForce:(float)force withFrictionForce:(float)frictionForce;
 {
-    NSLog(@"onCollideBody");
+//    NSLog(@"onCollideBody");
 }
 
 
@@ -181,6 +150,7 @@ enum {
 
 -(BOOL)mouseDown:( b2Vec2 )p
 {
+    NSLog(@"mouseDown");
 	m_mouseWorld = p;
     
 	if (m_mouseJoint != NULL)
@@ -210,6 +180,14 @@ enum {
         
 		m_mouseJoint = (b2MouseJoint*)m_world->CreateJoint(&md);
 		body->SetAwake(true);
+        
+        void* userData = body->GetUserData();
+        if ([(id)userData isKindOfClass:[CCBodySprite class]]){
+            if (((CCBodySprite*)userData).onTouchDownBlock !=nil) {
+                ((CCBodySprite*)userData).onTouchDownBlock();
+            }           
+        }
+       
         
 		return true;
 	}
@@ -349,4 +327,79 @@ enum {
 		}
 	}
 }
+
+
+-(CCBodySprite*) createGround:(CGSize)size {
+    
+    float width = size.width;
+	float height =  size.height;
+    if([[CCDirector sharedDirector] enableRetinaDisplay:YES] ){
+        width = width*2;
+        height = height*2;
+    }
+ 
+    float32 margin = 5.0f;
+    b2Vec2 lowerLeft = b2Vec2(margin/PTM_RATIO, margin/PTM_RATIO);
+    b2Vec2 lowerRight = b2Vec2((width-margin)/PTM_RATIO,margin/PTM_RATIO);
+    b2Vec2 upperRight = b2Vec2((width-margin)/PTM_RATIO, (height-margin)/PTM_RATIO);
+    b2Vec2 upperLeft = b2Vec2(margin/PTM_RATIO, (height-margin)/PTM_RATIO);
+    
+
+    b2BodyDef bd;
+    bd.type = b2_staticBody;
+    bd.position.Set(0.0f, 0.0f);
+    
+    
+    const float32 k_restitution = 0.4f;
+	
+    
+    CCBodySprite *ground = [[CCBodySprite alloc]init];
+    [ground configureSpriteForWorld:m_world bodyDef:bd];
+    
+
+    // Left vertical
+    CCShape *leftEdge = [CCShape edgeWithVec1:lowerLeft  vec2:upperLeft];
+    leftEdge.restitution =k_restitution;
+    [ground addShape:leftEdge named:@"leftEdge"];
+    
+    // Right vertical
+    CCShape *rightEdge = [CCShape edgeWithVec1:lowerRight  vec2:upperRight];
+    rightEdge.restitution =k_restitution;
+    [ground addShape:rightEdge named:@"rightEdge"];
+    
+    // Top horizontal
+    CCShape *topEdge = [CCShape edgeWithVec1:upperLeft  vec2:upperRight];
+    topEdge.restitution =k_restitution;
+    [ground addShape:topEdge named:@"topEdge"];
+    
+    // Bottom horizontal
+    CCShape *bottomEdge = [CCShape edgeWithVec1:lowerLeft  vec2:lowerRight];
+    bottomEdge.restitution =k_restitution;
+    [ground addShape:bottomEdge named:@"bottomEdge"];
+    
+    return ground;
+}
+
+const float kZoomInFactor = 15.0f;
+
+-(void) zoomInOnPlayer:(ccTime)delta
+{
+	// just to be sure no other actions interfere
+	[self stopAllActions];
+	
+	isZooming = YES;
+	id zoomIn = [CCScaleTo actionWithDuration:13.0f scale:kZoomInFactor];
+	id zoomOut = [CCScaleTo actionWithDuration:2.0f scale:1.0f];
+	id reset = [CCCallBlock actionWithBlock:^{
+		CCLOG(@"zoom in/out complete");
+		isZooming = NO;
+		self.position = CGPointZero;
+		//[self scheduleOnce:@selector(zoomInOnPlayer:) delay:CCRANDOM_0_1() * 2.0f + 2.0f];
+	}];
+	id sequence = [CCSequence actions: zoomIn, nil]; //zoomOut, reset,
+	[self runAction:sequence];
+}
+
+
+
 @end

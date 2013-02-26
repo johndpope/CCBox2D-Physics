@@ -26,12 +26,12 @@
     b2Vec2 m_mouseWorld;
     int32 m_stepCount;
     
+    BOOL isZooming;
     
     
 }
 
-
-
+-(CCBodySprite*) createGround:(CGSize)size;
 // size of box around the point used for hit testing in -bodyAtPoint:queryTest:; defaults to 16x16 points
 // smallest value supported is 2x2
 /*@property (nonatomic) CGSize hitTestSize;
