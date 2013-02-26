@@ -3,7 +3,7 @@
 #import "CCBox2DPrivate.h"
 #import "Render.h"
 #import <OpenGLES/ES1/gl.h>
-#import "iPhoneTest.h"
+
 
 
 

@@ -1,6 +1,6 @@
 #import <UIKit/UIKit.h>
 #import "Box2DAppDelegate.h"
-#import "Box2DView.h"
+//#import "Box2DView.h"
 #import "cocos2d.h"
 #import "CCBox2DView.h"
 #import "CCWorldLayer.h"
@@ -35,10 +35,7 @@ enum {
 	CCScene *scene = [CCScene node];
     CGSize s = [[CCDirector sharedDirector] winSize];
     
-    // switch this to run normal box2d demos
-    if (0){
-        [scene addChild: [MenuLayer menuWithEntryID:0]];
-    }
+   
     if (1) {
         
         CCApplyForce *view =[[CCApplyForce alloc]init];
