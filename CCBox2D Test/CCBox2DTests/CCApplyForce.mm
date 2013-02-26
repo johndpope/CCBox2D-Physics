@@ -14,9 +14,9 @@
     
     if  (self!=nil){
 
-        m_world->SetGravity(b2Vec2(0.0f, -1.0f));
+        m_world->SetGravity(b2Vec2(0.0f, 0.0f));
         
-		const float32 k_restitution = 5.4f;
+        const float32 k_restitution = 0.4f;
 
         
         // Define the ground box shape.
@@ -24,9 +24,7 @@
 		{
             ground = [[CCBodySprite alloc]initWithWorld:m_world bodyType:b2_staticBody];
             ground.position = ccp(0.0f, 10.0f);
-            //[self addChild:ground];
-            [ground createBody];
-            
+
 			// Left vertical
            CCShape *leftEdge = [CCShape edgeWithVec1:b2Vec2(-20.0f, -20.0f)  vec2:b2Vec2(-20.0f, 20.0f)];
             leftEdge.density = 0.0f;
@@ -90,7 +88,7 @@
         
 		{
             b2PolygonShape shape;
-			shape.SetAsBox(0.5f, 0.5f);
+			shape.SetAsBox(2, 2);
             
 			b2FixtureDef fd;
 			fd.shape = &shape;
@@ -100,14 +98,17 @@
 			for (int i = 0; i < 10; ++i)
 			{
                 CCBodySprite *bd = [[CCBodySprite alloc]initWithWorld:m_world bodyType:b2_dynamicBody];
-                bd.position = ccp(0.0f, 5.0f + 1.54f * i);
+                bd.position = ccp(0.0f, (5.0f + 1.54f * i)*15);
    
-                CCShape *mShape = [CCShape boxWithFixtureDef:fd];
-                [bd addShape:mShape named:[NSString stringWithFormat:@"fd%d",i]];
+               // CCShape *box = [CCShape boxWithFixtureDef:fd];
+               // [bd addShape:box named:[NSString stringWithFormat:@"fd%d",i]];
+                 CCShape *circle = [CCShape circleWithCenter:ground.centerPoint radius:40];
+                 [bd addShape:circle named:[NSString stringWithFormat:@"fd%d",i]];
 
+                
 				float32 gravity = 10.0f;
-				float32 I = bd.body->GetInertia();
-				float32 mass = bd.body->GetMass();
+				float32 I = [bd inertia];
+				float32 mass = [bd mass];
                 
 				// For a circle: I = 0.5 * m * r * r ==> r = sqrt(2 * I / m)
 				float32 radius = b2Sqrt(2.0f * I / mass);
@@ -121,9 +122,6 @@
 				jd.collideConnected = true;
 				jd.maxForce = mass * gravity;
 				jd.maxTorque = mass * radius * gravity;
-
-                //CCSpringSprite *jointSprite = [[CCSpringSprite alloc] initWithWorld:m_world distanceJointDef:jd body1:ground body2:bd];
-                //[jointSprite createJoint];
                 m_world->CreateJoint(&jd);
 
                 
