@@ -52,7 +52,7 @@ enum {
         
 		// update every frame
 		[self scheduleUpdate];
-   		[self scheduleOnce:@selector(zoomInOnPlayer:) delay:2.0f];
+   		[self scheduleOnce:@selector(zoomInOnPlayer:) delay:0.0f];
 	}
 	return self;
 }
@@ -388,7 +388,7 @@ const float kZoomInFactor = 15.0f;
 	[self stopAllActions];
 	
 	isZooming = YES;
-	id zoomIn = [CCScaleTo actionWithDuration:13.0f scale:kZoomInFactor];
+	id zoomIn = [CCScaleTo actionWithDuration:0.0f scale:kZoomInFactor];
 	id zoomOut = [CCScaleTo actionWithDuration:2.0f scale:1.0f];
 	id reset = [CCCallBlock actionWithBlock:^{
 		CCLOG(@"zoom in/out complete");

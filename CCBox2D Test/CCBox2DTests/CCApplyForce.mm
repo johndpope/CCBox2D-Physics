@@ -2,6 +2,11 @@
 #import "CCBodySprite.h"
 #import "CCJointSprite.h"
 #import "CCSpringSprite.h"
+#import "ATSpring.h"
+#import "ATParticle.h"
+#import "ATKernel.h"
+#import "ATSystemRenderer.h"
+#import "ATPhysics.h"
 
 @implementation CCApplyForce{
     
@@ -17,7 +22,7 @@
         appDelegate = (Box2DAppDelegate*) [[UIApplication sharedApplication] delegate];
         
         [self loadMapData];
-        
+        [self createNodes];
         m_world->SetGravity(b2Vec2(0.0f, 0.0f));
    
         return self;
@@ -147,7 +152,10 @@
                 
                 NSLog(@"edges:%@",edges);
                 
-                [edges enumerateKeysAndObjectsWithOptions:NSEnumerationConcurrent usingBlock:^(id key, id obj, BOOL *stop) {
+                for (id o in edges) {
+                    
+                }
+                [edges enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
                     
                     NSString *source = key;
                     NSDictionary *targets = obj;
@@ -158,10 +166,8 @@
                     
                     NSMutableDictionary *userDataDict = [targets objectForKey:@"userData"];
                     
-                    [targets enumerateKeysAndObjectsWithOptions:NSEnumerationConcurrent usingBlock:^(id key, id obj, BOOL *stop) {
-                        
-                        
-                        
+                    [targets enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+
                         if (![key isEqualToString:@"userData"]) {
                             NSLog(@"Source %@ -> %@", source, key);
                             // Create the edge, and by proxy, create the nodes
@@ -185,6 +191,70 @@
     }
 }
 
+
+-(void)createNodes{
+    
+    for (ATParticle *particle in appDelegate.system.physics.particles) {
+        
+        CGPoint pt = CGPointRandom(5.0);;
+        //create a random point to display
+        if (pt.x<0) {
+            if (pt.y<0) {
+                pt =  CGPointScale(CGPointMake(pt.x*-1, pt.y*-1),100);
+            }else{
+                pt =  CGPointScale(CGPointMake(pt.x*-1, pt.y),100);
+            }
+        }else{
+            if (pt.y<0) {
+                pt =  CGPointScale(CGPointMake(pt.x, pt.y*-1),100);
+            }else{
+                pt =  CGPointScale(CGPointMake(pt.x, pt.y),100);
+            }
+        }
+        NSLog(@"pt:%f",particle.position.x);
+        NSLog(@"pt:%f",particle.position.y);
+        
+        particle.position =  pt;
+        [particle update:nil];
+        
+        //CGPoint pt = CGPointRandom(1.0);
+        /*ATParticle *node = [[ATParticle alloc] initWithWorld:world size:1 position:pt angle:0.35  name:@"ball" userData:nil];
+         node.position = pt;
+         [self addChild:node.sprite];*/
+        
+        //[self addChild:particle.sprite];
+    }
+    
+    for (ATSpring *spring in appDelegate.system.physics.springs) {
+        
+        // Connect the joints
+        b2DistanceJointDef jointDef;
+        
+        //
+        NSLog(@"spring.point1.name:%@",spring.point1.name);
+        NSLog(@"spring.point2.name:%@",spring.point2.name);
+        // NSLog(@"sspring.point1.innerCircleBody:%@",spring.point1.innerCircleBody);
+        
+        // spring.point1.position = ccp(i, i);
+        // Get current body and neighbor
+        b2Body *currentBody = (b2Body*)spring.point1.innerCircleBody;
+        b2Body *neighborBody = (b2Body*)spring.point2.innerCircleBody;
+        
+        // Connect the outer circles to each other
+        jointDef.Initialize(currentBody, neighborBody,
+                            currentBody->GetWorldCenter(),
+                            neighborBody->GetWorldCenter() );
+        // Specifies whether the two connected bodies should collide with each other
+        jointDef.collideConnected = false;
+        jointDef.frequencyHz = 1.0;
+        jointDef.length = 15;
+        jointDef.dampingRatio = 0.0;
+        
+        m_world->CreateJoint(&jointDef);
+        
+    }
+    
+}
 
 
 @end
