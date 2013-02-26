@@ -8,8 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
-#import "CCNode.h"
-@interface ATNode : CCNode <NSCoding>
+#import "CCBodySprite.h"
+@interface ATNode : CCBodySprite <NSCoding>
 {
     
 

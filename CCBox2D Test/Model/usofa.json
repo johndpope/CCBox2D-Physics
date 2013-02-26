@@ -1,0 +1,21 @@
+{
+    "edges": {
+        "a": {
+            "userData": { "nodeType": "super"},
+            "i": {},
+            "b": {},
+            "c": {}
+        },
+        "c": {
+            "userData": { "nodeType": "minor"},
+            "d": {}
+        },
+        "b": {
+            "userData": { "nodeType": "major"},
+            "c": {},
+            "g": {}
+        }
+    }
+    
+}
+

@@ -45,6 +45,19 @@
 		836FFE8616DA097500EE2A69 /* r2.png in Resources */ = {isa = PBXBuildFile; fileRef = 836FFE7416DA097500EE2A69 /* r2.png */; };
 		836FFE8B16DA2ACB00EE2A69 /* CCBox2DView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 836FFE8A16DA2ACA00EE2A69 /* CCBox2DView.mm */; };
 		83F9A0B816DC9B2500F5B406 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 83F9A0B716DC9B2500F5B406 /* Icon.png */; };
+		83F9A0E916DD590F00F5B406 /* ATEdge.mm in Sources */ = {isa = PBXBuildFile; fileRef = 83F9A0CA16DD590F00F5B406 /* ATEdge.mm */; };
+		83F9A0EA16DD590F00F5B406 /* ATNode.mm in Sources */ = {isa = PBXBuildFile; fileRef = 83F9A0CC16DD590F00F5B406 /* ATNode.mm */; };
+		83F9A0EB16DD590F00F5B406 /* ATBarnesHutBranch.mm in Sources */ = {isa = PBXBuildFile; fileRef = 83F9A0CF16DD590F00F5B406 /* ATBarnesHutBranch.mm */; };
+		83F9A0EC16DD590F00F5B406 /* ATBarnesHutTree.mm in Sources */ = {isa = PBXBuildFile; fileRef = 83F9A0D116DD590F00F5B406 /* ATBarnesHutTree.mm */; };
+		83F9A0ED16DD590F00F5B406 /* ATKernel.mm in Sources */ = {isa = PBXBuildFile; fileRef = 83F9A0D416DD590F00F5B406 /* ATKernel.mm */; };
+		83F9A0EE16DD590F00F5B406 /* ATEnergy.mm in Sources */ = {isa = PBXBuildFile; fileRef = 83F9A0D716DD590F00F5B406 /* ATEnergy.mm */; };
+		83F9A0EF16DD590F00F5B406 /* ATParticle.mm in Sources */ = {isa = PBXBuildFile; fileRef = 83F9A0D916DD590F00F5B406 /* ATParticle.mm */; };
+		83F9A0F016DD590F00F5B406 /* ATPhysics.mm in Sources */ = {isa = PBXBuildFile; fileRef = 83F9A0DB16DD590F00F5B406 /* ATPhysics.mm */; };
+		83F9A0F116DD590F00F5B406 /* ATSpring.mm in Sources */ = {isa = PBXBuildFile; fileRef = 83F9A0DD16DD590F00F5B406 /* ATSpring.mm */; };
+		83F9A0F216DD590F00F5B406 /* ATSystem.mm in Sources */ = {isa = PBXBuildFile; fileRef = 83F9A0E316DD590F00F5B406 /* ATSystem.mm */; };
+		83F9A0F316DD590F00F5B406 /* ATSystemParams.mm in Sources */ = {isa = PBXBuildFile; fileRef = 83F9A0E516DD590F00F5B406 /* ATSystemParams.mm */; };
+		83F9A0F416DD590F00F5B406 /* ATSystemState.mm in Sources */ = {isa = PBXBuildFile; fileRef = 83F9A0E816DD590F00F5B406 /* ATSystemState.mm */; };
+		83F9A0F816DD5A8C00F5B406 /* usofa.json in Resources */ = {isa = PBXBuildFile; fileRef = 83F9A0F716DD5A8C00F5B406 /* usofa.json */; };
 		B6B0BBFECE1F45E3A9CC5EA9 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 91D1B226CAFA40E6AC4DC9C5 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -100,6 +113,35 @@
 		836FFE8A16DA2ACA00EE2A69 /* CCBox2DView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CCBox2DView.mm; sourceTree = "<group>"; };
 		83F9A0B716DC9B2500F5B406 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		83F9A0B916DCAA4200F5B406 /* BGLibraryMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BGLibraryMacros.h; sourceTree = "<group>"; };
+		83F9A0C916DD590F00F5B406 /* ATEdge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATEdge.h; sourceTree = "<group>"; };
+		83F9A0CA16DD590F00F5B406 /* ATEdge.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ATEdge.mm; sourceTree = "<group>"; };
+		83F9A0CB16DD590F00F5B406 /* ATNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATNode.h; sourceTree = "<group>"; };
+		83F9A0CC16DD590F00F5B406 /* ATNode.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ATNode.mm; sourceTree = "<group>"; };
+		83F9A0CE16DD590F00F5B406 /* ATBarnesHutBranch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATBarnesHutBranch.h; sourceTree = "<group>"; };
+		83F9A0CF16DD590F00F5B406 /* ATBarnesHutBranch.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ATBarnesHutBranch.mm; sourceTree = "<group>"; };
+		83F9A0D016DD590F00F5B406 /* ATBarnesHutTree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATBarnesHutTree.h; sourceTree = "<group>"; };
+		83F9A0D116DD590F00F5B406 /* ATBarnesHutTree.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ATBarnesHutTree.mm; sourceTree = "<group>"; };
+		83F9A0D316DD590F00F5B406 /* ATKernel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATKernel.h; sourceTree = "<group>"; };
+		83F9A0D416DD590F00F5B406 /* ATKernel.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ATKernel.mm; sourceTree = "<group>"; };
+		83F9A0D616DD590F00F5B406 /* ATEnergy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATEnergy.h; sourceTree = "<group>"; };
+		83F9A0D716DD590F00F5B406 /* ATEnergy.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ATEnergy.mm; sourceTree = "<group>"; };
+		83F9A0D816DD590F00F5B406 /* ATParticle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATParticle.h; sourceTree = "<group>"; };
+		83F9A0D916DD590F00F5B406 /* ATParticle.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ATParticle.mm; sourceTree = "<group>"; };
+		83F9A0DA16DD590F00F5B406 /* ATPhysics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATPhysics.h; sourceTree = "<group>"; };
+		83F9A0DB16DD590F00F5B406 /* ATPhysics.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ATPhysics.mm; sourceTree = "<group>"; };
+		83F9A0DC16DD590F00F5B406 /* ATSpring.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATSpring.h; sourceTree = "<group>"; };
+		83F9A0DD16DD590F00F5B406 /* ATSpring.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ATSpring.mm; sourceTree = "<group>"; };
+		83F9A0DE16DD590F00F5B406 /* PSArborTouch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PSArborTouch.h; sourceTree = "<group>"; };
+		83F9A0E016DD590F00F5B406 /* ATGeometry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATGeometry.h; sourceTree = "<group>"; };
+		83F9A0E216DD590F00F5B406 /* ATSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATSystem.h; sourceTree = "<group>"; };
+		83F9A0E316DD590F00F5B406 /* ATSystem.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ATSystem.mm; sourceTree = "<group>"; };
+		83F9A0E416DD590F00F5B406 /* ATSystemParams.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATSystemParams.h; sourceTree = "<group>"; };
+		83F9A0E516DD590F00F5B406 /* ATSystemParams.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ATSystemParams.mm; sourceTree = "<group>"; };
+		83F9A0E616DD590F00F5B406 /* ATSystemRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATSystemRenderer.h; sourceTree = "<group>"; };
+		83F9A0E716DD590F00F5B406 /* ATSystemState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATSystemState.h; sourceTree = "<group>"; };
+		83F9A0E816DD590F00F5B406 /* ATSystemState.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ATSystemState.mm; sourceTree = "<group>"; };
+		83F9A0F516DD5A3C00F5B406 /* Defs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Defs.h; sourceTree = "<group>"; };
+		83F9A0F716DD5A8C00F5B406 /* usofa.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = usofa.json; sourceTree = "<group>"; };
 		91D1B226CAFA40E6AC4DC9C5 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -133,6 +175,8 @@
 		836FFD9F16D9EB1000EE2A69 = {
 			isa = PBXGroup;
 			children = (
+				83F9A0F616DD5A8B00F5B406 /* Model */,
+				83F9A0C616DD590F00F5B406 /* External */,
 				834F392D16DB80AC00307AB3 /* CCBox2DTests */,
 				836FFDB116D9EB1000EE2A69 /* CCBox2D Test */,
 				836FFDAA16D9EB1000EE2A69 /* Frameworks */,
@@ -183,6 +227,7 @@
 			isa = PBXGroup;
 			children = (
 				83F9A0B916DCAA4200F5B406 /* BGLibraryMacros.h */,
+				83F9A0F516DD5A3C00F5B406 /* Defs.h */,
 				83F9A0B716DC9B2500F5B406 /* Icon.png */,
 				836FFDDB16D9F00100EE2A69 /* GLES-Render.h */,
 				836FFDDC16D9F00100EE2A69 /* GLES-Render.mm */,
@@ -223,6 +268,106 @@
 				836FFE7416DA097500EE2A69 /* r2.png */,
 			);
 			path = Images;
+			sourceTree = "<group>";
+		};
+		83F9A0C616DD590F00F5B406 /* External */ = {
+			isa = PBXGroup;
+			children = (
+				83F9A0C716DD590F00F5B406 /* PSArborTouch */,
+			);
+			name = External;
+			path = "CCBox2D Test/External";
+			sourceTree = "<group>";
+		};
+		83F9A0C716DD590F00F5B406 /* PSArborTouch */ = {
+			isa = PBXGroup;
+			children = (
+				83F9A0C816DD590F00F5B406 /* Atoms */,
+				83F9A0CD16DD590F00F5B406 /* Barnes-Hut */,
+				83F9A0D216DD590F00F5B406 /* Kernel */,
+				83F9A0D516DD590F00F5B406 /* Physics */,
+				83F9A0DE16DD590F00F5B406 /* PSArborTouch.h */,
+				83F9A0DF16DD590F00F5B406 /* Support */,
+				83F9A0E116DD590F00F5B406 /* System */,
+			);
+			path = PSArborTouch;
+			sourceTree = "<group>";
+		};
+		83F9A0C816DD590F00F5B406 /* Atoms */ = {
+			isa = PBXGroup;
+			children = (
+				83F9A0C916DD590F00F5B406 /* ATEdge.h */,
+				83F9A0CA16DD590F00F5B406 /* ATEdge.mm */,
+				83F9A0CB16DD590F00F5B406 /* ATNode.h */,
+				83F9A0CC16DD590F00F5B406 /* ATNode.mm */,
+			);
+			path = Atoms;
+			sourceTree = "<group>";
+		};
+		83F9A0CD16DD590F00F5B406 /* Barnes-Hut */ = {
+			isa = PBXGroup;
+			children = (
+				83F9A0CE16DD590F00F5B406 /* ATBarnesHutBranch.h */,
+				83F9A0CF16DD590F00F5B406 /* ATBarnesHutBranch.mm */,
+				83F9A0D016DD590F00F5B406 /* ATBarnesHutTree.h */,
+				83F9A0D116DD590F00F5B406 /* ATBarnesHutTree.mm */,
+			);
+			path = "Barnes-Hut";
+			sourceTree = "<group>";
+		};
+		83F9A0D216DD590F00F5B406 /* Kernel */ = {
+			isa = PBXGroup;
+			children = (
+				83F9A0D316DD590F00F5B406 /* ATKernel.h */,
+				83F9A0D416DD590F00F5B406 /* ATKernel.mm */,
+			);
+			path = Kernel;
+			sourceTree = "<group>";
+		};
+		83F9A0D516DD590F00F5B406 /* Physics */ = {
+			isa = PBXGroup;
+			children = (
+				83F9A0D616DD590F00F5B406 /* ATEnergy.h */,
+				83F9A0D716DD590F00F5B406 /* ATEnergy.mm */,
+				83F9A0D816DD590F00F5B406 /* ATParticle.h */,
+				83F9A0D916DD590F00F5B406 /* ATParticle.mm */,
+				83F9A0DA16DD590F00F5B406 /* ATPhysics.h */,
+				83F9A0DB16DD590F00F5B406 /* ATPhysics.mm */,
+				83F9A0DC16DD590F00F5B406 /* ATSpring.h */,
+				83F9A0DD16DD590F00F5B406 /* ATSpring.mm */,
+			);
+			path = Physics;
+			sourceTree = "<group>";
+		};
+		83F9A0DF16DD590F00F5B406 /* Support */ = {
+			isa = PBXGroup;
+			children = (
+				83F9A0E016DD590F00F5B406 /* ATGeometry.h */,
+			);
+			path = Support;
+			sourceTree = "<group>";
+		};
+		83F9A0E116DD590F00F5B406 /* System */ = {
+			isa = PBXGroup;
+			children = (
+				83F9A0E216DD590F00F5B406 /* ATSystem.h */,
+				83F9A0E316DD590F00F5B406 /* ATSystem.mm */,
+				83F9A0E416DD590F00F5B406 /* ATSystemParams.h */,
+				83F9A0E516DD590F00F5B406 /* ATSystemParams.mm */,
+				83F9A0E616DD590F00F5B406 /* ATSystemRenderer.h */,
+				83F9A0E716DD590F00F5B406 /* ATSystemState.h */,
+				83F9A0E816DD590F00F5B406 /* ATSystemState.mm */,
+			);
+			path = System;
+			sourceTree = "<group>";
+		};
+		83F9A0F616DD5A8B00F5B406 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				83F9A0F716DD5A8C00F5B406 /* usofa.json */,
+			);
+			name = Model;
+			path = "CCBox2D Test/Model";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -304,6 +449,7 @@
 				834F393A16DC7D2700307AB3 /* fabric.png in Resources */,
 				834F393B16DC7D2700307AB3 /* fabric@2x.png in Resources */,
 				83F9A0B816DC9B2500F5B406 /* Icon.png in Resources */,
+				83F9A0F816DD5A8C00F5B406 /* usofa.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -339,6 +485,18 @@
 				834F392C16DB71E800307AB3 /* CCTestLayer.mm in Sources */,
 				834F393016DB810D00307AB3 /* CCAddPair.mm in Sources */,
 				834F393316DC15D300307AB3 /* CCApplyForce.mm in Sources */,
+				83F9A0E916DD590F00F5B406 /* ATEdge.mm in Sources */,
+				83F9A0EA16DD590F00F5B406 /* ATNode.mm in Sources */,
+				83F9A0EB16DD590F00F5B406 /* ATBarnesHutBranch.mm in Sources */,
+				83F9A0EC16DD590F00F5B406 /* ATBarnesHutTree.mm in Sources */,
+				83F9A0ED16DD590F00F5B406 /* ATKernel.mm in Sources */,
+				83F9A0EE16DD590F00F5B406 /* ATEnergy.mm in Sources */,
+				83F9A0EF16DD590F00F5B406 /* ATParticle.mm in Sources */,
+				83F9A0F016DD590F00F5B406 /* ATPhysics.mm in Sources */,
+				83F9A0F116DD590F00F5B406 /* ATSpring.mm in Sources */,
+				83F9A0F216DD590F00F5B406 /* ATSystem.mm in Sources */,
+				83F9A0F316DD590F00F5B406 /* ATSystemParams.mm in Sources */,
+				83F9A0F416DD590F00F5B406 /* ATSystemState.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

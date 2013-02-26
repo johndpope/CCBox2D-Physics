@@ -14,8 +14,13 @@
     
     if  (self!=nil){
 
+        appDelegate = (Box2DAppDelegate*) [[UIApplication sharedApplication] delegate];
+        
+        [self loadMapData];
+        
         m_world->SetGravity(b2Vec2(0.0f, 0.0f));
    
+        return self;
         
         // Define the ground box shape.
         CGSize screenSize = [CCDirector sharedDirector].winSize;
@@ -118,6 +123,65 @@
         
         
         
+    }
+}
+
+
+
+
+-(void) loadMapData
+{
+    // Find the file
+    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"usofa" ofType:@"json"];
+    if (filePath) {
+        // Load data in the file
+        NSData *theJSONData = [NSData dataWithContentsOfFile:filePath];
+        if (theJSONData) {
+            // Parse the file
+            NSError *theError = nil;
+            NSDictionary *theObject = [NSJSONSerialization JSONObjectWithData:theJSONData options:NSJSONReadingAllowFragments                                error:&theError];
+            
+            if (theObject) {
+                
+                NSMutableDictionary *edges = [NSMutableDictionary dictionaryWithDictionary:[theObject objectForKey:@"edges"]];
+                
+                NSLog(@"edges:%@",edges);
+                
+                [edges enumerateKeysAndObjectsWithOptions:NSEnumerationConcurrent usingBlock:^(id key, id obj, BOOL *stop) {
+                    
+                    NSString *source = key;
+                    NSDictionary *targets = obj;
+                    
+                    // How about an extra measure of concurrency within the concurrency.
+                    NSLog(@"source:%@",source);
+                    NSLog(@"targets:%@",targets);
+                    
+                    NSMutableDictionary *userDataDict = [targets objectForKey:@"userData"];
+                    
+                    [targets enumerateKeysAndObjectsWithOptions:NSEnumerationConcurrent usingBlock:^(id key, id obj, BOOL *stop) {
+                        
+                        
+                        
+                        if (![key isEqualToString:@"userData"]) {
+                            NSLog(@"Source %@ -> %@", source, key);
+                            // Create the edge, and by proxy, create the nodes
+                            [appDelegate.system addEdgeFromNode:[source copy] toNode:[key copy] withData:userDataDict withWorld:m_world];
+                            
+                        }
+                        
+                        
+                    }];
+                    
+                }];
+                
+            } else {
+                NSLog(@"Could not parse JSON file.");
+            }
+        } else {
+            NSLog(@"Could not load NSData from file.");
+        }
+    } else {
+        NSLog(@"Please include america.json in the project resources.");
     }
 }
 

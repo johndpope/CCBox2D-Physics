@@ -79,7 +79,7 @@ static inline CGPoint CGPointNormalize(const CGPoint point)
 static inline CGPoint CGPointRandom(const CGFloat radius)
 {
     CGFloat targetRadius = (radius > 0.0) ? radius : 5.0;
-    CGPoint r = { .x = 2 * targetRadius * (RANDOM_0_1 - 0.5), .y = 2 * targetRadius * (RANDOM_0_1 - 0.5) };
+    CGPoint r = { .x = static_cast<CGFloat>(2.0f * targetRadius * (RANDOM_0_1 - 0.5)), .y = static_cast<CGFloat>(2.0f * targetRadius * (RANDOM_0_1 - 0.5)) };
     return(r);
 }
 
