@@ -204,7 +204,7 @@ typedef enum {
 
 - (void) applyForces:(ATParticle *)particle andRepulsion:(CGFloat)repulsion 
 {
-    //NSLog(@"applyForces");
+    NSLog(@"applyForces");
     NSParameterAssert(particle != nil);
     
     if (particle == nil) return;

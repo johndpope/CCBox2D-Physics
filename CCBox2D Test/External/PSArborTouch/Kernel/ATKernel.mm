@@ -17,7 +17,7 @@
 
 
 // Interval in seconds: make sure this is more than 0
-#define kTimerInterval 0.05
+#define kTimerInterval 0.5
 
 
 @interface ATKernel ()

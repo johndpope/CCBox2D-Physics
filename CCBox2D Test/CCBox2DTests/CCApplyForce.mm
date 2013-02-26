@@ -25,6 +25,7 @@
         [self createNodes];
         m_world->SetGravity(b2Vec2(0.0f, 0.0f));
    
+
         return self;
         
         // Define the ground box shape.
@@ -57,6 +58,18 @@
     [ground release];
     [super dealloc];
 }
+
+-(void) update:(ccTime)delta
+{
+    [super update:delta];
+    for (ATParticle *particle in appDelegate.system.physics.particles) {
+        [particle update:delta];
+    }
+    
+    
+	
+}
+
 -(void)generateNodesWithParent:(CCBodySprite*)parentSprite{
     b2PolygonShape shape;
     //shape.SetAsBox(2, 2);
@@ -68,7 +81,13 @@
     
     BG_WEAKSELF;
     
-    for (int i = 0; i < 5; ++i)
+    
+    float minX = 2.0f;
+    float maxX = 8.0f;
+    float t = RandomFloat(minX,maxX);
+    
+    
+    for (int i = 0; i < t; ++i)
     {
         CGPoint pt;
         if (parentSprite.tag ==111) {
@@ -80,37 +99,36 @@
         NSLog(@"pt.x:%f",pt.x);
         NSLog(@"pt.y:%f",pt.y);
         
-        CCBodySprite *kirby = [[CCBodySprite spriteWithFile:@"Icon.png"]retain];
-        kirby.color = ccMAGENTA;
+        CCBodySprite *particle = [[CCBodySprite spriteWithFile:@"Icon.png"]retain];
+        particle.color = ccMAGENTA;
         
         b2BodyDef bodyDef;
         bodyDef.type = b2_dynamicBody;
         bodyDef.awake = YES;
         bodyDef.allowSleep = YES;
-        [kirby configureSpriteForWorld:m_world bodyDef:bodyDef];
-        kirby.position = pt;
-        [self addChild:kirby]; //add the kirby image into canvas
+        [particle configureSpriteForWorld:m_world bodyDef:bodyDef];
+        particle.position = pt;
+        [self addChild:particle]; //add the particle image into canvas
         
-        
-        float radius = 150;
+         float radius = RandomFloat(10.0,150.0);
         CCShape *circle = [CCShape circleWithCenter:ccp(5,5) radius:radius];
         circle.restitution = 0.0f;
-        [kirby addShape:circle named:@"circle"];
+        [particle addShape:circle named:@"circle"];
         float scale =1.0f/15;
-        [kirby setScale:scale];
+        [particle setScale:scale];
 
-        kirby.onTouchDownBlock = ^{
+        particle.onTouchDownBlock = ^{
             NSLog(@"onTouchDownBlock");
 
-            [weakSelf generateNodesWithParent:kirby];
+            [weakSelf generateNodesWithParent:particle];
             //circle
             
         };
         
         
         float32 gravity = 10.0f;
-        float32 I = [kirby inertia];
-        float32 mass = [kirby mass];
+        float32 I = [particle inertia];
+        float32 mass = [particle mass];
         
         // For a circle: I = 0.5 * m * r * r ==> r = sqrt(2 * I / m)
         radius = b2Sqrt(2.0f * I / mass);
@@ -120,7 +138,7 @@
         jd.localAnchorA.SetZero();
         jd.localAnchorB.SetZero();
         jd.bodyA = parentSprite.body;
-        jd.bodyB = kirby.body;
+        jd.bodyB = particle.body;
         jd.collideConnected = true;
         jd.maxForce = mass * gravity;
         jd.maxTorque = mass * radius * gravity;
@@ -198,31 +216,34 @@
         
         CGPoint pt = CGPointRandom(5.0);;
         //create a random point to display
-        if (pt.x<0) {
-            if (pt.y<0) {
-                pt =  CGPointScale(CGPointMake(pt.x*-1, pt.y*-1),100);
-            }else{
-                pt =  CGPointScale(CGPointMake(pt.x*-1, pt.y),100);
-            }
-        }else{
-            if (pt.y<0) {
-                pt =  CGPointScale(CGPointMake(pt.x, pt.y*-1),100);
-            }else{
-                pt =  CGPointScale(CGPointMake(pt.x, pt.y),100);
-            }
-        }
-        NSLog(@"pt:%f",particle.position.x);
-        NSLog(@"pt:%f",particle.position.y);
-        
-        particle.position =  pt;
+
         [particle update:nil];
         
-        //CGPoint pt = CGPointRandom(1.0);
-        /*ATParticle *node = [[ATParticle alloc] initWithWorld:world size:1 position:pt angle:0.35  name:@"ball" userData:nil];
-         node.position = pt;
-         [self addChild:node.sprite];*/
+        BG_WEAKSELF;
         
-        //[self addChild:particle.sprite];
+        [particle setTexture:[[CCTextureCache sharedTextureCache] addImage: @"Icon.png"]];
+        b2BodyDef bodyDef;
+        bodyDef.type = b2_dynamicBody;
+        bodyDef.awake = YES;
+        bodyDef.allowSleep = YES;
+        [particle configureSpriteForWorld:m_world bodyDef:bodyDef];
+        particle.position = pt;
+        [self addChild:particle]; //add the particle image into canvas
+        particle.onTouchDownBlock = ^{
+            NSLog(@"onTouchDownBlock");
+            
+            [weakSelf generateNodesWithParent:particle];
+            //circle
+            
+        };
+        
+        float radius = 50;
+        CCShape *circle = [CCShape circleWithCenter:ccp(5,5) radius:radius];
+        circle.restitution = 0.0f;
+        [particle addShape:circle named:@"circle"];
+        float scale =1.0f/15;
+        [particle setScale:scale];
+
     }
     
     for (ATSpring *spring in appDelegate.system.physics.springs) {

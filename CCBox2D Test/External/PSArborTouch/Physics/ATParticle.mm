@@ -168,27 +168,28 @@
 	}
 }
 
-- (void)update:(ccTime)dt
+/*- (void)update:(ccTime)dt
 {
-  //  NSLog(@"update particle");
-	if (self.sprite != nil && _body != NULL)
+    //NSLog(@"update particle");
+	/*if (self.sprite != nil && _body != NULL)
 	{
         //NSLog(@"_body->GetPosition().x:%f",_body->GetPosition().x);
        // NSLog(@"_body->GetPosition().y:%f",_body->GetPosition().y);
    
-        self.sprite.position = ccp(_body->GetPosition().x * PTM_RATIO,
+        self.position = ccp(_body->GetPosition().x * PTM_RATIO,
                                 _body->GetPosition().y * PTM_RATIO);
         
         //NSLog(@"x:%f",self.position.x);
         //NSLog(@"y:%f",self.position.y);
-		self.sprite.rotation = -1.0f * CC_RADIANS_TO_DEGREES(_body->GetAngle());
-	}
-}
+		self.rotation = -1.0f * CC_RADIANS_TO_DEGREES(_body->GetAngle());
+	}*/
+//}
 
 - (void) applyForce:(CGPoint)force
 {
-    //NSLog(@"applyForce");
-    self.position = CGPointAdd(self.force, CGPointDivideFloat(force, self.mass));
+    NSLog(@"applyForce");
+    //self.position = CGPointAdd(self.force, CGPointDivideFloat(force, self.mass));
+    [self applyForce:CGPointAdd(self.force, CGPointDivideFloat(force, self.mass)) asImpulse:YES];
 }
 
 #pragma mark - Internal Interface

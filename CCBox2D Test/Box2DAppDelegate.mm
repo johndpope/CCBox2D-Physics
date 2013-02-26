@@ -31,10 +31,10 @@ enum {
     // Configure simulation parameters, (take a copy, modify it, update the system when done.)
     ATSystemParams *params = self.system.parameters;
     
-    /*params.repulsion = 100.0;
+    params.repulsion = 100.0;
      params.stiffness = 10.0;
      params.friction  = 0.2;
-     params.precision = 0.6;*/
+     params.precision = 0.6;
     
     self.system.parameters = params;
     
@@ -50,16 +50,14 @@ enum {
     // set this controller as the system's delegate
     self.system.delegate = self;
     
-
-    
-    
+    // start the simulation
+    [self.system start:YES];
     
 	// Turn on display FPS
 	[director_ setDisplayStats:YES];
 
 	// 2D projection
 	[director_ setProjection:kCCDirectorProjection2D];
-//	[director_ setProjection:kCCDirectorProjection3D];
 
 	// Enables High Res mode (Retina Display) on iPhone 4 and maintains low res on all other devices
 	//if( ! [director_ enableRetinaDisplay:NO] )
@@ -68,17 +66,13 @@ enum {
 	CCScene *scene = [CCScene node];
     CGSize s = [[CCDirector sharedDirector] winSize];
     
-   
-    if (1) {
-        
-        CCApplyForce *view =[[CCApplyForce alloc]init];
-        [view setScale:1];
-		[view setAnchorPoint:ccp(0,0)];
-        [scene addChild:view z:0 tag:kTagBox2DNode];
-        
-    }
-   
-	
+
+    CCApplyForce *view =[[CCApplyForce alloc]init];
+    [view setScale:1];
+    [view setAnchorPoint:ccp(0,0)];
+    [scene addChild:view z:0 tag:kTagBox2DNode];
+
+
   
 	[director_ pushScene: scene];
 
