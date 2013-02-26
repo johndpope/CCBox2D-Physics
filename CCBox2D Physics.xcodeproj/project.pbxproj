@@ -62,14 +62,14 @@
 		834F393416DC76A100307AB3 /* Kirby.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Kirby.png; sourceTree = "<group>"; };
 		834F393816DC7D2700307AB3 /* fabric.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fabric.png; sourceTree = "<group>"; };
 		834F393916DC7D2700307AB3 /* fabric@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fabric@2x.png"; sourceTree = "<group>"; };
-		836FFDA816D9EB1000EE2A69 /* CCBox2D Test.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "CCBox2D Test.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		836FFDA816D9EB1000EE2A69 /* CCBox2D Physics.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "CCBox2D Physics.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		836FFDAB16D9EB1000EE2A69 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		836FFDAD16D9EB1000EE2A69 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		836FFDAF16D9EB1000EE2A69 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		836FFDB316D9EB1000EE2A69 /* CCBox2D Test-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CCBox2D Test-Info.plist"; sourceTree = "<group>"; };
+		836FFDB316D9EB1000EE2A69 /* CCBox2D Physics-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CCBox2D Physics-Info.plist"; sourceTree = "<group>"; };
 		836FFDB516D9EB1000EE2A69 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		836FFDB716D9EB1000EE2A69 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		836FFDB916D9EB1000EE2A69 /* CCBox2D Test-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CCBox2D Test-Prefix.pch"; sourceTree = "<group>"; };
+		836FFDB916D9EB1000EE2A69 /* CCBox2D Physics-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CCBox2D Physics-Prefix.pch"; sourceTree = "<group>"; };
 		836FFDBD16D9EB1000EE2A69 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		836FFDBF16D9EB1000EE2A69 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		836FFDC116D9EB1000EE2A69 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
@@ -197,7 +197,7 @@
 		836FFDA916D9EB1000EE2A69 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				836FFDA816D9EB1000EE2A69 /* CCBox2D Test.app */,
+				836FFDA816D9EB1000EE2A69 /* CCBox2D Physics.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -239,10 +239,10 @@
 				83F9A0B716DC9B2500F5B406 /* Icon.png */,
 				836FFDDB16D9F00100EE2A69 /* GLES-Render.h */,
 				836FFDDC16D9F00100EE2A69 /* GLES-Render.mm */,
-				836FFDB316D9EB1000EE2A69 /* CCBox2D Test-Info.plist */,
+				836FFDB316D9EB1000EE2A69 /* CCBox2D Physics-Info.plist */,
 				836FFDB416D9EB1000EE2A69 /* InfoPlist.strings */,
 				836FFDB716D9EB1000EE2A69 /* main.m */,
-				836FFDB916D9EB1000EE2A69 /* CCBox2D Test-Prefix.pch */,
+				836FFDB916D9EB1000EE2A69 /* CCBox2D Physics-Prefix.pch */,
 				836FFDBD16D9EB1000EE2A69 /* Default.png */,
 				836FFDBF16D9EB1000EE2A69 /* Default@2x.png */,
 				836FFDC116D9EB1000EE2A69 /* Default-568h@2x.png */,
@@ -344,9 +344,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		836FFDA716D9EB1000EE2A69 /* CCBox2D Test */ = {
+		836FFDA716D9EB1000EE2A69 /* CCBox2D Physics */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 836FFDC516D9EB1000EE2A69 /* Build configuration list for PBXNativeTarget "CCBox2D Test" */;
+			buildConfigurationList = 836FFDC516D9EB1000EE2A69 /* Build configuration list for PBXNativeTarget "CCBox2D Physics" */;
 			buildPhases = (
 				836FFDA416D9EB1000EE2A69 /* Sources */,
 				836FFDA516D9EB1000EE2A69 /* Frameworks */,
@@ -357,9 +357,9 @@
 			);
 			dependencies = (
 			);
-			name = "CCBox2D Test";
+			name = "CCBox2D Physics";
 			productName = "CCBox2D Test";
-			productReference = 836FFDA816D9EB1000EE2A69 /* CCBox2D Test.app */;
+			productReference = 836FFDA816D9EB1000EE2A69 /* CCBox2D Physics.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -372,7 +372,7 @@
 				LastUpgradeCheck = 0460;
 				ORGANIZATIONNAME = "Bell George";
 			};
-			buildConfigurationList = 836FFDA316D9EB1000EE2A69 /* Build configuration list for PBXProject "CCBox2D Test" */;
+			buildConfigurationList = 836FFDA316D9EB1000EE2A69 /* Build configuration list for PBXProject "CCBox2D Physics" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -384,7 +384,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				836FFDA716D9EB1000EE2A69 /* CCBox2D Test */,
+				836FFDA716D9EB1000EE2A69 /* CCBox2D Physics */,
 			);
 		};
 /* End PBXProject section */
@@ -538,9 +538,9 @@
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: John Pope (MHZ9FUBAN8)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "CCBox2D Test/CCBox2D Test-Prefix.pch";
-				INFOPLIST_FILE = "CCBox2D Test/CCBox2D Test-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				GCC_PREFIX_HEADER = "CCBox2D Test/CCBox2D Physics-Prefix.pch";
+				INFOPLIST_FILE = "CCBox2D Test/CCBox2D Physics-Info.plist";
+				PRODUCT_NAME = "CCBox2D Physics";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -551,9 +551,9 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "CCBox2D Test/CCBox2D Test-Prefix.pch";
-				INFOPLIST_FILE = "CCBox2D Test/CCBox2D Test-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				GCC_PREFIX_HEADER = "CCBox2D Test/CCBox2D Physics-Prefix.pch";
+				INFOPLIST_FILE = "CCBox2D Test/CCBox2D Physics-Info.plist";
+				PRODUCT_NAME = "CCBox2D Physics";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -561,7 +561,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		836FFDA316D9EB1000EE2A69 /* Build configuration list for PBXProject "CCBox2D Test" */ = {
+		836FFDA316D9EB1000EE2A69 /* Build configuration list for PBXProject "CCBox2D Physics" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				836FFDC316D9EB1000EE2A69 /* Debug */,
@@ -570,7 +570,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		836FFDC516D9EB1000EE2A69 /* Build configuration list for PBXNativeTarget "CCBox2D Test" */ = {
+		836FFDC516D9EB1000EE2A69 /* Build configuration list for PBXNativeTarget "CCBox2D Physics" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				836FFDC616D9EB1000EE2A69 /* Debug */,

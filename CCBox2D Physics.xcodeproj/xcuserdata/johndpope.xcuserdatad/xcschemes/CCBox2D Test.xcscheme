@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "836FFDA716D9EB1000EE2A69"
-               BuildableName = "CCBox2D Test.app"
-               BlueprintName = "CCBox2D Test"
-               ReferencedContainer = "container:CCBox2D Test.xcodeproj">
+               BuildableName = "CCBox2D Physics.app"
+               BlueprintName = "CCBox2D Physics"
+               ReferencedContainer = "container:CCBox2D Physics.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "836FFDA716D9EB1000EE2A69"
-            BuildableName = "CCBox2D Test.app"
-            BlueprintName = "CCBox2D Test"
-            ReferencedContainer = "container:CCBox2D Test.xcodeproj">
+            BuildableName = "CCBox2D Physics.app"
+            BlueprintName = "CCBox2D Physics"
+            ReferencedContainer = "container:CCBox2D Physics.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </TestAction>
@@ -52,9 +52,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "836FFDA716D9EB1000EE2A69"
-            BuildableName = "CCBox2D Test.app"
-            BlueprintName = "CCBox2D Test"
-            ReferencedContainer = "container:CCBox2D Test.xcodeproj">
+            BuildableName = "CCBox2D Physics.app"
+            BlueprintName = "CCBox2D Physics"
+            ReferencedContainer = "container:CCBox2D Physics.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -70,9 +70,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "836FFDA716D9EB1000EE2A69"
-            BuildableName = "CCBox2D Test.app"
-            BlueprintName = "CCBox2D Test"
-            ReferencedContainer = "container:CCBox2D Test.xcodeproj">
+            BuildableName = "CCBox2D Physics.app"
+            BlueprintName = "CCBox2D Physics"
+            ReferencedContainer = "container:CCBox2D Physics.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
