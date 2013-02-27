@@ -380,7 +380,7 @@ enum {
     return ground;
 }
 
-const float kZoomInFactor = 15.0f;
+const float kZoomInFactor = 5;
 
 -(void) zoomInOnPlayer:(ccTime)delta
 {

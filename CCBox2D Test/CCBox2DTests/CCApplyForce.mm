@@ -23,6 +23,7 @@
         
         [self loadMapData];
         [self createNodes];
+        [self createJoints];
         m_world->SetGravity(b2Vec2(0.0f, 0.0f));
    
 
@@ -68,6 +69,50 @@
     
     
 	
+}
+-(void)generateChildrenByParent:(ATParticle*)parentParticle{
+    
+    //TODO make this cleaner
+    
+    float n = RandomFloat(10.0,150000000.0);
+    NSString *name = [NSString stringWithFormat:@"rnd%f",n];
+    CGPoint pt = CGPointRandom(5.0);;
+    
+    ATParticle *node = [[ATParticle alloc] initWithWorld:m_world size:1 position:pt angle:0.35  name:name userData:nil];
+
+    [appDelegate.system.state setNamesObject:node forKey:name];
+    [appDelegate.system.state setNodesObject:node forKey:node.index];
+    [appDelegate.system addParticle:node];
+    
+
+    [node setTexture:[[CCTextureCache sharedTextureCache] addImage: @"Icon.png"]];
+    //CCBodySprite *particle = [[CCBodySprite spriteWithFile:@"Icon.png"]retain];
+    node.color = ccMAGENTA;
+    
+    b2BodyDef bodyDef;
+    bodyDef.type = b2_dynamicBody;
+    bodyDef.awake = YES;
+    bodyDef.allowSleep = YES;
+    [node configureSpriteForWorld:m_world bodyDef:bodyDef];
+   // particle.position = pt;
+    [self addChild:node]; //add the particle image into canvas
+    
+    float radius = RandomFloat(10.0,150.0);
+    CCShape *circle = [CCShape circleWithCenter:ccp(5,5) radius:radius];
+    circle.restitution = 0.0f;
+    [node addShape:circle named:@"circle"];
+    float scale =1.0f/15;
+    [node setScale:scale];
+    
+    [appDelegate.system addEdgeFromNode:[parentParticle name] toNode:name withData:nil withWorld:m_world];
+    @try {
+           [self createJoints];
+    }
+    @catch (NSException *exception) {
+        NSLog(@"e:%@",exception);
+    }
+
+ 
 }
 
 -(void)generateNodesWithParent:(CCBodySprite*)parentSprite{
@@ -232,7 +277,7 @@
         particle.onTouchDownBlock = ^{
             NSLog(@"onTouchDownBlock");
             
-            [weakSelf generateNodesWithParent:particle];
+            [weakSelf generateChildrenByParent:particle];
             //circle
             
         };
@@ -246,12 +291,16 @@
 
     }
     
+   
+    
+}
+
+-(void)createJoints{
     for (ATSpring *spring in appDelegate.system.physics.springs) {
         
         // Connect the joints
         b2DistanceJointDef jointDef;
-        
-        //
+
         NSLog(@"spring.point1.name:%@",spring.point1.name);
         NSLog(@"spring.point2.name:%@",spring.point2.name);
         // NSLog(@"sspring.point1.innerCircleBody:%@",spring.point1.innerCircleBody);
@@ -274,8 +323,6 @@
         m_world->CreateJoint(&jointDef);
         
     }
-    
 }
-
 
 @end

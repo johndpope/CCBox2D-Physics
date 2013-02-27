@@ -11,7 +11,6 @@
 #import "ATSpring.h"
 #import "ATParticle.h"
 #import "ATEnergy.h"
-
 #import "ATSystemParams.h"
 #import "ATSystemRenderer.h"
 
@@ -152,7 +151,7 @@
                 }
             }
         });
-//    });
+
 }
 
 - (void) start:(BOOL)unpause

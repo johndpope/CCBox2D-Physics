@@ -57,7 +57,7 @@
         energy_         = [[[ATEnergy alloc] init] retain];
         bounds_         = CGRectMake(-1.0, -1.0, 2.0, 2.0);
         speedLimit_     = 1000;
-        deltaTime_      = 0.02;
+        deltaTime_      = 1;
         stiffness_      = 1000;
         repulsion_      = 600;
         friction_       = 0.3;
@@ -213,7 +213,10 @@
         if   (pt.y < topleft.y)   topleft.y = pt.y;
     }
     
-    self.bounds = CGRectMake(topleft.x, topleft.y, bottomright.x - topleft.x, bottomright.y - topleft.y);
+    CGRect rect = CGRectMake(topleft.x, topleft.y, bottomright.x - topleft.x, bottomright.y - topleft.y);
+
+    //TODO test if this is valid
+    self.bounds = rect;
 }
 
 - (void) eulerIntegrator:(CGFloat)deltaTime 
@@ -382,7 +385,18 @@
     
     for (ATParticle *particle in activeParticles_) {
         // move the node to its new position
-        particle.position = CGPointAdd(particle.position, CGPointScale(particle.velocity, timestep) );
+        NSLog(@"velocity x:%f",particle.velocity.x);
+        NSLog(@"velocity y:%f",particle.velocity.y);
+        
+        CGPoint pos = particle.position;
+        CGPoint v0 = {0,0};
+        CGPoint v1 = particle.velocity;
+        if (CGPointEqualToPoint(v0,v1)) {
+            
+        }else{
+            particle.position = CGPointAdd(pos, CGPointScale(v1, timestep) );
+        }
+        
         
         // keep stats to report in systemEnergy
         CGFloat speed = CGPointMagnitude(particle.velocity);
