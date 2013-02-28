@@ -200,6 +200,8 @@
         
         // update the bounds
         CGPoint pt = particle.position;
+        NSLog(@"pt.x:%f",pt.x);
+        NSLog(@"pt.y:%f",pt.y);
         
         if (firstParticle) {
             bottomright     = pt;
@@ -217,6 +219,10 @@
 
     //TODO test if this is valid
     self.bounds = rect;
+    NSLog(@"topLeft.x:%f",topleft.x);
+    NSLog(@"topLeft.y:%f",topleft.y);
+    NSLog(@"width:%f",bottomright.x - topleft.x);
+    NSLog(@"height:%f",bottomright.y - topleft.y);
 }
 
 - (void) eulerIntegrator:(CGFloat)deltaTime 
@@ -294,6 +300,7 @@
 
 - (void) applySprings 
 {
+   // NSLog(@"applySprings");
     for (ATSpring *spring in activeSprings_) {
         CGPoint d = CGPointSubtract(spring.target.position, spring.source.position); // the direction of the spring
         

@@ -8,6 +8,7 @@
 #import "ATSystemRenderer.h"
 #import "ATPhysics.h"
 
+
 @implementation CCApplyForce{
     
 };
@@ -35,7 +36,7 @@
         
         //float scale = 1.0f/15;
         ground = [self createGround:screenSize];
-        ground.anchorPoint = screenCenter;
+        //ground.anchorPoint = screenCenter;
      
         
         CCBodySprite *centerBody = [[CCBodySprite spriteWithFile:@"Icon.png"]retain];

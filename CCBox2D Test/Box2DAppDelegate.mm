@@ -39,7 +39,8 @@ enum {
     self.system.parameters = params;
     
     // Setup the view bounds
-    self.system.viewBounds = CGRectMake(0, 0, 768, 1024);// canvas_.bounds;
+    self.system.viewBounds = CGRectMake(0, 0, 768, 1024);
+    self.system.physics.bounds = CGRectMake(0, 0, 768, 1024);
     
     // leave some space at the bottom and top for text
     self.system.viewPadding = UIEdgeInsetsMake(60.0, 60.0, 60.0, 60.0);

@@ -62,6 +62,11 @@ typedef enum {
 
 - (void) updateWithBounds:(CGRect)bounds theta:(CGFloat)theta 
 {
+    NSLog(@"bounds height:%f",bounds.size.height);
+    NSLog(@"bounds width:%f",bounds.size.width);
+    NSLog(@"bounds x:%f",bounds.origin.x);
+    NSLog(@"bounds y:%f",bounds.origin.y);
+    
     bounds_         = bounds;
     theta_          = theta;
     
@@ -217,6 +222,7 @@ typedef enum {
     
     while ([queue count] != 0) {
         
+        NSLog(@"queue size:%d",[queue count]);
         // dequeue
         id node = [queue objectAtIndex:0];
         [queue removeObjectAtIndex:0];
@@ -243,6 +249,12 @@ typedef enum {
             
             CGFloat dist = CGPointMagnitude(CGPointSubtract(particle.position, CGPointDivideFloat(nodeBranch.position, nodeBranch.mass)));
             CGFloat size = sqrtf( CGRectGetWidth(nodeBranch.bounds) * CGRectGetHeight(nodeBranch.bounds) );
+            
+            NSLog(@"size:%f",size);
+            NSLog(@"dist:%f",dist);
+            NSLog(@"nodeBranch.bounds.size.height:%f",nodeBranch.bounds.size.height);
+            
+             NSLog(@"nodeBranch.bounds.size.width:%f",nodeBranch.bounds.size.width);
             
             if ( (size / dist) > theta_ ) { // i.e., s/d > Θ
                 // open the quad and recurse
@@ -358,7 +370,9 @@ typedef enum {
     if ( branches_.count == 0 || branchCounter_ > (branches_.count -1) ) {
         branch = [[[ATBarnesHutBranch alloc] init] autorelease];
         [branches_ addObject:branch];
+        NSLog(@"adding branches_:%@",branch);
     } else {
+       
         branch = [branches_ objectAtIndex:branchCounter_];
         branch.ne = nil;
         branch.nw = nil;
@@ -367,6 +381,7 @@ typedef enum {
         branch.bounds = CGRectZero;
         branch.mass = 0.0;
         branch.position = CGPointZero;
+        NSLog(@" branch objectAtIndex:%@",branch);
     }
     
 //    NSLog(@"Branch count:%u", _branches.count);

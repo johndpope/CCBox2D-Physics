@@ -338,7 +338,7 @@ enum {
         height = height*2;
     }
  
-    float32 margin = 5.0f;
+    float32 margin = 10.0f;
     b2Vec2 lowerLeft = b2Vec2(margin/PTM_RATIO, margin/PTM_RATIO);
     b2Vec2 lowerRight = b2Vec2((width-margin)/PTM_RATIO,margin/PTM_RATIO);
     b2Vec2 upperRight = b2Vec2((width-margin)/PTM_RATIO, (height-margin)/PTM_RATIO);
