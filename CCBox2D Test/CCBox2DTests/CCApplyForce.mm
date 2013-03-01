@@ -20,35 +20,32 @@
     
     if  (self!=nil){
 
-        appDelegate = (Box2DAppDelegate*) [[UIApplication sharedApplication] delegate];
-        
+ 
         [self loadMapData];
         [self createNodes];
         [self createJoints];
         m_world->SetGravity(b2Vec2(0.0f, 0.0f));
    
 
-        return self;
         
         // Define the ground box shape.
         CGSize screenSize = [CCDirector sharedDirector].winSize;
 		CGPoint screenCenter = CGPointMake(screenSize.width * 0.5f, screenSize.height * 0.5f);
         
         //float scale = 1.0f/15;
-        ground = [self createGround:screenSize];
-        //ground.anchorPoint = screenCenter;
-     
-        
+         [self createBounds];
+
         CCBodySprite *centerBody = [[CCBodySprite spriteWithFile:@"Icon.png"]retain];
+        centerBody.color = ccGREEN;
         centerBody.tag = 111;
         b2BodyDef bodyDef;
         bodyDef.type = b2_staticBody;
         [centerBody configureSpriteForWorld:m_world bodyDef:bodyDef];
-        centerBody.position = ccp(500,500);
+        centerBody.position = ccp(50,50);
         [self addChild:centerBody z:-100];
         
 		{
-            [self generateNodesWithParent:centerBody];
+           // [self generateNodesWithParent:centerBody];
 		}
 
         
@@ -95,10 +92,10 @@
     bodyDef.awake = YES;
     bodyDef.allowSleep = YES;
     [node configureSpriteForWorld:m_world bodyDef:bodyDef];
-   // particle.position = pt;
+    node.position = parentParticle.position;
     [self addChild:node]; //add the particle image into canvas
     
-    float radius = RandomFloat(10.0,150.0);
+    float radius = RandomFloat(10.0,15.0);
     CCShape *circle = [CCShape circleWithCenter:ccp(5,5) radius:radius];
     circle.restitution = 0.0f;
     [node addShape:circle named:@"circle"];
@@ -153,7 +150,7 @@
         bodyDef.awake = YES;
         bodyDef.allowSleep = YES;
         [particle configureSpriteForWorld:m_world bodyDef:bodyDef];
-        particle.position = pt;
+        particle.physicsPosition = pt;
         [self addChild:particle]; //add the particle image into canvas
         
          float radius = RandomFloat(10.0,150.0);
@@ -267,13 +264,16 @@
         
         BG_WEAKSELF;
         
-        [particle setTexture:[[CCTextureCache sharedTextureCache] addImage: @"Icon.png"]];
+        [particle setTexture:[[CCTextureCache sharedTextureCache] addImage: @"Kirby.png"]];
         b2BodyDef bodyDef;
         bodyDef.type = b2_dynamicBody;
         bodyDef.awake = YES;
         bodyDef.allowSleep = YES;
         [particle configureSpriteForWorld:m_world bodyDef:bodyDef];
-        particle.position = pt;
+        particle.physicsPosition = pt;
+        NSLog(@"particle.physicsPosition x:%f",particle.physicsPosition.x);
+        NSLog(@"particle.physicsPosition y:%f",particle.physicsPosition.y);
+
         [self addChild:particle]; //add the particle image into canvas
         particle.onTouchDownBlock = ^{
             NSLog(@"onTouchDownBlock");
@@ -302,8 +302,8 @@
         // Connect the joints
         b2DistanceJointDef jointDef;
 
-        NSLog(@"spring.point1.name:%@",spring.point1.name);
-        NSLog(@"spring.point2.name:%@",spring.point2.name);
+       // NSLog(@"spring.point1.name:%@",spring.point1.name);
+       // NSLog(@"spring.point2.name:%@",spring.point2.name);
         // NSLog(@"sspring.point1.innerCircleBody:%@",spring.point1.innerCircleBody);
         
         // spring.point1.position = ccp(i, i);

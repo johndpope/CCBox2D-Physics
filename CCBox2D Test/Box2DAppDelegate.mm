@@ -40,10 +40,12 @@ enum {
     
     // Setup the view bounds
     self.system.viewBounds = CGRectMake(0, 0, 768, 1024);
-    self.system.physics.bounds = CGRectMake(0, 0, 768, 1024);
+    
+    // this gets recalculated on tendparticles function....but without this line - it fails.
+    self.system.physics.bounds = CGRectMake(-1, -1, 2, 2);
     
     // leave some space at the bottom and top for text
-    self.system.viewPadding = UIEdgeInsetsMake(60.0, 60.0, 60.0, 60.0);
+    //self.system.viewPadding = UIEdgeInsetsMake(60.0, 60.0, 60.0, 60.0);
     
     // have the ‘camera’ zoom somewhat slowly as the graph unfolds
     self.system.viewTweenStep = 0.2;
@@ -51,8 +53,7 @@ enum {
     // set this controller as the system's delegate
     self.system.delegate = self;
     
-    // start the simulation
-    [self.system start:YES];
+    
     
 	// Turn on display FPS
 	[director_ setDisplayStats:YES];
@@ -66,17 +67,17 @@ enum {
 
 	CCScene *scene = [CCScene node];
     CGSize s = [[CCDirector sharedDirector] winSize];
-    
 
     CCApplyForce *view =[[CCApplyForce alloc]init];
     [view setScale:1];
     [view setAnchorPoint:ccp(0,0)];
     [scene addChild:view z:0 tag:kTagBox2DNode];
 
-
-  
 	[director_ pushScene: scene];
 
+    // start the simulation
+    [self.system start:YES];
+    
 	return YES;
 }
 

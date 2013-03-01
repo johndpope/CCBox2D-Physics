@@ -3,8 +3,9 @@
 #import "CCBox2DPrivate.h"
 #import "Render.h"
 #import <OpenGLES/ES1/gl.h>
-
-
+#import "ATBarnesHutBranch.h"
+#import "ATParticle.h"
+#import "Box2DAppDelegate.h"
 
 
 @implementation CCTestLayer {
@@ -23,6 +24,8 @@ enum {
 {
 	if ((self = [super init]))
 	{
+        appDelegate = (Box2DAppDelegate*) [[UIApplication sharedApplication] delegate];
+   
         self.touchEnabled = YES;
         
         b2Vec2 gravity;
@@ -52,7 +55,8 @@ enum {
         
 		// update every frame
 		[self scheduleUpdate];
-   		[self scheduleOnce:@selector(zoomInOnPlayer:) delay:0.0f];
+   		//[self scheduleOnce:@selector(zoomInOnPlayer:) delay:0.0f];
+        self.isDebugDrawing = YES;
 	}
 	return self;
 }
@@ -77,12 +81,14 @@ enum {
 	ccGLEnableVertexAttribs( kCCVertexAttribFlag_Position );
     
 	kmGLPushMatrix();
-    
+    [self drawRect];
 	m_world->DrawDebugData();
 
 	kmGLPopMatrix();
     
 	CHECK_GL_ERROR_DEBUG();
+
+    
 }
 
 -(void) update:(ccTime)delta
@@ -158,10 +164,16 @@ enum {
 		return NO;
 	}
     
-	// Make a small box.
+	// Make a tiny box. 
+   
 	b2AABB aabb;
 	b2Vec2 d;
-	d.Set(0.001f, 0.001f);
+    d.Set(1, 1); // 1x1 meter
+    //d.Set(0.1f, 0.1f); // 10cm x 10cm meter
+    //d.Set(0.01f, 0.01f); // 1cm x 1cm meter
+    //d.Set(0.001f, 0.001f); // 10mm x 10mm 
+    
+	d.Set(0.001f, 0.001f); // 
 	aabb.lowerBound = p - d;
 	aabb.upperBound = p + d;
     
@@ -328,59 +340,37 @@ enum {
 	}
 }
 
+//this isn't working!!
+-(void) createBounds {
+    
+    // for the screenBorder body we'll need these values
+    CGSize screenSize = [CCDirector sharedDirector].winSize;
+    float widthInMeters = screenSize.width / PTM_RATIO;
+    float heightInMeters = screenSize.height / PTM_RATIO;
+    b2Vec2 lowerLeftCorner = b2Vec2(0, 0);
+    b2Vec2 lowerRightCorner = b2Vec2(widthInMeters, 0);
+    b2Vec2 upperLeftCorner = b2Vec2(0, heightInMeters);
+    b2Vec2 upperRightCorner = b2Vec2(widthInMeters, heightInMeters);
+    
+    // static container body, with the collisions at screen borders
+    b2BodyDef screenBorderDef;
+    screenBorderDef.position.Set(0, 0);
+    b2Body* screenBorderBody = m_world->CreateBody(&screenBorderDef);
+    b2EdgeShape screenBorderShape;
+    
+    // Create fixtures for the four borders (the border shape is re-used)
+    screenBorderShape.Set(lowerLeftCorner, lowerRightCorner);
+    screenBorderBody->CreateFixture(&screenBorderShape, 0);
+    screenBorderShape.Set(lowerRightCorner, upperRightCorner);
+    screenBorderBody->CreateFixture(&screenBorderShape, 0);
+    screenBorderShape.Set(upperRightCorner, upperLeftCorner);
+    screenBorderBody->CreateFixture(&screenBorderShape, 0);
+    screenBorderShape.Set(upperLeftCorner, lowerLeftCorner);
+    screenBorderBody->CreateFixture(&screenBorderShape, 0);
 
--(CCBodySprite*) createGround:(CGSize)size {
-    
-    float width = size.width;
-	float height =  size.height;
-    if([[CCDirector sharedDirector] enableRetinaDisplay:YES] ){
-        width = width*2;
-        height = height*2;
-    }
- 
-    float32 margin = 10.0f;
-    b2Vec2 lowerLeft = b2Vec2(margin/PTM_RATIO, margin/PTM_RATIO);
-    b2Vec2 lowerRight = b2Vec2((width-margin)/PTM_RATIO,margin/PTM_RATIO);
-    b2Vec2 upperRight = b2Vec2((width-margin)/PTM_RATIO, (height-margin)/PTM_RATIO);
-    b2Vec2 upperLeft = b2Vec2(margin/PTM_RATIO, (height-margin)/PTM_RATIO);
-    
-
-    b2BodyDef bd;
-    bd.type = b2_staticBody;
-    bd.position.Set(0.0f, 0.0f);
-    
-    
-    const float32 k_restitution = 0.4f;
-	
-    
-    CCBodySprite *ground = [[CCBodySprite alloc]init];
-    [ground configureSpriteForWorld:m_world bodyDef:bd];
-    
-
-    // Left vertical
-    CCShape *leftEdge = [CCShape edgeWithVec1:lowerLeft  vec2:upperLeft];
-    leftEdge.restitution =k_restitution;
-    [ground addShape:leftEdge named:@"leftEdge"];
-    
-    // Right vertical
-    CCShape *rightEdge = [CCShape edgeWithVec1:lowerRight  vec2:upperRight];
-    rightEdge.restitution =k_restitution;
-    [ground addShape:rightEdge named:@"rightEdge"];
-    
-    // Top horizontal
-    CCShape *topEdge = [CCShape edgeWithVec1:upperLeft  vec2:upperRight];
-    topEdge.restitution =k_restitution;
-    [ground addShape:topEdge named:@"topEdge"];
-    
-    // Bottom horizontal
-    CCShape *bottomEdge = [CCShape edgeWithVec1:lowerLeft  vec2:lowerRight];
-    bottomEdge.restitution =k_restitution;
-    [ground addShape:bottomEdge named:@"bottomEdge"];
-    
-    return ground;
 }
 
-const float kZoomInFactor = 5;
+
 
 -(void) zoomInOnPlayer:(ccTime)delta
 {
@@ -400,6 +390,109 @@ const float kZoomInFactor = 5;
 	[self runAction:sequence];
 }
 
+
+
+
+- (void) drawRect
+{
+   // NSLog(@"drawRect");
+    
+    if ( appDelegate.system ) {
+
+        if (self.isDebugDrawing) {
+            
+            // Drawing code for the barnes-hut trees
+            ATBarnesHutBranch *root = appDelegate.system.physics.bhTree.root;
+            
+            if ( root ) {
+                [self recursiveDrawBranches:root];
+            }
+            // Draw bounds target (due to translation will always be the outeredge in display)
+
+            [self createLineByRect:[self scaleRect:appDelegate.system.tweenBoundsTarget]];
+    
+            
+            // Draw bounds current (this is a relative representation of the view window you see
+            // with all the nodes. It shows what the "camera" is doing to keep elements centered in
+            // view)
+            [self createLineByRect:[self scaleRect:appDelegate.system.tweenBoundsCurrent]];
+
+        }
+        
+
+        // Drawing code for springs
+       /* for (ATSpring *spring in appDelegate.system.physics.springs) {
+            //  NSLog(@"spring:%@",spring.userData);
+        
+           // [self drawSpring:spring inContext:context];
+            
+        }
+
+        CGContextSetLineWidth(context, 2.0);
+        // Drawing code for particle centers
+        /*for (ATParticle *particle in appDelegate.system.physics.particles) {
+            //[self updateParticleViewPosition:particle];
+        }*/
+
+    }
+    
+}
+
+#pragma mark - Internal Interface
+
+- (CGSize) sizeToScreen:(CGSize)s
+{
+    return [appDelegate.system toViewSize:s];
+}
+
+- (CGPoint) pointToScreen:(CGPoint)p
+{
+    return [appDelegate.system toViewPoint:p];
+}
+
+- (CGRect) scaleRect:(CGRect)rect
+{
+    return [appDelegate.system toViewRect:rect];
+}
+
+-(void)createLineByRect:(CGRect)rect{
+    //NSLog(@"rect w:%f",rect.size.width);
+    //NSLog(@"rect h:%f",rect.size.height);
+    
+    [self createLineByRect:rect color:ccc4(0, 0, 1, 1)];
+}
+-(void)createLineByRect:(CGRect)rect color:(ccColor4B)color
+{
+    return;
+    CCLayerColor* layer = [CCLayerColor layerWithColor:color width:rect.size.width*PTM_RATIO height:rect.size.height*PTM_RATIO];
+    layer.position = rect.origin;
+    [self addChild:layer];
+    
+}
+
+- (void) recursiveDrawBranches:(ATBarnesHutBranch *)branch
+{
+    // Draw the rect
+    [self createLineByRect:[self scaleRect:branch.bounds]];
+    
+    // Draw any sub branches
+    if (branch.se != nil && [branch.se isKindOfClass:ATBarnesHutBranch.class] == YES) {
+        [self recursiveDrawBranches:branch.se];
+    }
+    
+    if (branch.sw != nil && [branch.sw isKindOfClass:ATBarnesHutBranch.class] == YES ) {
+        [self recursiveDrawBranches:branch.sw ];
+    }
+    
+    if (branch.ne != nil && [branch.ne isKindOfClass:ATBarnesHutBranch.class] == YES ) {
+        [self recursiveDrawBranches:branch.ne ];
+    }
+    
+    if (branch.nw != nil && [branch.nw isKindOfClass:ATBarnesHutBranch.class] == YES ) {
+        [self recursiveDrawBranches:branch.nw ];
+    }
+    
+}
 
 
 @end

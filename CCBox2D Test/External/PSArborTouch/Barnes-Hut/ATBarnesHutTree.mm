@@ -64,9 +64,9 @@ typedef enum {
 {
     NSLog(@"bounds height:%f",bounds.size.height);
     NSLog(@"bounds width:%f",bounds.size.width);
-    NSLog(@"bounds x:%f",bounds.origin.x);
-    NSLog(@"bounds y:%f",bounds.origin.y);
-    
+    NSLog(@" x:%f",bounds.origin.x);
+    NSLog(@" y:%f",bounds.origin.y);
+    //PTM_RATIO
     bounds_         = bounds;
     theta_          = theta;
     
@@ -92,6 +92,7 @@ typedef enum {
     
     while ([queue count] != 0) {
         
+        NSLog(@"queue :%d",[queue count]);
         // dequeue
         ATParticle *particle = [queue objectAtIndex:0];
         [queue removeObjectAtIndex:0];
@@ -105,7 +106,7 @@ typedef enum {
             
             // slot is empty, just drop this node in and update the mass/c.o.m. 
             node.mass += p_mass;
-            node.position = CGPointAdd( node.position, CGPointScale(particle.position, p_mass) );
+            node.position = CGPointAdd( node.position, CGPointScale(particle.physicsPosition, p_mass) );
             
             [self _setQuad:p_quad ofBranch:node withObject:particle];
             
@@ -118,7 +119,7 @@ typedef enum {
             // as our new root
             
             node.mass += p_mass;
-            node.position = CGPointAdd( node.position, CGPointScale(particle.position, p_mass) );
+            node.position = CGPointAdd( node.position, CGPointScale(particle.physicsPosition, p_mass) );
             
             node = objectAtQuad;
             
@@ -163,10 +164,10 @@ typedef enum {
             [self _setQuad:p_quad ofBranch:node withObject:newBranch];
             newBranch.bounds = CGRectMake(branch_origin.x, branch_origin.y, branch_size.width, branch_size.height);
             node.mass = p_mass;
-            node.position = CGPointScale(particle.position, p_mass);
+            node.position = CGPointScale(particle.physicsPosition, p_mass);
             node = newBranch;
             
-            if ( (oldParticle.position.x == particle.position.x) && (oldParticle.position.y == particle.position.y) ) {
+            if ( (oldParticle.position.x == particle.physicsPosition.x) && (oldParticle.position.y == particle.physicsPosition.y) ) {
                 // prevent infinite bisection in the case where two particles
                 // have identical coordinates by jostling one of them slightly
                 
@@ -207,9 +208,13 @@ typedef enum {
     }
 }
 
+-(void)setBounds:(CGRect)bounds{
+    self.bounds = CGRectMake(bounds.origin.x, bounds.origin.y, bounds.size.width*PTM_RATIO, bounds.size.height*PTM_RATIO);
+
+}
 - (void) applyForces:(ATParticle *)particle andRepulsion:(CGFloat)repulsion 
 {
-    NSLog(@"applyForces");
+   //s NSLog(@"applyForces");
     NSParameterAssert(particle != nil);
     
     if (particle == nil) return;
@@ -222,7 +227,7 @@ typedef enum {
     
     while ([queue count] != 0) {
         
-        NSLog(@"queue size:%d",[queue count]);
+        //NSLog(@"queue size:%d",[queue count]);
         // dequeue
         id node = [queue objectAtIndex:0];
         [queue removeObjectAtIndex:0];
@@ -234,7 +239,7 @@ typedef enum {
             // this is a particle leafnode, so just apply the force directly
             ATParticle *nodeParticle = node;
             
-            CGPoint d = CGPointSubtract(particle.position, nodeParticle.position);
+            CGPoint d = CGPointSubtract(particle.physicsPosition, nodeParticle.position);
             CGFloat distance = MAX(1.0f, CGPointMagnitude(d));
             CGPoint direction = ( CGPointMagnitude(d) > 0.0 ) ? d : CGPointNormalize( CGPointRandom(1.0) );
             CGPoint force = CGPointDivideFloat( CGPointScale(direction, (repulsion * nodeParticle.mass) ), (distance * distance) );
@@ -247,14 +252,13 @@ typedef enum {
             // with its quadrants in turn
             ATBarnesHutBranch *nodeBranch = node;
             
-            CGFloat dist = CGPointMagnitude(CGPointSubtract(particle.position, CGPointDivideFloat(nodeBranch.position, nodeBranch.mass)));
+            CGFloat dist = CGPointMagnitude(CGPointSubtract(particle.physicsPosition, CGPointDivideFloat(nodeBranch.position, nodeBranch.mass)));
             CGFloat size = sqrtf( CGRectGetWidth(nodeBranch.bounds) * CGRectGetHeight(nodeBranch.bounds) );
             
-            NSLog(@"size:%f",size);
-            NSLog(@"dist:%f",dist);
-            NSLog(@"nodeBranch.bounds.size.height:%f",nodeBranch.bounds.size.height);
-            
-             NSLog(@"nodeBranch.bounds.size.width:%f",nodeBranch.bounds.size.width);
+            //NSLog(@"size:%f",size);
+            //NSLog(@"dist:%f",dist);
+            //NSLog(@"nodeBranch.bounds.size.height:%f",nodeBranch.bounds.size.height);
+           //  NSLog(@"nodeBranch.bounds.size.width:%f",nodeBranch.bounds.size.width);
             
             if ( (size / dist) > theta_ ) { // i.e., s/d > Θ
                 // open the quad and recurse
@@ -264,7 +268,7 @@ typedef enum {
                 if (nodeBranch.sw != nil) [queue addObject:nodeBranch.sw];
             } else {
                 // treat the quad as a single body
-                CGPoint d = CGPointSubtract(particle.position, CGPointDivideFloat(nodeBranch.position, nodeBranch.mass));
+                CGPoint d = CGPointSubtract(particle.physicsPosition, CGPointDivideFloat(nodeBranch.position, nodeBranch.mass));
                 CGFloat distance = MAX(1.0, CGPointMagnitude(d));
                 CGPoint direction = ( CGPointMagnitude(d) > 0.0 ) ? d : CGPointNormalize( CGPointRandom(1.0) );
                 CGPoint force = CGPointDivideFloat( CGPointScale(direction, (repulsion * nodeBranch.mass) ), (distance * distance) );
@@ -280,19 +284,22 @@ typedef enum {
 
 // TODO: Review - should these next 3 just be branch members ?
 
-- (BHLocation) _whichQuad:(ATParticle *)particle ofBranch:(ATBarnesHutBranch *)branch 
+- (BHLocation) _whichQuad:(ATParticle *)particle ofBranch:(ATBarnesHutBranch *)branch
 {
     NSParameterAssert(particle != nil);
     NSParameterAssert(branch != nil);
     
     // sort the particle into one of the quadrants of this node
-    if ( CGPointExploded(particle.position) ) {
+    if ( CGPointExploded(particle.physicsPosition) ) {
+        NSLog(@"undefined");
         return BHLocationUD;
     }
     
-    CGPoint particle_p = CGPointSubtract(particle.position, branch.bounds.origin);
-    CGSize halfsize = CGSizeMake(CGRectGetWidth(branch.bounds)  / 2.0, 
-                                 CGRectGetHeight(branch.bounds) / 2.0);
+    CGPoint particle_p = CGPointSubtract(particle.physicsPosition, branch.bounds.origin);
+    float width = CGRectGetWidth(branch.bounds)  / 2.0;
+    float height = CGRectGetHeight(branch.bounds) / 2.0;
+    CGSize halfsize = CGSizeMake(width*PTM_RATIO,
+                                 height*PTM_RATIO);
     
     if ( particle_p.y < halfsize.height ) {
         if ( particle_p.x < halfsize.width ) return BHLocationNW;
@@ -370,7 +377,7 @@ typedef enum {
     if ( branches_.count == 0 || branchCounter_ > (branches_.count -1) ) {
         branch = [[[ATBarnesHutBranch alloc] init] autorelease];
         [branches_ addObject:branch];
-        NSLog(@"adding branches_:%@",branch);
+       // NSLog(@"adding branches_:%@",branch);
     } else {
        
         branch = [branches_ objectAtIndex:branchCounter_];
@@ -381,11 +388,10 @@ typedef enum {
         branch.bounds = CGRectZero;
         branch.mass = 0.0;
         branch.position = CGPointZero;
-        NSLog(@" branch objectAtIndex:%@",branch);
+        //NSLog(@" branch objectAtIndex:%@",branch);
     }
     
-//    NSLog(@"Branch count:%u", _branches.count);
-    
+
     branchCounter_++;
 
     // DEBUG for a graph of 4 nodes

@@ -53,6 +53,7 @@
     self = [self init];
     if (self) {
      
+        _world =  world;
         name_ = [name copy];
         data_ = [data retain];
         
@@ -63,12 +64,13 @@
 		bodyDef.position.Set(POINTS_TO_METERS(position.x), POINTS_TO_METERS(position.y));
 		bodyDef.userData =  self;
 		bodyDef.angle = CC_DEGREES_TO_RADIANS(angle);
-		_body = world->CreateBody(&bodyDef);
+		_body = _world->CreateBody(&bodyDef);
         
 		self.sprite = [[CCSprite spriteWithFile:@"Kirby.png" rect:CGRectMake(0, 0, 64, 64)]retain];
         
         self.sprite.position = ccp(100, 300);
         self.position =  ccp(100, 300);
+        self.physicsPosition = position;
 		self.sprite.rotation = -angle;
         
         
@@ -81,7 +83,7 @@
 		fixtureDef.restitution = 1.0f;
 		fixtureDef.density = (1.0f - shape.m_radius*shape.m_radius) * 0.5f;  // trial-and-error
 		_body->CreateFixture(&fixtureDef);
-        [self createPhysicsObject:world];
+        [self createPhysicsObject];
 
     }
     return self;
@@ -89,7 +91,7 @@
 }
 
 
-- (void) createPhysicsObject:(b2World *)world {
+- (void) createPhysicsObject{
     // Center is the position of the circle that is in the center (inner circle)
     b2Vec2 center = b2Vec2(self.position.x/PTM_RATIO, self.position.y/PTM_RATIO);
     b2CircleShape circleShape;
@@ -109,7 +111,7 @@
     
     // Position is at the center
     innerCircleBodyDef.position = center;
-    self.innerCircleBody = world->CreateBody(&innerCircleBodyDef);
+    self.innerCircleBody = _world->CreateBody(&innerCircleBodyDef);
     self.innerCircleBody->CreateFixture(&fixtureDef);
     
     

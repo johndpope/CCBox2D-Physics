@@ -123,7 +123,7 @@
 - (void) addSpring:(ATSpring *)spring
 {
     NSParameterAssert(spring != nil);
-    
+
     if (spring == nil) return;
     
     [activeSprings_ addObject:spring];
@@ -178,28 +178,16 @@
     
     CGPoint bottomright = CGPointZero;
     CGPoint topleft     = CGPointZero;
+
     BOOL firstParticle  = YES;
+    BOOL didFindMovingParticle = NO;
+    
     
     for (ATParticle *particle in activeParticles_) {
-        
-        // decay down any of the temporary mass increases that were passed along
-        // by using an {_m:} instead of an {m:} (which is to say via a Node having
-        // its .tempMass attr set)
-        
-        if (particle.tempMass != 0.0) {
-            if (ABS(particle.mass - particle.tempMass) < 1.0) {
-                particle.mass = particle.tempMass;
-                particle.tempMass = 0.0;
-            } else {
-                particle.mass *= 0.98;
-            }
-        }
-        
-        // zero out the velocity from one tick to the next
-        particle.velocity = CGPointZero;
-        
+
         // update the bounds
-        CGPoint pt = particle.position;
+        CGPoint pt = particle.physicsPosition;
+        if(!CGPointEqualToPoint(CGPointZero,pt)) didFindMovingParticle = YES;
         NSLog(@"pt.x:%f",pt.x);
         NSLog(@"pt.y:%f",pt.y);
         
@@ -214,15 +202,20 @@
         if   (pt.x < topleft.x)   topleft.x = pt.x;
         if   (pt.y < topleft.y)   topleft.y = pt.y;
     }
+    float width = bottomright.x - topleft.x;
+    float height = bottomright.y - topleft.y;
     
-    CGRect rect = CGRectMake(topleft.x, topleft.y, bottomright.x - topleft.x, bottomright.y - topleft.y);
+    CGRect rect = CGRectMake(topleft.x, topleft.y, width*PTM_RATIO, height*PTM_RATIO);
 
-    //TODO test if this is valid
-    self.bounds = rect;
-    NSLog(@"topLeft.x:%f",topleft.x);
-    NSLog(@"topLeft.y:%f",topleft.y);
-    NSLog(@"width:%f",bottomright.x - topleft.x);
-    NSLog(@"height:%f",bottomright.y - topleft.y);
+    if (didFindMovingParticle){
+      self.bounds = rect;
+         NSLog(@"BARNES HUT - width:%f height:%f",height*PTM_RATIO,height*PTM_RATIO);
+    }
+
+
+   // NSLog(@"topLeft.x:%f",topleft.x);
+   // NSLog(@"topLeft.y:%f",topleft.y);
+   
 }
 
 - (void) eulerIntegrator:(CGFloat)deltaTime 
@@ -290,6 +283,7 @@
     
     for (ATParticle *particle in activeParticles_) {
         [bhTree_ insertParticle:particle];
+        NSLog(@"insert particle");
     }
     
     // ...and use it to approximate the repulsion forces
@@ -327,7 +321,7 @@
     NSUInteger numParticles = 0;
     CGPoint centroid = CGPointZero;
     for (ATParticle *particle in activeParticles_) {
-        centroid = CGPointAdd(centroid, particle.position);
+        centroid = CGPointAdd(centroid, particle.physicsPosition);
         numParticles++;
     }
     
@@ -343,7 +337,7 @@
 {
     // attract each node to the origin
     for (ATParticle *particle in activeParticles_) {
-        CGPoint direction = CGPointScale(particle.position, -1.0);
+        CGPoint direction = CGPointScale(particle.physicsPosition, -1.0);
         [particle applyForce:CGPointScale(direction, (self.repulsion / 100.0))];
     }
 }
@@ -392,16 +386,16 @@
     
     for (ATParticle *particle in activeParticles_) {
         // move the node to its new position
-        NSLog(@"velocity x:%f",particle.velocity.x);
-        NSLog(@"velocity y:%f",particle.velocity.y);
+        //NSLog(@"velocity x:%f",particle.velocity.x);
+        //NSLog(@"velocity y:%f",particle.velocity.y);
         
-        CGPoint pos = particle.position;
+        CGPoint pos = particle.physicsPosition;
         CGPoint v0 = {0,0};
         CGPoint v1 = particle.velocity;
         if (CGPointEqualToPoint(v0,v1)) {
             
         }else{
-            particle.position = CGPointAdd(pos, CGPointScale(v1, timestep) );
+            particle.physicsPosition = CGPointAdd(pos, CGPointScale(v1, timestep) );
         }
         
         
@@ -413,7 +407,7 @@
         n++;
         
         // update the bounds
-        CGPoint pt = particle.position;
+        CGPoint pt = particle.physicsPosition;
         
         if (firstParticle) {
             bottomright     = pt;

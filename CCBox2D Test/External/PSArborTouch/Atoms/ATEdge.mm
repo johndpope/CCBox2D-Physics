@@ -83,8 +83,8 @@ static NSInteger nextEdgeIndex_ = -1;
     NSParameterAssert(node != nil);
     
 // see http://stackoverflow.com/questions/849211/shortest-distance-between-a-point-and-a-line-segment/865080#865080
-    CGPoint n = CGPointNormalize( CGPointNormal( CGPointSubtract(self.target.position, self.source.position) ) );
-    CGPoint ac = CGPointSubtract(node.position, self.source.position);
+    CGPoint n = CGPointNormalize( CGPointNormal( CGPointSubtract(self.target.physicsPosition, self.source.physicsPosition) ) );
+    CGPoint ac = CGPointSubtract(node.physicsPosition, self.source.physicsPosition);
     return ABS(ac.x * n.x + ac.y * n.y);
 }
 

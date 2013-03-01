@@ -241,7 +241,7 @@
     
     for (ATNode *node in self.state.nodes) {
         
-        distance = CGPointDistance(node.position, translatedPoint);
+        distance = CGPointDistance(node.physicsPosition, translatedPoint);
         
         if (distance < closestDistance) {
             closestNode = node;
@@ -266,9 +266,9 @@
         // if view bounds has been specified, presume viewPoint is in screen pixel
         // units and convert the closest node to view space for comparison
         if ( CGRectIsEmpty(viewBounds_) == NO ) {
-            translatedNodePoint = [self toViewPoint:closestNode.position];
+            translatedNodePoint = [self toViewPoint:closestNode.physicsPosition];
         } else {
-            translatedNodePoint = closestNode.position;
+            translatedNodePoint = closestNode.physicsPosition;
         }
         
         CGFloat distance = CGPointDistance(translatedNodePoint, viewPoint);
@@ -363,8 +363,8 @@
         
         // If the target already exists, put the new source near it.
         if (targetNode != nil) {
-            sourceNode.position = CGPointNearPoint(targetNode.position, 1.0);
-            NSLog(@"adding node near :%f:%f",targetNode.position.x,targetNode.position.y);
+            sourceNode.physicsPosition = CGPointNearPoint(targetNode.physicsPosition, 1.0);
+            NSLog(@"adding node near :%f:%f",targetNode.physicsPosition.x,targetNode.physicsPosition.y);
         }
     }
     
@@ -374,7 +374,7 @@
         
         if (sourceNode != nil) {
             // If we have to build the target node, create it close to the source node.
-            targetNode.position = CGPointNearPoint(sourceNode.position, 1.0);
+            targetNode.physicsPosition = CGPointNearPoint(sourceNode.physicsPosition, 1.0);
         }
     }
     

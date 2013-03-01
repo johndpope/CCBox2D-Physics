@@ -5,7 +5,7 @@
 #include "GLES-Render.h"
 #import "CCBox2DPrivate.h"
 #include <cstdlib>
-//#import "iPhoneTest.h"
+#import "Box2DAppDelegate.h"
 
 @class CCBodySprite;
 
@@ -92,9 +92,10 @@ inline float32 RandomFloat(float32 lo, float32 hi)
 	return r;
 }
 
+
 @interface CCTestLayer : CCLayer <ContactListenizer>
 {
-
+    Box2DAppDelegate *appDelegate;
     b2World* m_world;	// cocos2d specific
     Settings* settings;
     
@@ -108,11 +109,11 @@ inline float32 RandomFloat(float32 lo, float32 hi)
     int32 m_stepCount;
     
     BOOL isZooming;
-    
+
     
 }
-
--(CCBodySprite*) createGround:(CGSize)size;
+@property(nonatomic,assign)     BOOL isDebugDrawing;
+-(void) createBounds;
 // size of box around the point used for hit testing in -bodyAtPoint:queryTest:; defaults to 16x16 points
 // smallest value supported is 2x2
 /*@property (nonatomic) CGSize hitTestSize;

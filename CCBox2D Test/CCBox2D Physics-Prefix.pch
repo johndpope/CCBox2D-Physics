@@ -10,7 +10,7 @@
 
     #import <UIKit/UIKit.h>
     #import <Foundation/Foundation.h>
-
+    #import "Defs.h"
     #import "BGLibraryMacros.h"
 
 #endif
