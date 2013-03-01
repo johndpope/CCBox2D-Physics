@@ -11,4 +11,4 @@
 #define POINTS_TO_METERS(n) ((n) / (PTM_RATIO))
 #define METERS_TO_POINTS(n) ((n) * (PTM_RATIO))
 
-#define kZoomInFactor 32
+#define kZoomInFactor 1

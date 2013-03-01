@@ -60,11 +60,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "CCBox2D Test/External/PSArborTouch/Barnes-Hut/ATBarnesHutTree.mm"
-         timestampString = "383798283.411327"
+         timestampString = "383804126.337036"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "240"
-         endingLineNumber = "240"
+         startingLineNumber = "252"
+         endingLineNumber = "252"
          landmarkName = "-applyForces:andRepulsion:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -73,11 +73,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "CCBox2D Test/External/PSArborTouch/Barnes-Hut/ATBarnesHutTree.mm"
-         timestampString = "383798283.411327"
+         timestampString = "383804126.337036"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "253"
-         endingLineNumber = "253"
+         startingLineNumber = "265"
+         endingLineNumber = "265"
          landmarkName = "-applyForces:andRepulsion:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -86,51 +86,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "CCBox2D Test/External/PSArborTouch/Barnes-Hut/ATBarnesHutTree.mm"
-         timestampString = "383798283.411327"
+         timestampString = "383804126.337036"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "306"
-         endingLineNumber = "306"
-         landmarkName = "-_whichQuad:ofBranch:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "Yes"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "CCBox2D Test/External/PSArborTouch/Barnes-Hut/ATBarnesHutTree.mm"
-         timestampString = "383798283.411327"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "309"
-         endingLineNumber = "309"
-         landmarkName = "-_whichQuad:ofBranch:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "Yes"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "CCBox2D Test/External/PSArborTouch/Barnes-Hut/ATBarnesHutTree.mm"
-         timestampString = "383798283.411327"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "305"
-         endingLineNumber = "305"
-         landmarkName = "-_whichQuad:ofBranch:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "Yes"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "CCBox2D Test/External/PSArborTouch/Barnes-Hut/ATBarnesHutTree.mm"
-         timestampString = "383798283.411327"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "308"
-         endingLineNumber = "308"
-         landmarkName = "-_whichQuad:ofBranch:"
+         startingLineNumber = "224"
+         endingLineNumber = "224"
+         landmarkName = "-setBounds:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

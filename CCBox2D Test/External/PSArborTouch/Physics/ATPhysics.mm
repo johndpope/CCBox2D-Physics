@@ -54,7 +54,7 @@
         freeParticles_  = [[NSMutableArray arrayWithCapacity:32] retain];
         particles_      = [[NSMutableArray arrayWithCapacity:32] retain];
         springs_        = [[NSMutableArray arrayWithCapacity:32] retain];
-        energy_         = [[[ATEnergy alloc] init] retain];
+        energy_         = [[ATEnergy alloc] init];
         bounds_         = CGRectMake(-1.0, -1.0, 2.0, 2.0);
         speedLimit_     = 1000;
         deltaTime_      = 1;
@@ -63,7 +63,7 @@
         friction_       = 0.3;
         gravity_        = NO;
         theta_          = 0.4;
-        bhTree_         = [[[ATBarnesHutTree alloc] init] retain];
+        bhTree_         = [[ATBarnesHutTree alloc] init] ;
     }
     return self;
 }
@@ -279,11 +279,12 @@
 {
     NSLog(@"applyBarnesHutRepulsion");
     // build a barnes-hut tree...
+    self.bounds  = CGRectMake(0, 0, 1024*PTM_RATIO, 1024*PTM_RATIO);
     [bhTree_ updateWithBounds:self.bounds theta:self.theta];
     
     for (ATParticle *particle in activeParticles_) {
         [bhTree_ insertParticle:particle];
-        NSLog(@"insert particle");
+
     }
     
     // ...and use it to approximate the repulsion forces

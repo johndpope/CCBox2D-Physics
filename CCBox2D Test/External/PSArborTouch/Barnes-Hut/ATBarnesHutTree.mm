@@ -27,6 +27,7 @@ typedef enum {
 - (id) _getQuad:(BHLocation)location ofBranch:(ATBarnesHutBranch *)branch;
 - (ATBarnesHutBranch *) _dequeueBranch;
 
+
 @end
 
 
@@ -77,19 +78,19 @@ typedef enum {
 
 - (void) insertParticle:(ATParticle *)newParticle 
 {
+    NSLog(@"insertParticle");
     NSParameterAssert(newParticle != nil);
     
     if (newParticle == nil) return;
     
     // add a particle to the tree, starting at the current _root and working down
     ATBarnesHutBranch *node = root_;
-    
+
     NSMutableArray* queue = [NSMutableArray arrayWithCapacity:32];
         
     // Add particle to the end of the queue
     [queue addObject:newParticle];
-    
-    
+
     while ([queue count] != 0) {
         
         NSLog(@"queue :%d",[queue count]);
@@ -102,12 +103,16 @@ typedef enum {
         id objectAtQuad = [self _getQuad:p_quad ofBranch:node];
         
         
+       // NSLog(@"p_quad:%d",p_quad);
+        
         if ( objectAtQuad == nil ) {
             
             // slot is empty, just drop this node in and update the mass/c.o.m. 
             node.mass += p_mass;
+            NSLog(@"->mass:%f",node.mass);
             node.position = CGPointAdd( node.position, CGPointScale(particle.physicsPosition, p_mass) );
             
+            NSLog(@"->node.bounds.size.height:%f",node.bounds.size.height);
             [self _setQuad:p_quad ofBranch:node withObject:particle];
             
             // process next object in queue.
@@ -119,6 +124,7 @@ typedef enum {
             // as our new root
             
             node.mass += p_mass;
+            NSLog(@"mass:%f",node.mass);
             node.position = CGPointAdd( node.position, CGPointScale(particle.physicsPosition, p_mass) );
             
             node = objectAtQuad;
@@ -137,6 +143,7 @@ typedef enum {
             
             if ( CGRectGetHeight(node.bounds) == 0.0 || CGRectGetWidth(node.bounds) == 0.0 ) {
                 NSLog(@"Should not be zero?");
+                continue;
             }
             
             CGSize branch_size;
@@ -147,11 +154,13 @@ typedef enum {
             // SMALLER FOR SOME POINTS OUT OF BOUNDS.
             
             // CGRectContainsPoint
+            float width = CGRectGetWidth(node.bounds) / 2.0;
+            float height =  CGRectGetHeight(node.bounds) / 2.0;
             
-            branch_size = CGSizeMake( CGRectGetWidth(node.bounds) / 2.0, CGRectGetHeight(node.bounds) / 2.0);
+            branch_size = CGSizeMake(width ,height);
             branch_origin = node.bounds.origin;
-            
-            
+            NSLog(@"height:%f",branch_size.height);
+  
             // if (p_quad == BHLocationSE || p_quad == BHLocationSW) return;
             
             if (p_quad == BHLocationSE || p_quad == BHLocationSW) branch_origin.y += branch_size.height;
@@ -162,6 +171,9 @@ typedef enum {
             
             ATBarnesHutBranch *newBranch = [self _dequeueBranch];
             [self _setQuad:p_quad ofBranch:node withObject:newBranch];
+            
+            NSLog(@"newBranch:%f",newBranch.position.x);
+            
             newBranch.bounds = CGRectMake(branch_origin.x, branch_origin.y, branch_size.width, branch_size.height);
             node.mass = p_mass;
             node.position = CGPointScale(particle.physicsPosition, p_mass);

@@ -456,25 +456,30 @@ enum {
 }
 
 -(void)createLineByRect:(CGRect)rect{
-    //NSLog(@"rect w:%f",rect.size.width);
-    //NSLog(@"rect h:%f",rect.size.height);
+   NSLog(@"rect w:%f",rect.size.width);
+    NSLog(@"rect h:%f",rect.size.height);
+    NSLog(@"origin x:%f",rect.origin.x);
+    NSLog(@"origin y:%f",rect.origin.y);
+
+    rect.size.height = 100;
+    rect.size.width = 1;
     
-    [self createLineByRect:rect color:ccc4(0, 0, 1, 1)];
+    [self createLineByRect:rect color:ccc4(1,0,0,1)];
 }
 -(void)createLineByRect:(CGRect)rect color:(ccColor4B)color
 {
-    return;
+
     CCLayerColor* layer = [CCLayerColor layerWithColor:color width:rect.size.width*PTM_RATIO height:rect.size.height*PTM_RATIO];
     layer.position = rect.origin;
-    [self addChild:layer];
+    [self addChild:layer z:100];
     
 }
 
 - (void) recursiveDrawBranches:(ATBarnesHutBranch *)branch
 {
     // Draw the rect
-    [self createLineByRect:[self scaleRect:branch.bounds]];
-    
+    //[self createLineByRect:[self scaleRect:branch.bounds]];
+    [self createLineByRect:branch.bounds];
     // Draw any sub branches
     if (branch.se != nil && [branch.se isKindOfClass:ATBarnesHutBranch.class] == YES) {
         [self recursiveDrawBranches:branch.se];

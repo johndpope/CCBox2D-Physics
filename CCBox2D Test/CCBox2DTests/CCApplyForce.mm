@@ -15,19 +15,14 @@
 
 -(id) init
 {
-
     self = [super init];
-    
     if  (self!=nil){
 
- 
         [self loadMapData];
         [self createNodes];
         [self createJoints];
         m_world->SetGravity(b2Vec2(0.0f, 0.0f));
-   
 
-        
         // Define the ground box shape.
         CGSize screenSize = [CCDirector sharedDirector].winSize;
 		CGPoint screenCenter = CGPointMake(screenSize.width * 0.5f, screenSize.height * 0.5f);
@@ -47,8 +42,6 @@
 		{
            // [self generateNodesWithParent:centerBody];
 		}
-
-        
 
     }
     return self;
