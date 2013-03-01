@@ -474,7 +474,7 @@ enum {
 
     if (![[debugLinesDict valueForKey:key] isEqualToString:@"OK"]){
           [debugLinesDict setValue:@"OK" forKey:key];
-        NSLog(@"debugLinesDict:%@",debugLinesDict);
+        //NSLog(@"debugLinesDict:%@",debugLinesDict);
         
         //draw the box outlines
         // eg. 256 wide x 1 high

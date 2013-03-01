@@ -209,7 +209,7 @@
 
     if (didFindMovingParticle){
       self.bounds = rect;
-         NSLog(@"BARNES HUT - width:%f height:%f",height*PTM_RATIO,height*PTM_RATIO);
+       //  NSLog(@"BARNES HUT - width:%f height:%f",height*PTM_RATIO,height*PTM_RATIO);
     }
 
 
@@ -336,6 +336,8 @@
 
 - (void) applyCenterGravity 
 {
+    NSLog(@"applyCenterGravity");
+    return;
     // attract each node to the origin
     for (ATParticle *particle in activeParticles_) {
         CGPoint direction = CGPointScale(particle.physicsPosition, -1.0);

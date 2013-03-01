@@ -78,7 +78,7 @@ typedef enum {
 
 - (void) insertParticle:(ATParticle *)newParticle 
 {
-    NSLog(@"insertParticle");
+  //  NSLog(@"insertParticle");
     NSParameterAssert(newParticle != nil);
     
     if (newParticle == nil) return;
@@ -159,7 +159,7 @@ typedef enum {
             
             branch_size = CGSizeMake(width ,height);
             branch_origin = node.bounds.origin;
-            NSLog(@"height:%f",branch_size.height);
+            //NSLog(@"height:%f",branch_size.height);
   
             // if (p_quad == BHLocationSE || p_quad == BHLocationSW) return;
             
@@ -172,7 +172,7 @@ typedef enum {
             ATBarnesHutBranch *newBranch = [self _dequeueBranch];
             [self _setQuad:p_quad ofBranch:node withObject:newBranch];
             
-            NSLog(@"newBranch:%f",newBranch.position.x);
+           // NSLog(@"newBranch:%f",newBranch.position.x);
             
             newBranch.bounds = CGRectMake(branch_origin.x, branch_origin.y, branch_size.width, branch_size.height);
             node.mass = p_mass;

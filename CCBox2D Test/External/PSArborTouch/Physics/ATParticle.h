@@ -30,7 +30,6 @@
         
 }
 @property (nonatomic,retain) CCSprite *sprite;
-@property (nonatomic,assign)  b2Body *innerCircleBody;
 @property (nonatomic,retain) UIView *particleView;
 @property (nonatomic, assign) CGPoint velocity;
 @property (nonatomic, assign) CGPoint force;

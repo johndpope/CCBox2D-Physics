@@ -263,8 +263,8 @@
         bodyDef.allowSleep = YES;
         [particle configureSpriteForWorld:m_world bodyDef:bodyDef];
         particle.physicsPosition = pt;
-        NSLog(@"particle.physicsPosition x:%f",particle.physicsPosition.x);
-        NSLog(@"particle.physicsPosition y:%f",particle.physicsPosition.y);
+        //NSLog(@"particle.physicsPosition x:%f",particle.physicsPosition.x);
+        //NSLog(@"particle.physicsPosition y:%f",particle.physicsPosition.y);
 
         [self addChild:particle]; //add the particle image into canvas
         particle.onTouchDownBlock = ^{
@@ -294,8 +294,8 @@
         // Connect the joints
         b2DistanceJointDef jointDef;
 
-        b2Body *currentBody = (b2Body*)spring.point1.innerCircleBody;
-        b2Body *neighborBody = (b2Body*)spring.point2.innerCircleBody;
+        b2Body *currentBody = (b2Body*)spring.point1.body;
+        b2Body *neighborBody = (b2Body*)spring.point2.body;
         
         // Connect the outer circles to each other
         jointDef.Initialize(currentBody, neighborBody,

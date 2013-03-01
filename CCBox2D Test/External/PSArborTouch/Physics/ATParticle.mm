@@ -25,7 +25,6 @@
 @synthesize tempMass    = tempMass_;
 @synthesize connections = connections_;
 @synthesize particleView = particleView_;
-@synthesize innerCircleBody = innerCircleBody_;
 @synthesize sprite = sprite_;
 
 #define PTM_RATIO 32.f
@@ -111,8 +110,8 @@
     
     // Position is at the center
     innerCircleBodyDef.position = center;
-    self.innerCircleBody = _world->CreateBody(&innerCircleBodyDef);
-    self.innerCircleBody->CreateFixture(&fixtureDef);
+    self.body = _world->CreateBody(&innerCircleBodyDef);
+    self.body->CreateFixture(&fixtureDef);
     
     [self createBody];
     
@@ -189,9 +188,9 @@
 
 - (void) applyForce:(CGPoint)force
 {
-    NSLog(@"applyForce");
+   // NSLog(@"applyForce");
     //self.position = CGPointAdd(self.force, CGPointDivideFloat(force, self.mass));
-    [self applyForce:CGPointAdd(self.force, CGPointDivideFloat(force, self.mass)) asImpulse:YES];
+    [self applyForce:CGPointAdd(self.force, CGPointDivideFloat(force, self.mass)) asImpulse:NO];
 }
 
 #pragma mark - Internal Interface

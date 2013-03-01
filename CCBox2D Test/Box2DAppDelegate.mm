@@ -31,10 +31,10 @@ enum {
     // Configure simulation parameters, (take a copy, modify it, update the system when done.)
     ATSystemParams *params = self.system.parameters;
     
-    params.repulsion = 100.0;
-     params.stiffness = 10.0;
-     params.friction  = 0.2;
-     params.precision = 0.6;
+     params.repulsion = 100000.0;
+     params.stiffness = 100.0;
+     params.friction  = 20;
+     params.precision = 10.0;
     
     self.system.parameters = params;
     
