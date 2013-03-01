@@ -30,19 +30,19 @@ enum {
     
     // Configure simulation parameters, (take a copy, modify it, update the system when done.)
     ATSystemParams *params = self.system.parameters;
-    
-     params.repulsion = 100000.0;
-     params.stiffness = 100.0;
-     params.friction  = 20;
-     params.precision = 10.0;
+   // http://arborjs.org/reference
+    /* params.gravity = NO;
+     params.repulsion = 1,000;
+     params.stiffness = 600;
+     params.friction  = 0.5;
+     params.precision = 0.6;*/ //accuracy vs. speed in force calculations
+                             //(zero is fast but jittery, one is smooth but cpu-intensive)
     
     self.system.parameters = params;
     
     // Setup the view bounds
-    self.system.viewBounds = CGRectMake(0, 0, 768*PTM_RATIO, 1024*PTM_RATIO);
-    
-    // this gets recalculated on tendparticles function....but without this line - it fails.
-    self.system.physics.bounds = CGRectMake(-1, -1, 2, 2);
+    //self.system.viewBounds = CGRectMake(0, 0, 768*PTM_RATIO, 1024*PTM_RATIO);
+    //self.system.viewBounds = CGRectMake(0, 0, 100, 100);
     
     // leave some space at the bottom and top for text
     //self.system.viewPadding = UIEdgeInsetsMake(60.0, 60.0, 60.0, 60.0);
@@ -71,6 +71,7 @@ enum {
     CCApplyForce *view =[[CCApplyForce alloc]init];
     [view setScale:1];
     [view setAnchorPoint:ccp(0,0)];
+    [view setPosition:ccp(s.width/2, s.height/2)];
     [scene addChild:view z:0 tag:kTagBox2DNode];
 
 	[director_ pushScene: scene];

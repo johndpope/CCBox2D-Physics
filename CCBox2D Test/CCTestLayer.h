@@ -114,6 +114,7 @@ inline float32 RandomFloat(float32 lo, float32 hi)
 }
 @property(nonatomic,assign)     BOOL isDebugDrawing;
 -(void) createBounds;
+-(void) createBoundsWithZeroZeroCentered;
 
 
 @end

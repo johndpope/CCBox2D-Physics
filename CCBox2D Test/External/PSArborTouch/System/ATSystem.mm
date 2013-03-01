@@ -375,6 +375,7 @@
         if (sourceNode != nil) {
             // If we have to build the target node, create it close to the source node.
             targetNode.physicsPosition = CGPointNearPoint(sourceNode.physicsPosition, 1.0);
+             NSLog(@"adding node near :%f:%f",targetNode.physicsPosition.x,targetNode.physicsPosition.y);
         }
     }
     

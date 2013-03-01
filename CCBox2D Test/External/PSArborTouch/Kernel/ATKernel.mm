@@ -32,6 +32,22 @@
 @synthesize physics = physics_;
 @synthesize delegate = delegate_;
 
+
+/*
+ 
+ http://arborjs.org/reference
+ 
+ The parameters and their defaults are:
+ repulsion 1,000 the force repelling nodes from each other
+ stiffness 600 the rigidity of the edges
+ friction 0.5 the amount of damping in the system
+ gravity false an additional force attracting nodes to the origin
+ fps 55 frames per second
+ dt 0.02 timestep to use for stepping the simulation
+ precision 0.6 accuracy vs. speed in force calculations
+ (zero is fast but jittery, one is smooth but cpu-intensive)
+ 
+ */
 - (id)init
 {
     self = [super init];
@@ -40,11 +56,11 @@
         queue_      = nil;
         paused_     = NO;
         running_    = NO;
-        physics_    = [[[ATPhysics alloc] initWithDeltaTime:0.02 
+        physics_    = [[ATPhysics alloc] initWithDeltaTime:0.02 
                                                stiffness:1000.0 
                                                repulsion:600.0 
-                                                friction:0.5] retain];
-        lastEnergy_ = [[[ATEnergy alloc] init] retain];
+                                                friction:0.5];
+        lastEnergy_ = [[ATEnergy alloc] init];
         lastBounds_ = CGRectMake(-1.0, -1.0, 2.0, 2.0);
     }
     return self;
@@ -133,6 +149,9 @@
             lastEnergy_.max     = currentEnergy.max;
             lastEnergy_.mean    = currentEnergy.mean;
             lastEnergy_.count   = currentEnergy.count;
+            NSLog(@"sum:%f",lastEnergy_.sum);
+            NSLog(@"max:%f",lastEnergy_.max);
+            NSLog(@"mean:%f",lastEnergy_.mean);
             
             lastBounds_         = physics_.bounds;
             

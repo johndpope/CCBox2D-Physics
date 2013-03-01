@@ -8,11 +8,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Pods/CCBox2D/CCBox2D/CCBodySprite.mm"
-         timestampString = "383798796.199566"
+         timestampString = "383812857.41742"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "511"
-         endingLineNumber = "511"
+         startingLineNumber = "509"
+         endingLineNumber = "509"
          landmarkName = "-createBody"
          landmarkType = "5">
       </FileBreakpoint>
@@ -27,32 +27,6 @@
          startingLineNumber = "172"
          endingLineNumber = "172"
          landmarkName = "-initWithWorld:distanceJointDef:body1:body2:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "Pods/CCBox2D/CCBox2D/CCBodySprite.mm"
-         timestampString = "383798796.199566"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "418"
-         endingLineNumber = "418"
-         landmarkName = "-addedToJoint:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "Pods/CCBox2D/CCBox2D/CCBodySprite.mm"
-         timestampString = "383798796.199566"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "421"
-         endingLineNumber = "421"
-         landmarkName = "-addedToJoint:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint

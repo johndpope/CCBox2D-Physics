@@ -185,40 +185,103 @@
     
     for (ATParticle *particle in activeParticles_) {
 
-        // update the bounds
-        CGPoint pt = particle.physicsPosition;
-        if(!CGPointEqualToPoint(CGPointZero,pt)) didFindMovingParticle = YES;
-       // NSLog(@"pt.x:%f",pt.x);
-       // NSLog(@"pt.y:%f",pt.y);
+        // decay down any of the temporary mass increases that were passed along
+        // by using an {_m:} instead of an {m:} (which is to say via a Node having
+        // its .tempMass attr set)
         
-        if (firstParticle) {
-            bottomright     = pt;
-            topleft         = pt;
-            firstParticle   = NO;
+        if (particle.tempMass != 0.0) {
+            if (ABS(particle.mass - particle.tempMass) < 1.0) {
+                particle.mass = particle.tempMass;
+                particle.tempMass = 0.0;
+            } else {
+                particle.mass *= 0.98;
+            }
         }
         
-        if (pt.x > bottomright.x) bottomright.x = pt.x;
-        if (pt.y > bottomright.y) bottomright.y = pt.y;          
-        if   (pt.x < topleft.x)   topleft.x = pt.x;
-        if   (pt.y < topleft.y)   topleft.y = pt.y;
-    }
-    float width = bottomright.x - topleft.x;
-    float height = bottomright.y - topleft.y;
-    
-    CGRect rect = CGRectMake(topleft.x, topleft.y, width*PTM_RATIO, height*PTM_RATIO);
-
-    if (didFindMovingParticle){
-      self.bounds = rect;
-       //  NSLog(@"BARNES HUT - width:%f height:%f",height*PTM_RATIO,height*PTM_RATIO);
-    }
-
-
-   // NSLog(@"topLeft.x:%f",topleft.x);
-   // NSLog(@"topLeft.y:%f",topleft.y);
-   
+        // zero out the velocity from one tick to the next
+        particle.velocity = CGPointZero;
+    }   
 }
 
-- (void) eulerIntegrator:(CGFloat)deltaTime 
+-(BOOL)updateBounds{
+    /*
+     if (_screenSize===null) return
+     
+     if (newBounds) _boundsTarget = newBounds
+     else _boundsTarget = that.bounds()
+     
+     // _boundsTarget = newBounds || that.bounds()
+     // _boundsTarget.topleft = new Point(_boundsTarget.topleft.x,_boundsTarget.topleft.y)
+     // _boundsTarget.bottomright = new Point(_boundsTarget.bottomright.x,_boundsTarget.bottomright.y)
+     
+     var bottomright = new Point(_boundsTarget.bottomright.x, _boundsTarget.bottomright.y)
+     var topleft = new Point(_boundsTarget.topleft.x, _boundsTarget.topleft.y)
+     var dims = bottomright.subtract(topleft)
+     var center = topleft.add(dims.divide(2))
+     
+     
+     var MINSIZE = 4                                   // perfect-fit scaling
+     // MINSIZE = Math.max(Math.max(MINSIZE,dims.y), dims.x) // proportional scaling
+     
+     var size = new Point(Math.max(dims.x,MINSIZE), Math.max(dims.y,MINSIZE))
+     _boundsTarget.topleft = center.subtract(size.divide(2))
+     _boundsTarget.bottomright = center.add(size.divide(2))
+     
+     if (!_bounds){
+     if ($.isEmptyObject(state.nodes)) return false
+     _bounds = _boundsTarget
+     return true
+     }
+     
+     // var stepSize = (Math.max(dims.x,dims.y)<MINSIZE) ? .2 : _screenStep
+     var stepSize = _screenStep
+     _newBounds = {
+     bottomright: _bounds.bottomright.add( _boundsTarget.bottomright.subtract(_bounds.bottomright).multiply(stepSize) ),
+     topleft: _bounds.topleft.add( _boundsTarget.topleft.subtract(_bounds.topleft).multiply(stepSize) )
+     }
+     
+     // return true if we're still approaching the target, false if we're ‘close enough’
+     var diff = new Point(_bounds.topleft.subtract(_newBounds.topleft).magnitude(), _bounds.bottomright.subtract(_newBounds.bottomright).magnitude())
+     if (diff.x*_screenSize.width>1 || diff.y*_screenSize.height>1){
+     _bounds = _newBounds
+     return true
+     }else{
+     return false
+     }
+     */
+    // update the bounds
+    /* CGPoint pt = particle.physicsPosition;
+     if(!CGPointEqualToPoint(CGPointZero,pt)) didFindMovingParticle = YES;
+     // NSLog(@"pt.x:%f",pt.x);
+     // NSLog(@"pt.y:%f",pt.y);
+     
+     if (firstParticle) {
+     bottomright     = pt;
+     topleft         = pt;
+     firstParticle   = NO;
+     }
+     
+     if (pt.x > bottomright.x) bottomright.x = pt.x;
+     if (pt.y > bottomright.y) bottomright.y = pt.y;
+     if   (pt.x < topleft.x)   topleft.x = pt.x;
+     if   (pt.y < topleft.y)   topleft.y = pt.y;
+     }
+     float width = bottomright.x - topleft.x;
+     float height = bottomright.y - topleft.y;
+     
+     CGRect rect = CGRectMake(topleft.x, topleft.y, width*PTM_RATIO, height*PTM_RATIO);
+     
+     if (didFindMovingParticle){
+     self.bounds = rect;
+     //  NSLog(@"BARNES HUT - width:%f height:%f",height*PTM_RATIO,height*PTM_RATIO);
+     }*/
+     
+     
+     // NSLog(@"topLeft.x:%f",topleft.x);
+     // NSLog(@"topLeft.y:%f",topleft.y);
+
+}
+- (void) eulerIntegrator:(CGFloat)deltaTime
 {
     NSParameterAssert(deltaTime > 0.0);
     
@@ -279,7 +342,17 @@
 {
     NSLog(@"applyBarnesHutRepulsion");
     // build a barnes-hut tree...
-    self.bounds  = CGRectMake(0, 0, 1024*PTM_RATIO, 1024*PTM_RATIO);
+    
+    CGSize screenSize = [CCDirector sharedDirector].winSize;
+    float widthInMeters = screenSize.width / PTM_RATIO;
+    float heightInMeters = screenSize.height / PTM_RATIO;
+    
+    if (1){
+       self.bounds  = CGRectMake(-widthInMeters/2, -heightInMeters/2, widthInMeters,heightInMeters); 
+    }else{
+       self.bounds  = CGRectMake(0, 0, widthInMeters,heightInMeters);
+    }
+    
     [bhTree_ updateWithBounds:self.bounds theta:self.theta];
     
     for (ATParticle *particle in activeParticles_) {
@@ -334,11 +407,10 @@
     }
 }
 
-- (void) applyCenterGravity 
+- (void) applyCenterGravity
 {
     NSLog(@"applyCenterGravity");
-    return;
-    // attract each node to the origin
+
     for (ATParticle *particle in activeParticles_) {
         CGPoint direction = CGPointScale(particle.physicsPosition, -1.0);
         [particle applyForce:CGPointScale(direction, (self.repulsion / 100.0))];

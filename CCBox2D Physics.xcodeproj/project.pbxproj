@@ -44,6 +44,7 @@
 		836FFE8516DA097500EE2A69 /* r2-ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 836FFE7316DA097500EE2A69 /* r2-ipad.png */; };
 		836FFE8616DA097500EE2A69 /* r2.png in Resources */ = {isa = PBXBuildFile; fileRef = 836FFE7416DA097500EE2A69 /* r2.png */; };
 		836FFE8B16DA2ACB00EE2A69 /* CCBox2DView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 836FFE8A16DA2ACA00EE2A69 /* CCBox2DView.mm */; };
+		838D842316E0BA6400F6E4A8 /* example.json in Resources */ = {isa = PBXBuildFile; fileRef = 838D842216E0BA6400F6E4A8 /* example.json */; };
 		83F9A0B816DC9B2500F5B406 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 83F9A0B716DC9B2500F5B406 /* Icon.png */; };
 		83F9A0E916DD590F00F5B406 /* ATEdge.mm in Sources */ = {isa = PBXBuildFile; fileRef = 83F9A0CA16DD590F00F5B406 /* ATEdge.mm */; };
 		83F9A0EA16DD590F00F5B406 /* ATNode.mm in Sources */ = {isa = PBXBuildFile; fileRef = 83F9A0CC16DD590F00F5B406 /* ATNode.mm */; };
@@ -111,6 +112,7 @@
 		836FFE7416DA097500EE2A69 /* r2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = r2.png; sourceTree = "<group>"; };
 		836FFE8916DA2AC900EE2A69 /* CCBox2DView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCBox2DView.h; sourceTree = "<group>"; };
 		836FFE8A16DA2ACA00EE2A69 /* CCBox2DView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CCBox2DView.mm; sourceTree = "<group>"; };
+		838D842216E0BA6400F6E4A8 /* example.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = example.json; sourceTree = "<group>"; };
 		83F9A0B716DC9B2500F5B406 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		83F9A0B916DCAA4200F5B406 /* BGLibraryMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BGLibraryMacros.h; sourceTree = "<group>"; };
 		83F9A0C916DD590F00F5B406 /* ATEdge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATEdge.h; sourceTree = "<group>"; };
@@ -364,6 +366,7 @@
 		83F9A0F616DD5A8B00F5B406 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				838D842216E0BA6400F6E4A8 /* example.json */,
 				83F9A0F716DD5A8C00F5B406 /* usofa.json */,
 			);
 			name = Model;
@@ -450,6 +453,7 @@
 				834F393B16DC7D2700307AB3 /* fabric@2x.png in Resources */,
 				83F9A0B816DC9B2500F5B406 /* Icon.png in Resources */,
 				83F9A0F816DD5A8C00F5B406 /* usofa.json in Resources */,
+				838D842316E0BA6400F6E4A8 /* example.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

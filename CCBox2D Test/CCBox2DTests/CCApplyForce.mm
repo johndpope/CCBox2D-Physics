@@ -23,27 +23,8 @@
         [self loadMapData];
         [self createNodes];
         [self createJoints];
-        
+        [self createBoundsWithZeroZeroCentered];
 
-        // Define the ground box shape.
-        CGSize screenSize = [CCDirector sharedDirector].winSize;
-		CGPoint screenCenter = CGPointMake(screenSize.width * 0.5f, screenSize.height * 0.5f);
-        
-        //float scale = 1.0f/15;
-         [self createBounds];
-
-        /*CCBodySprite *centerBody = [[CCBodySprite spriteWithFile:@"Icon.png"]retain];
-        centerBody.color = ccGREEN;
-        centerBody.tag = 111;
-        b2BodyDef bodyDef;
-        bodyDef.type = b2_staticBody;
-        [centerBody configureSpriteForWorld:m_world bodyDef:bodyDef];
-        centerBody.position = ccp(50,50);
-        [self addChild:centerBody z:-100];
-        
-		{
-           // [self generateNodesWithParent:centerBody];
-		}*/
 
     }
     return self;
@@ -159,7 +140,7 @@
         };
         
         
-        float32 gravity = 10.0f;
+        float32 gravity = 0.0f;
         float32 I = [particle inertia];
         float32 mass = [particle mass];
         
@@ -188,7 +169,7 @@
 -(void) loadMapData
 {
     // Find the file
-    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"usofa" ofType:@"json"];
+    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"example" ofType:@"json"];
     if (filePath) {
         // Load data in the file
         NSData *theJSONData = [NSData dataWithContentsOfFile:filePath];
@@ -255,32 +236,22 @@
         BG_WEAKSELF;
         
         [particle setTexture:[[CCTextureCache sharedTextureCache] addImage: @"Kirby.png"]];
-        
-        
-        b2BodyDef bodyDef;
-        bodyDef.type = b2_dynamicBody;
-        bodyDef.awake = YES;
-        bodyDef.allowSleep = YES;
-        [particle configureSpriteForWorld:m_world bodyDef:bodyDef];
-        particle.physicsPosition = pt;
-        //NSLog(@"particle.physicsPosition x:%f",particle.physicsPosition.x);
-        //NSLog(@"particle.physicsPosition y:%f",particle.physicsPosition.y);
 
-        [self addChild:particle]; //add the particle image into canvas
+       // [self addChild:particle]; //add the particle image into canvas
         particle.onTouchDownBlock = ^{
             NSLog(@"onTouchDownBlock");
             
-            //[weakSelf generateChildrenByParent:particle];
+            [weakSelf generateChildrenByParent:particle];
             //circle
             
         };
         
-        float radius = 10;
+        /*float radius = 10;
         CCShape *circle = [CCShape circleWithCenter:ccp(5,5) radius:radius];
         circle.restitution = 0.0f;
-        [particle addShape:circle named:@"circle"];
-       // float scale =1.0f/15; - impacts sprite
-       // [particle setScale:scale];
+        [particle addShape:circle named:@"circle"];*/
+        //float scale =1.0f/15; //- impacts sprite
+       //[particle setScale:scale];
 
     }
     
@@ -302,9 +273,9 @@
                             currentBody->GetWorldCenter(),
                             neighborBody->GetWorldCenter() );
         // Specifies whether the two connected bodies should collide with each other
-        jointDef.collideConnected = false;
+        jointDef.collideConnected = true;
         jointDef.frequencyHz = 1.0;
-        jointDef.length = 150;
+        jointDef.length = 250;
         jointDef.dampingRatio = 0.0;
         
         m_world->CreateJoint(&jointDef);

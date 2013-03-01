@@ -138,7 +138,7 @@
 - (void)setRotationSpeed:(float)rotationSpeed
 {
 	//_rotationSpeed = rotationSpeed;
-	_body->SetAngularVelocity(CC_DEGREES_TO_RADIANS(rotationSpeed));
+	self.body->SetAngularVelocity(CC_DEGREES_TO_RADIANS(rotationSpeed));
 }
 
 /*- (CGPoint)position
@@ -172,7 +172,7 @@
 /*- (void)update:(ccTime)dt
 {
     //NSLog(@"update particle");
-	/*if (self.sprite != nil && _body != NULL)
+	/if (self.sprite != nil && _body != NULL)
 	{
         //NSLog(@"_body->GetPosition().x:%f",_body->GetPosition().x);
        // NSLog(@"_body->GetPosition().y:%f",_body->GetPosition().y);
@@ -188,9 +188,20 @@
 
 - (void) applyForce:(CGPoint)force
 {
-   // NSLog(@"applyForce");
+    NSLog(@"applyForce x:%f y:%f",self.force.x,self.force.y);
     //self.position = CGPointAdd(self.force, CGPointDivideFloat(force, self.mass));
     [self applyForce:CGPointAdd(self.force, CGPointDivideFloat(force, self.mass)) asImpulse:NO];
+}
+
+-(CGPoint)getVelocity{
+    b2Vec2 vel = self.body->GetLinearVelocity();
+    return ccpMult(CGPointMake(vel.x, vel.y), PTM_RATIO);
+}
+
+-(void)setVelocity:(CGPoint)point{
+   // b2Vec2 v = b2Vec2(point.x ,point.y);
+   // self.body->SetLinearVelocity(v);
+
 }
 
 #pragma mark - Internal Interface

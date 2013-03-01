@@ -342,9 +342,7 @@ enum {
 	}
 }
 
-//this isn't working!!
--(void) createBounds {
-    
+-(void) createBounds{
     // for the screenBorder body we'll need these values
     CGSize screenSize = [CCDirector sharedDirector].winSize;
     float widthInMeters = screenSize.width / PTM_RATIO;
@@ -370,6 +368,35 @@ enum {
     screenBorderShape.Set(upperLeftCorner, lowerLeftCorner);
     screenBorderBody->CreateFixture(&screenBorderShape, 0);
 
+}
+
+-(void) createBoundsWithZeroZeroCentered {
+    
+    // for the screenBorder body we'll need these values
+    CGSize screenSize = [CCDirector sharedDirector].winSize;
+    float widthInMeters = screenSize.width / PTM_RATIO;
+    float heightInMeters = screenSize.height / PTM_RATIO;
+    b2Vec2 lowerLeftCorner = b2Vec2(widthInMeters/2, -heightInMeters/2);
+    b2Vec2 lowerRightCorner = b2Vec2(widthInMeters/2, heightInMeters/2);
+    b2Vec2 upperLeftCorner = b2Vec2(widthInMeters/2, heightInMeters/2);
+    b2Vec2 upperRightCorner = b2Vec2(widthInMeters/2, heightInMeters/2);
+    
+    // static container body, with the collisions at screen borders
+    b2BodyDef screenBorderDef;
+    screenBorderDef.position.Set(0, 0);
+    b2Body* screenBorderBody = m_world->CreateBody(&screenBorderDef);
+    b2EdgeShape screenBorderShape;
+    
+    // Create fixtures for the four borders (the border shape is re-used)
+    screenBorderShape.Set(lowerLeftCorner, lowerRightCorner);
+    screenBorderBody->CreateFixture(&screenBorderShape, 0);
+    screenBorderShape.Set(lowerRightCorner, upperRightCorner);
+    screenBorderBody->CreateFixture(&screenBorderShape, 0);
+    screenBorderShape.Set(upperRightCorner, upperLeftCorner);
+    screenBorderBody->CreateFixture(&screenBorderShape, 0);
+    screenBorderShape.Set(upperLeftCorner, lowerLeftCorner);
+    screenBorderBody->CreateFixture(&screenBorderShape, 0);
+    
 }
 
 

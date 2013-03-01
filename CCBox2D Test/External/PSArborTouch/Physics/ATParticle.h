@@ -31,7 +31,7 @@
 }
 @property (nonatomic,retain) CCSprite *sprite;
 @property (nonatomic,retain) UIView *particleView;
-@property (nonatomic, assign) CGPoint velocity;
+@property (nonatomic, assign,getter = getVelocity,setter = setVelocity:) CGPoint velocity;
 @property (nonatomic, assign) CGPoint force;
 @property (nonatomic, assign) CGFloat tempMass;
 @property (nonatomic, assign) NSUInteger connections;
