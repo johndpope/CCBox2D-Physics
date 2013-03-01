@@ -63,10 +63,10 @@ typedef enum {
 
 - (void) updateWithBounds:(CGRect)bounds theta:(CGFloat)theta 
 {
-    NSLog(@"bounds height:%f",bounds.size.height);
+   /* NSLog(@"bounds height:%f",bounds.size.height);
     NSLog(@"bounds width:%f",bounds.size.width);
     NSLog(@" x:%f",bounds.origin.x);
-    NSLog(@" y:%f",bounds.origin.y);
+    NSLog(@" y:%f",bounds.origin.y);*/
     //PTM_RATIO
     bounds_         = bounds;
     theta_          = theta;
@@ -93,7 +93,7 @@ typedef enum {
 
     while ([queue count] != 0) {
         
-        NSLog(@"queue :%d",[queue count]);
+       // NSLog(@"queue :%d",[queue count]);
         // dequeue
         ATParticle *particle = [queue objectAtIndex:0];
         [queue removeObjectAtIndex:0];
@@ -109,10 +109,10 @@ typedef enum {
             
             // slot is empty, just drop this node in and update the mass/c.o.m. 
             node.mass += p_mass;
-            NSLog(@"->mass:%f",node.mass);
+           // NSLog(@"->mass:%f",node.mass);
             node.position = CGPointAdd( node.position, CGPointScale(particle.physicsPosition, p_mass) );
             
-            NSLog(@"->node.bounds.size.height:%f",node.bounds.size.height);
+           // NSLog(@"->node.bounds.size.height:%f",node.bounds.size.height);
             [self _setQuad:p_quad ofBranch:node withObject:particle];
             
             // process next object in queue.
@@ -124,7 +124,7 @@ typedef enum {
             // as our new root
             
             node.mass += p_mass;
-            NSLog(@"mass:%f",node.mass);
+           // NSLog(@"mass:%f",node.mass);
             node.position = CGPointAdd( node.position, CGPointScale(particle.physicsPosition, p_mass) );
             
             node = objectAtQuad;

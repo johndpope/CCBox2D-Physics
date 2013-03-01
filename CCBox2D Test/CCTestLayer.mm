@@ -57,6 +57,7 @@ enum {
 		[self scheduleUpdate];
    		//[self scheduleOnce:@selector(zoomInOnPlayer:) delay:0.0f];
         self.isDebugDrawing = YES;
+        debugLinesDict = [[NSMutableDictionary alloc]init];
 	}
 	return self;
 }
@@ -67,6 +68,7 @@ enum {
 	delete _conduit;
 	delete m_world;
     
+    [debugLinesDict release];
     if(_debugDraw) delete _debugDraw;
 	
 	// don't forget to call "super dealloc"
@@ -455,23 +457,32 @@ enum {
     return [appDelegate.system toViewRect:rect];
 }
 
--(void)createLineByRect:(CGRect)rect{
-   NSLog(@"rect w:%f",rect.size.width);
-    NSLog(@"rect h:%f",rect.size.height);
-    NSLog(@"origin x:%f",rect.origin.x);
-    NSLog(@"origin y:%f",rect.origin.y);
-
-    rect.size.height = 100;
-    rect.size.width = 1;
-    
-    [self createLineByRect:rect color:ccc4(1,0,0,1)];
+-(void)createLineByRect:(CGRect)rect{   
+    [self createLineByRect:rect color:ccc4(1,0,0,128)];
 }
 -(void)createLineByRect:(CGRect)rect color:(ccColor4B)color
 {
-
-    CCLayerColor* layer = [CCLayerColor layerWithColor:color width:rect.size.width*PTM_RATIO height:rect.size.height*PTM_RATIO];
-    layer.position = rect.origin;
-    [self addChild:layer z:100];
+    NSString *key = [NSString stringWithFormat:@"%.0f-%.0f",rect.origin.x,rect.origin.y];
+    
+    if (![[debugLinesDict valueForKey:key] isEqualToString:@"OK"]){
+          [debugLinesDict setValue:@"OK" forKey:key];
+        NSLog(@"debugLinesDict:%@",debugLinesDict);
+        
+        //draw the width
+        CCLayerColor* layer = [CCLayerColor layerWithColor:color width:rect.size.width height:1 ]; 
+        layer.position = rect.origin;
+        [self addChild:layer];
+        
+        CCLayerColor* layer2 = [CCLayerColor layerWithColor:color width:1 height:rect.size.height  ]; 
+        layer2.position = rect.origin;
+        [self addChild:layer2];
+        
+    }
+  
+    
+    
+ 
+    
     
 }
 

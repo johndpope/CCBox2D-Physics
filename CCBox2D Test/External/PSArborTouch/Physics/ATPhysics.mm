@@ -188,8 +188,8 @@
         // update the bounds
         CGPoint pt = particle.physicsPosition;
         if(!CGPointEqualToPoint(CGPointZero,pt)) didFindMovingParticle = YES;
-        NSLog(@"pt.x:%f",pt.x);
-        NSLog(@"pt.y:%f",pt.y);
+       // NSLog(@"pt.x:%f",pt.x);
+       // NSLog(@"pt.y:%f",pt.y);
         
         if (firstParticle) {
             bottomright     = pt;
