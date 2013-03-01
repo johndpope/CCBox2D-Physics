@@ -21,7 +21,7 @@
         m_world->SetGravity(b2Vec2(0.0f, 0.0f));
         
         [self loadMapData];
-        [self createNodes];
+        //[self createNodes];
         [self createJoints];
         [self createBoundsWithZeroZeroCentered];
 
@@ -274,7 +274,7 @@
                             neighborBody->GetWorldCenter() );
         // Specifies whether the two connected bodies should collide with each other
         jointDef.collideConnected = true;
-        jointDef.frequencyHz = 1.0;
+        jointDef.frequencyHz = 60.0;
         jointDef.length = 250;
         jointDef.dampingRatio = 0.0;
         

@@ -25,7 +25,7 @@
 @synthesize tempMass    = tempMass_;
 @synthesize connections = connections_;
 @synthesize particleView = particleView_;
-@synthesize sprite = sprite_;
+
 
 #define PTM_RATIO 32.f
 - (id) init
@@ -65,23 +65,8 @@
 		bodyDef.angle = CC_DEGREES_TO_RADIANS(angle);
 		_body = _world->CreateBody(&bodyDef);
         
-		self.sprite = [[CCSprite spriteWithFile:@"Kirby.png" rect:CGRectMake(0, 0, 64, 64)]retain];
-        
-        self.sprite.position = ccp(100, 300);
-        self.position =  ccp(100, 300);
-        self.physicsPosition = position;
-		self.sprite.rotation = -angle;
-        
-        
-		b2CircleShape shape;
-		shape.m_radius =  POINTS_TO_METERS(self.sprite.contentSize.width);
-        
-		b2FixtureDef fixtureDef;
-		fixtureDef.shape = &shape;
-		fixtureDef.friction = 1.0f;
-		fixtureDef.restitution = 1.0f;
-		fixtureDef.density = (1.0f - shape.m_radius*shape.m_radius) * 0.5f;  // trial-and-error
-		_body->CreateFixture(&fixtureDef);
+		        
+		
         [self createPhysicsObject];
 
     }
@@ -124,7 +109,7 @@
 {
 	NSLog(@"dealloc %@", self);
 
-    [sprite_ release];    self.sprite = nil;
+
     self.particleView = nil;
     if (particleView_ !=nil)[particleView_ release];
     
@@ -146,19 +131,6 @@
 	return _sprite.position;
 }*/
 
-- (void)addSpriteTo:(CCNode *)parent
-{
-	[parent addChild:self.sprite];
-}
-
-- (void)removeSprite
-{
-	if (self.sprite != NULL)
-	{
-		[self.sprite removeFromParentAndCleanup:YES];
-		self.sprite = nil;
-	}
-}
 
 - (void)removeBody
 {
