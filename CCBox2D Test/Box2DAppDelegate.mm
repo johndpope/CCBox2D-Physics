@@ -39,7 +39,7 @@ enum {
     self.system.parameters = params;
     
     // Setup the view bounds
-    self.system.viewBounds = CGRectMake(0, 0, 768, 1024);
+    self.system.viewBounds = CGRectMake(0, 0, 768*PTM_RATIO, 1024*PTM_RATIO);
     
     // this gets recalculated on tendparticles function....but without this line - it fails.
     self.system.physics.bounds = CGRectMake(-1, -1, 2, 2);
