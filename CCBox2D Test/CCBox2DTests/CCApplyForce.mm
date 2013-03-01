@@ -18,10 +18,12 @@
     self = [super init];
     if  (self!=nil){
 
+        m_world->SetGravity(b2Vec2(0.0f, 0.0f));
+        
         [self loadMapData];
         [self createNodes];
         [self createJoints];
-        m_world->SetGravity(b2Vec2(0.0f, 0.0f));
+        
 
         // Define the ground box shape.
         CGSize screenSize = [CCDirector sharedDirector].winSize;
@@ -30,7 +32,7 @@
         //float scale = 1.0f/15;
          [self createBounds];
 
-        CCBodySprite *centerBody = [[CCBodySprite spriteWithFile:@"Icon.png"]retain];
+        /*CCBodySprite *centerBody = [[CCBodySprite spriteWithFile:@"Icon.png"]retain];
         centerBody.color = ccGREEN;
         centerBody.tag = 111;
         b2BodyDef bodyDef;
@@ -41,7 +43,7 @@
         
 		{
            // [self generateNodesWithParent:centerBody];
-		}
+		}*/
 
     }
     return self;
@@ -80,12 +82,7 @@
     //CCBodySprite *particle = [[CCBodySprite spriteWithFile:@"Icon.png"]retain];
     node.color = ccMAGENTA;
     
-    b2BodyDef bodyDef;
-    bodyDef.type = b2_dynamicBody;
-    bodyDef.awake = YES;
-    bodyDef.allowSleep = YES;
-    [node configureSpriteForWorld:m_world bodyDef:bodyDef];
-    node.position = parentParticle.position;
+   
     [self addChild:node]; //add the particle image into canvas
     
     float radius = RandomFloat(10.0,15.0);
@@ -258,6 +255,8 @@
         BG_WEAKSELF;
         
         [particle setTexture:[[CCTextureCache sharedTextureCache] addImage: @"Kirby.png"]];
+        
+        
         b2BodyDef bodyDef;
         bodyDef.type = b2_dynamicBody;
         bodyDef.awake = YES;
@@ -271,17 +270,17 @@
         particle.onTouchDownBlock = ^{
             NSLog(@"onTouchDownBlock");
             
-            [weakSelf generateChildrenByParent:particle];
+            //[weakSelf generateChildrenByParent:particle];
             //circle
             
         };
         
-        float radius = 50;
+        float radius = 10;
         CCShape *circle = [CCShape circleWithCenter:ccp(5,5) radius:radius];
         circle.restitution = 0.0f;
         [particle addShape:circle named:@"circle"];
-        float scale =1.0f/15;
-        [particle setScale:scale];
+       // float scale =1.0f/15; - impacts sprite
+       // [particle setScale:scale];
 
     }
     
@@ -295,12 +294,6 @@
         // Connect the joints
         b2DistanceJointDef jointDef;
 
-       // NSLog(@"spring.point1.name:%@",spring.point1.name);
-       // NSLog(@"spring.point2.name:%@",spring.point2.name);
-        // NSLog(@"sspring.point1.innerCircleBody:%@",spring.point1.innerCircleBody);
-        
-        // spring.point1.position = ccp(i, i);
-        // Get current body and neighbor
         b2Body *currentBody = (b2Body*)spring.point1.innerCircleBody;
         b2Body *neighborBody = (b2Body*)spring.point2.innerCircleBody;
         
@@ -311,7 +304,7 @@
         // Specifies whether the two connected bodies should collide with each other
         jointDef.collideConnected = false;
         jointDef.frequencyHz = 1.0;
-        jointDef.length = 15;
+        jointDef.length = 150;
         jointDef.dampingRatio = 0.0;
         
         m_world->CreateJoint(&jointDef);

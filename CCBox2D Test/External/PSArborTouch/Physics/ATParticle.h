@@ -42,5 +42,5 @@
 - (id)initWithWorld:(b2World *)world size:(int)size position:(CGPoint)position angle:(float)angle name:(NSString*)name userData:(NSMutableDictionary*)userData;
 - (void) applyForce:(CGPoint)force;
 - (void) createPhysicsObject:(b2World *)world;
-- (void) applyForce:(CGPoint)force;
+
 @end

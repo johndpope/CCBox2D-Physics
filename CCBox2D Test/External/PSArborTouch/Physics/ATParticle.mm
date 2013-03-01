@@ -106,7 +106,7 @@
     // Circle at the center (inner circle)
     b2BodyDef innerCircleBodyDef;
     // Make the inner circle larger
-    circleShape.m_radius = 0.8f;
+    circleShape.m_radius = 15.0f;
     innerCircleBodyDef.type = b2_dynamicBody;
     
     // Position is at the center
@@ -114,7 +114,7 @@
     self.innerCircleBody = _world->CreateBody(&innerCircleBodyDef);
     self.innerCircleBody->CreateFixture(&fixtureDef);
     
-    
+    [self createBody];
     
     
 }

@@ -398,8 +398,7 @@
         }else{
             particle.physicsPosition = CGPointAdd(pos, CGPointScale(v1, timestep) );
         }
-        
-        
+
         // keep stats to report in systemEnergy
         CGFloat speed = CGPointMagnitude(particle.velocity);
         CGFloat e = speed * speed;

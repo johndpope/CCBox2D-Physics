@@ -411,13 +411,13 @@ enum {
             }
             // Draw bounds target (due to translation will always be the outeredge in display)
 
-            //[self createLineByRect:[self scaleRect:appDelegate.system.tweenBoundsTarget] color:ccc4(0, 255, 255, 255)];
+           // [self createLineByRect:[self scaleRect:appDelegate.system.tweenBoundsTarget] color:ccc4(0, 255, 255, 255) tag:10];
     
             
             // Draw bounds current (this is a relative representation of the view window you see
             // with all the nodes. It shows what the "camera" is doing to keep elements centered in
             // view)
-            //[self createLineByRect:[self scaleRect:appDelegate.system.tweenBoundsCurrent] color:ccc4(0, 255, 255, 255)];
+            //[self createLineByRect:[self scaleRect:appDelegate.system.tweenBoundsCurrent] color:ccc4(255, 255, 0, 255) tag:20];
 
         }
         
@@ -457,34 +457,46 @@ enum {
     return [appDelegate.system toViewRect:rect];
 }
 
--(void)createLineByRect:(CGRect)rect{   
-    [self createLineByRect:rect color:ccc4(0,255,0,255)];
+-(void)createLineByRect:(CGRect)rect{
+    [self createLineByRect:rect color:ccc4(0,255,0,255) tag:0];
 }
--(void)createLineByRect:(CGRect)rect color:(ccColor4B)color
+-(void)createLineByRect:(CGRect)rect color:(ccColor4B)color tag:(NSInteger)tag
 {
     NSString *key = [NSString stringWithFormat:@"%.0f-%.0f-%.0f-%.0f",rect.origin.x,rect.origin.y,rect.size.width,rect.size.height];
     
+    if ((tag == 10) ||(tag == 20)){
+        [self removeChildByTag:tag];
+        [self removeChildByTag:tag+1];
+        [self removeChildByTag:tag+2];
+        [self removeChildByTag:tag+3];
+    }
+        
+
     if (![[debugLinesDict valueForKey:key] isEqualToString:@"OK"]){
           [debugLinesDict setValue:@"OK" forKey:key];
         NSLog(@"debugLinesDict:%@",debugLinesDict);
         
         //draw the box outlines
         // eg. 256 wide x 1 high
-        CCLayerColor* layer = [CCLayerColor layerWithColor:color width:rect.size.width height:1 ]; 
+        CCLayerColor* layer = [CCLayerColor layerWithColor:color width:rect.size.width height:1 ];
+        layer.tag = tag;
         layer.position = rect.origin;
         [self addChild:layer z:0];
         
-        CCLayerColor* layer2 = [CCLayerColor layerWithColor:color width:1 height:rect.size.height  ]; 
+        CCLayerColor* layer2 = [CCLayerColor layerWithColor:color width:1 height:rect.size.height  ];
+        layer2.tag = tag+1;
         layer2.position = rect.origin;
         [self addChild:layer2 z:0];
          
         // eg. 256 wide x 1 high but parallel
         CCLayerColor* layer3 = [CCLayerColor layerWithColor:color width:rect.size.width height:1 ];
+        layer3.tag = tag+2;
         layer3.position = ccp(rect.origin.x,rect.origin.y+rect.size.height);
         [self addChild:layer3 z:0];
         
         // eg. 1 wide x 256 high but perpendicular
         CCLayerColor* layer4 = [CCLayerColor layerWithColor:color width:1 height:rect.size.height  ];
+        layer4.tag = tag+3;
         layer4.position = ccp(rect.origin.x+rect.size.width,rect.origin.y);
         [self addChild:layer4 z:0];
         
