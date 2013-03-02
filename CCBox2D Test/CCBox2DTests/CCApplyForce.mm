@@ -7,6 +7,7 @@
 #import "ATKernel.h"
 #import "ATSystemRenderer.h"
 #import "ATPhysics.h"
+#import "b2FrictionJoint.h"
 
 
 @implementation CCApplyForce{
@@ -20,13 +21,12 @@
 
         m_world->SetGravity(b2Vec2(0.0f, 0.0f));
         
+        [self createTestBody];
         [self loadMapData];
         [self createNodes]; //- not needed
-        [self createJoints];
+        [self performSelector:@selector(createJoints) withObject:nil afterDelay:3];
         [self createCartesianBounds]; // 0,0 in center
 
-        [self createTestBody];
-        
 
     }
     return self;
@@ -47,7 +47,7 @@
     [centerBody configureSpriteForWorld:m_world bodyDef:bodyDef];
     centerBody.position = ccp(-130,-130);
     [self addChild:centerBody z:-100];
-    [self generateNodesWithParent:centerBody];
+    //[self generateNodesWithParent:centerBody];
 
 }
 
@@ -266,29 +266,23 @@
     for (ATSpring *spring in appDelegate.system.physics.springs) {
         
         // Connect the joints
-        b2PrismaticJointDef jd;
-
-        b2Body *currentBody = (b2Body*)spring.point1.body;
-        b2Body *neighborBody = (b2Body*)spring.point2.body;
+        ATParticle *currentBody = spring.point1;
+        ATParticle *neighborBody = spring.point2;
         
-        // Connect the outer circles to each other
-        jd.Initialize(currentBody, neighborBody,
-                            currentBody->GetWorldCenter(),
-                            neighborBody->GetWorldCenter() );
-        // Specifies whether the two connected bodies should collide with each other
+        float32 gravity = 10.0f;
+        float32 radius = 30;
+        float32 I = [currentBody inertia];
+        float32 mass = [currentBody mass];
+        
+        b2FrictionJointDef jd;
+        
+        jd.localAnchorA.SetZero();
+        jd.localAnchorB.SetZero();
+        jd.bodyA = currentBody.body;
+        jd.bodyB = neighborBody.body;
         jd.collideConnected = true;
-        //jointDef.frequencyHz = 60.0;
-        //jointDef.length = 250;
-        //jointDef.dampingRatio = 0.0;
-        b2Vec2 axis(2.0f, 1.0f);
-        axis.Normalize();
-        jd.motorSpeed = 0.0f;
-        jd.maxMotorForce = 100.0f;
-       // jd.enableMotor = true;
-        jd.lowerTranslation = -4.0f;
-        jd.upperTranslation = 4.0f;
-        jd.enableLimit = false;
-        
+        jd.maxForce = mass * gravity;
+        jd.maxTorque = mass * radius * gravity;
         m_world->CreateJoint(&jd);
         
     }

@@ -1,21 +1,14 @@
-CCBox2D-Test
+CCBox2D-Physics
 ============
 
-Alpha Testing of CCBox2D pod
+This project is a work in progress to port Ed Preston's PSArborTouch into Box2D physics engine.
 
+https://github.com/epreston/PSArborTouch
+PSArborTouch is a particle / spring physics engine optimised for 2D content layout and eye-catching visual effects.
+The goal of PSArborTouch is to build a high-quality physics based graph layout engine designed specifically for the Mac OSX and iOS. 
+The inspiration / structure comes from arbor, a dynamic and well structured javascript engine for the same purpose.
 
-This project ports across all the c++ sample code for box2d from cocos2d-iphone.
-This is a work in progress.
-
-
-In App Delegate
-
-// switch this to run normal box2d demos
-	 if (0){
-	     [scene addChild: [MenuLayer menuWithEntryID:0]];
-	 }else{
-	     [scene  addChild: [[CCBox2DView alloc] initWithEntryID:0]]; 
-	 }
+The project includes Barnes Hut Repulsion / Attraction sample.
 
 
 Podfile
@@ -28,12 +21,4 @@ Podfile
 	pod 'CCBox2D' , :podspec => 'https://raw.github.com/jdp-global/CCBox2D/master/CCBox2D.podspec'
 
 
-
-
-
-
-Goals
-============
-create ports of demo sample code across.
-Stabilise Pod
 
