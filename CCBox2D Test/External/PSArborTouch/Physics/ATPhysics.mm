@@ -154,14 +154,14 @@
 
 - (BOOL) update; 
 {
-    [self tendParticles];
+    //[self tendParticles];
     [self eulerIntegrator:deltaTime_];
     
 //    CGFloat motion = (self.energy.mean + self.energy.max) / 2; 
     CGFloat motion = (self.energy.max - self.energy.mean) / 2;
     
     if (motion < 0.05) { // 0.05
-//        NSLog(@"We would stop now.");
+        NSLog(@"We would stop now.");
         return NO;
     } else {
         return YES;
@@ -171,7 +171,9 @@
 
 #pragma mark - Internal Interface
 
-- (void) tendParticles 
+
+//this causes problems
+- (void) tendParticles
 {
     // Barnes-Hut requires accurate bounds.  If a particle has been modified from one
     // run to the next, detect it here to ensure the bounds are correct.
@@ -281,12 +283,14 @@
      // NSLog(@"topLeft.y:%f",topleft.y);
 
 }
+
 - (void) eulerIntegrator:(CGFloat)deltaTime
 {
     NSParameterAssert(deltaTime > 0.0);
     
     // Without advancement of time, does the simulation have meaning?
     if (deltaTime <= 0.0) return;
+
     
     if (self.repulsion > 0.0) {
         
@@ -301,8 +305,8 @@
     if (self.stiffness > 0.0) [self applySprings];
     [self applyCenterDrift];
     if (self.gravity) [self applyCenterGravity];
-    [self updateVelocity:deltaTime];
-    [self updatePosition:deltaTime];
+   // [self updateVelocity:deltaTime];
+    //[self updatePosition:deltaTime];
 }
 
 - (void) applyBruteForceRepulsion 
@@ -338,7 +342,7 @@
     }
 }
 
-- (void) applyBarnesHutRepulsion 
+- (void) applyBarnesHutRepulsion
 {
     NSLog(@"applyBarnesHutRepulsion");
     // build a barnes-hut tree...
@@ -347,7 +351,8 @@
     float widthInMeters = screenSize.width / PTM_RATIO;
     float heightInMeters = screenSize.height / PTM_RATIO;
     
-    if (1){
+    //keep the bound strangled to window layout for now
+    if (1){ // old-fashioned Cartesian one with (0,0) in the center  
        self.bounds  = CGRectMake(-widthInMeters/2, -heightInMeters/2, widthInMeters,heightInMeters); 
     }else{
        self.bounds  = CGRectMake(0, 0, widthInMeters,heightInMeters);
@@ -368,22 +373,32 @@
 
 - (void) applySprings 
 {
-   // NSLog(@"applySprings");
+    NSLog(@"applySprings");
     for (ATSpring *spring in activeSprings_) {
-        CGPoint d = CGPointSubtract(spring.target.position, spring.source.position); // the direction of the spring
+        CGPoint d = CGPointSubtract(spring.target.physicsPosition, spring.source.physicsPosition); // the direction of the spring
         
+        
+         NSLog(@"spring.target.physicsPosition.x:%f",spring.target.physicsPosition.x);
+        NSLog(@"spring.target.physicsPosition.y:%f",spring.target.physicsPosition.y);
+        NSLog(@"spring.source.physicsPosition.x:%f",spring.source.physicsPosition.x);
+        NSLog(@"spring.source.physicsPosition.y:%f",spring.source.physicsPosition.y);
+        NSLog(@"CGPointMagnitude(d):%f",CGPointMagnitude(d));
         CGFloat displacement = spring.length - CGPointMagnitude(d);
         
         CGPoint direction = CGPointNormalize( (CGPointMagnitude(d) > 0.0) ? d : CGPointRandom(1.0) );
-        
+        NSLog(@"direction x:%f y:%f",direction.x,direction.y);
+
         // BUG:
         // since things oscillate wildly for hub nodes, should probably normalize spring
         // forces by the number of incoming edges for each node. naive normalization 
         // doesn't work very well though. what's the `right' way to do it?
         
         // apply force to each end point
-        [spring.point1 applyForce:CGPointScale(direction, spring.stiffness * displacement * -0.5) ];
-        [spring.point2 applyForce:CGPointScale(direction, spring.stiffness * displacement * 0.5) ];
+       /* [spring.point1 applyForce:CGPointScale(direction, spring.stiffness * displacement * -0.5) ];
+        [spring.point2 applyForce:CGPointScale(direction, spring.stiffness * displacement * 0.5) ];*/
+        [spring.point1 applyForce:CGPointScale(direction, displacement  * 0.5) ];
+        [spring.point2 applyForce:CGPointScale(direction,  displacement * 0.5) ];
+        
     }    
 }
 
@@ -431,6 +446,8 @@
             particle.force = CGPointZero;
             continue;
         }
+        NSLog(@" particle.force x:%f", particle.force.x);
+        NSLog(@" particle.force y:%f", particle.force.y);
         
         particle.velocity = CGPointScale(CGPointAdd(particle.velocity, 
                                                     CGPointScale( particle.force, timestep)), 

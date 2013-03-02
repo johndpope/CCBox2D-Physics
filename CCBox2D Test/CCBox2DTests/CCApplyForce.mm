@@ -21,17 +21,34 @@
         m_world->SetGravity(b2Vec2(0.0f, 0.0f));
         
         [self loadMapData];
-        //[self createNodes];
+        [self createNodes]; //- not needed
         [self createJoints];
-        [self createBoundsWithZeroZeroCentered];
+        [self createCartesianBounds]; // 0,0 in center
 
+        [self createTestBody];
+        
 
     }
     return self;
 }
 -(void)dealloc{
     [ground release];
+    [centerBody release];
     [super dealloc];
+}
+
+-(void)createTestBody{
+
+
+    centerBody = [[ATParticle spriteWithFile:@"Icon.png"]retain];
+    centerBody.tag = 111;
+    b2BodyDef bodyDef;
+    bodyDef.type = b2_dynamicBody;
+    [centerBody configureSpriteForWorld:m_world bodyDef:bodyDef];
+    centerBody.position = ccp(-130,-130);
+    [self addChild:centerBody z:-100];
+    [self generateNodesWithParent:centerBody];
+
 }
 
 -(void) update:(ccTime)delta
@@ -39,10 +56,14 @@
     [super update:delta];
     for (ATParticle *particle in appDelegate.system.physics.particles) {
         [particle update:delta];
+        
+        [self attractNode:particle target:centerBody];
     }
+}
+-(void)attractNode:(ATParticle*)p1 target:(ATParticle*)p2{
+    CGPoint pt = [p1 attraction:p2];
+    [p1 applyForce:pt];
     
-    
-	
 }
 -(void)generateChildrenByParent:(ATParticle*)parentParticle{
     
@@ -62,8 +83,7 @@
     [node setTexture:[[CCTextureCache sharedTextureCache] addImage: @"Icon.png"]];
     //CCBodySprite *particle = [[CCBodySprite spriteWithFile:@"Icon.png"]retain];
     node.color = ccMAGENTA;
-    
-   
+ 
     [self addChild:node]; //add the particle image into canvas
     
     float radius = RandomFloat(10.0,15.0);
@@ -105,9 +125,9 @@
     {
         CGPoint pt;
         if (parentSprite.tag ==111) {
-         pt  = ccp(parentSprite.position.x,parentSprite.position.y+i);
+         pt  = ccp(parentSprite.physicsPosition.x,parentSprite.physicsPosition.y+i);
         }else{
-          pt  = ccp(parentSprite.position.x*PTM_RATIO,parentSprite.position.y*PTM_RATIO+i);
+          pt  = ccp(parentSprite.physicsPosition.x*PTM_RATIO,parentSprite.physicsPosition.y*PTM_RATIO+i);
         }
          
         NSLog(@"pt.x:%f",pt.x);
@@ -124,7 +144,7 @@
         particle.physicsPosition = pt;
         [self addChild:particle]; //add the particle image into canvas
         
-         float radius = RandomFloat(10.0,150.0);
+         float radius = RandomFloat(1.0,15.0);
         CCShape *circle = [CCShape circleWithCenter:ccp(5,5) radius:radius];
         circle.restitution = 0.0f;
         [particle addShape:circle named:@"circle"];
@@ -169,7 +189,7 @@
 -(void) loadMapData
 {
     // Find the file
-    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"example" ofType:@"json"];
+    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"usofa" ofType:@"json"];
     if (filePath) {
         // Load data in the file
         NSData *theJSONData = [NSData dataWithContentsOfFile:filePath];
@@ -227,31 +247,14 @@
 -(void)createNodes{
     
     for (ATParticle *particle in appDelegate.system.physics.particles) {
-        
-        CGPoint pt = CGPointRandom(5.0);;
-        //create a random point to display
 
-        [particle update:nil];
-        
         BG_WEAKSELF;
-        
         [particle setTexture:[[CCTextureCache sharedTextureCache] addImage: @"Kirby.png"]];
-
-       // [self addChild:particle]; //add the particle image into canvas
         particle.onTouchDownBlock = ^{
             NSLog(@"onTouchDownBlock");
-            
             [weakSelf generateChildrenByParent:particle];
-            //circle
-            
         };
-        
-        /*float radius = 10;
-        CCShape *circle = [CCShape circleWithCenter:ccp(5,5) radius:radius];
-        circle.restitution = 0.0f;
-        [particle addShape:circle named:@"circle"];*/
-        //float scale =1.0f/15; //- impacts sprite
-       //[particle setScale:scale];
+        [self addChild:particle];//add the particle image into canvas
 
     }
     
@@ -263,22 +266,30 @@
     for (ATSpring *spring in appDelegate.system.physics.springs) {
         
         // Connect the joints
-        b2DistanceJointDef jointDef;
+        b2PrismaticJointDef jd;
 
         b2Body *currentBody = (b2Body*)spring.point1.body;
         b2Body *neighborBody = (b2Body*)spring.point2.body;
         
         // Connect the outer circles to each other
-        jointDef.Initialize(currentBody, neighborBody,
+        jd.Initialize(currentBody, neighborBody,
                             currentBody->GetWorldCenter(),
                             neighborBody->GetWorldCenter() );
         // Specifies whether the two connected bodies should collide with each other
-        jointDef.collideConnected = true;
-        jointDef.frequencyHz = 60.0;
-        jointDef.length = 250;
-        jointDef.dampingRatio = 0.0;
+        jd.collideConnected = true;
+        //jointDef.frequencyHz = 60.0;
+        //jointDef.length = 250;
+        //jointDef.dampingRatio = 0.0;
+        b2Vec2 axis(2.0f, 1.0f);
+        axis.Normalize();
+        jd.motorSpeed = 0.0f;
+        jd.maxMotorForce = 100.0f;
+       // jd.enableMotor = true;
+        jd.lowerTranslation = -4.0f;
+        jd.upperTranslation = 4.0f;
+        jd.enableLimit = false;
         
-        m_world->CreateJoint(&jointDef);
+        m_world->CreateJoint(&jd);
         
     }
 }

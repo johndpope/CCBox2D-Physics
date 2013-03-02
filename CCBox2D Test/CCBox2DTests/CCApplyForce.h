@@ -7,6 +7,7 @@
 	b2Body* m_body;
     CCBodySprite *ground;
 
+    ATParticle *centerBody;
 
 };
 

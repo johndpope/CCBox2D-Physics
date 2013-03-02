@@ -408,7 +408,7 @@
     // Create the new edge
     NSLog(@"ATSpring >>>>initWithSource:%@%@",sourceNode.name,targetNode.name);
     ATSpring *edge = [[ATSpring alloc] initWithSource:sourceNode target:targetNode userData:data];
-    
+   // edge.length = 250;
     // Store the edge
     [self.state setEdgesObject:edge forKey:edge.index];
     

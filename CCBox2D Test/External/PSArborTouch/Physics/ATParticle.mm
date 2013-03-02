@@ -56,7 +56,7 @@
         name_ = [name copy];
         data_ = [data retain];
         
-        //self.mass = 1;
+        self.mass = 1;
         b2BodyDef bodyDef;
 		bodyDef.type = b2_dynamicBody;
 		bodyDef.allowSleep = true;
@@ -113,7 +113,7 @@
     self.particleView = nil;
     if (particleView_ !=nil)[particleView_ release];
     
-	[self removeSprite];
+
 	[self removeBody];
     [super dealloc];
 }
@@ -126,10 +126,6 @@
 	self.body->SetAngularVelocity(CC_DEGREES_TO_RADIANS(rotationSpeed));
 }
 
-/*- (CGPoint)position
-{
-	return _sprite.position;
-}*/
 
 
 - (void)removeBody
@@ -160,9 +156,12 @@
 
 - (void) applyForce:(CGPoint)force
 {
-    NSLog(@"applyForce x:%f y:%f",self.force.x,self.force.y);
-    //self.position = CGPointAdd(self.force, CGPointDivideFloat(force, self.mass));
-    [self applyForce:CGPointAdd(self.force, CGPointDivideFloat(force, self.mass)) asImpulse:NO];
+    NSLog(@"applyForce x:%f y:%f",force.x,force.y);
+    // get force and location in world coordinates
+    b2Vec2 b2Force(force.x , force.y );
+    b2Vec2 point = self.body->GetPosition();
+    self.body->ApplyForce(b2Force, point);
+
 }
 
 -(CGPoint)getVelocity{
@@ -171,11 +170,31 @@
 }
 
 -(void)setVelocity:(CGPoint)point{
-   // b2Vec2 v = b2Vec2(point.x ,point.y);
-   // self.body->SetLinearVelocity(v);
+
+    b2Vec2 v = b2Vec2(point.x ,point.y);
+    self.body->SetLinearVelocity(v);
 
 }
 
+
+-(CGPoint)attraction:(ATParticle*)target{
+   
+    CGPoint d = CGPointSubtract(self.physicsPosition, target.position);
+    CGFloat distance = MAX(1.0f, CGPointMagnitude(d));
+    CGPoint direction = ( CGPointMagnitude(d) > 0.0 ) ? d : CGPointNormalize( CGPointRandom(1.0) );
+
+    CGPoint a = CGPointScale(direction, (self.body->GetMass()*(target.body->GetMass()) ));
+    CGPoint force = CGPointDivideFloat(a , (distance * distance) );
+
+    //float strength = (g * mass * m.mass) / (distance * distance);
+   // force.mult(strength);
+
+    CGLog(@"force %@",force);
+    CGLog(@"direction %@",direction);
+
+    return force;
+
+}
 #pragma mark - Internal Interface
 
 

@@ -255,7 +255,9 @@ typedef enum {
             CGFloat distance = MAX(1.0f, CGPointMagnitude(d));
             CGPoint direction = ( CGPointMagnitude(d) > 0.0 ) ? d : CGPointNormalize( CGPointRandom(1.0) );
             CGPoint force = CGPointDivideFloat( CGPointScale(direction, (repulsion * nodeParticle.mass) ), (distance * distance) );
-            
+            NSLog(@"force x:%f",force.x);
+            NSLog(@"force y:%f",force.y);
+            //particle.force = force;
             [particle applyForce:force];
             
         } else {
@@ -284,7 +286,7 @@ typedef enum {
                 CGFloat distance = MAX(1.0, CGPointMagnitude(d));
                 CGPoint direction = ( CGPointMagnitude(d) > 0.0 ) ? d : CGPointNormalize( CGPointRandom(1.0) );
                 CGPoint force = CGPointDivideFloat( CGPointScale(direction, (repulsion * nodeBranch.mass) ), (distance * distance) );
-                
+                //particle.force = force;
                 [particle applyForce:force];
             }
         }

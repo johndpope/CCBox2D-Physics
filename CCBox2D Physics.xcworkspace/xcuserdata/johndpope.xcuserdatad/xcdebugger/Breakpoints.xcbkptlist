@@ -8,11 +8,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Pods/CCBox2D/CCBox2D/CCBodySprite.mm"
-         timestampString = "383812857.41742"
+         timestampString = "383896791.595578"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "509"
-         endingLineNumber = "509"
+         startingLineNumber = "519"
+         endingLineNumber = "519"
          landmarkName = "-createBody"
          landmarkType = "5">
       </FileBreakpoint>
@@ -47,11 +47,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "CCBox2D Test/External/PSArborTouch/Barnes-Hut/ATBarnesHutTree.mm"
-         timestampString = "383804126.337036"
+         timestampString = "383870910.439296"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "265"
-         endingLineNumber = "265"
+         startingLineNumber = "267"
+         endingLineNumber = "267"
          landmarkName = "-applyForces:andRepulsion:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -66,6 +66,32 @@
          startingLineNumber = "224"
          endingLineNumber = "224"
          landmarkName = "-setBounds:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Pods/CCBox2D/CCBox2D/CCBodySprite.mm"
+         timestampString = "383878055.444767"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "346"
+         endingLineNumber = "346"
+         landmarkName = "-applyForce:asImpulse:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "CCBox2D Test/CCBox2DTests/CCApplyForce.mm"
+         timestampString = "383899909.989001"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "128"
+         endingLineNumber = "128"
+         landmarkName = "-generateNodesWithParent:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>
