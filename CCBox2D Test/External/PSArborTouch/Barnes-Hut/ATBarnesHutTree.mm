@@ -251,15 +251,18 @@ typedef enum {
             // this is a particle leafnode, so just apply the force directly
             ATParticle *nodeParticle = node;
             
-            CGPoint d = CGPointSubtract(particle.physicsPosition, nodeParticle.position);
+            CGPoint d = CGPointSubtract(particle.physicsPosition, nodeParticle.physicsPosition);
+            
             CGFloat distance = MAX(1.0f, CGPointMagnitude(d));
             CGPoint direction = ( CGPointMagnitude(d) > 0.0 ) ? d : CGPointNormalize( CGPointRandom(1.0) );
             CGPoint force = CGPointDivideFloat( CGPointScale(direction, (repulsion * nodeParticle.mass) ), (distance * distance) );
-            NSLog(@"force x:%f",force.x);
-            NSLog(@"force y:%f",force.y);
-            //particle.force = force;
-            [particle applyForce:force];
-            
+            CCLOG(force);
+            //apply force directly 
+            float magnitude = 100; //flip to cause repulsion
+            CGPoint scaledForce = CGPointScale(force,magnitude);
+            b2Vec2 b2Force = b2Vec2(scaledForce.x,scaledForce.y);
+            particle.body->ApplyLinearImpulse(b2Force, particle.body->GetWorldCenter() );
+
         } else {
             // it's a branch node so decide if it's cluster-y and distant enough
             // to summarize as a single point. if it's too complex, open it and deal
@@ -271,8 +274,6 @@ typedef enum {
             
             //NSLog(@"size:%f",size);
             //NSLog(@"dist:%f",dist);
-            //NSLog(@"nodeBranch.bounds.size.height:%f",nodeBranch.bounds.size.height);
-           //  NSLog(@"nodeBranch.bounds.size.width:%f",nodeBranch.bounds.size.width);
             
             if ( (size / dist) > theta_ ) { // i.e., s/d > Θ
                 // open the quad and recurse
@@ -281,13 +282,18 @@ typedef enum {
                 if (nodeBranch.se != nil) [queue addObject:nodeBranch.se];
                 if (nodeBranch.sw != nil) [queue addObject:nodeBranch.sw];
             } else {
+                
                 // treat the quad as a single body
                 CGPoint d = CGPointSubtract(particle.physicsPosition, CGPointDivideFloat(nodeBranch.position, nodeBranch.mass));
                 CGFloat distance = MAX(1.0, CGPointMagnitude(d));
                 CGPoint direction = ( CGPointMagnitude(d) > 0.0 ) ? d : CGPointNormalize( CGPointRandom(1.0) );
                 CGPoint force = CGPointDivideFloat( CGPointScale(direction, (repulsion * nodeBranch.mass) ), (distance * distance) );
-                //particle.force = force;
-                [particle applyForce:force];
+
+                //apply force directly
+                float magnitude = 100; //flip to cause repulsion
+                CGPoint scaledForce = CGPointScale(force,magnitude);
+                b2Vec2 b2Force = b2Vec2(scaledForce.x,scaledForce.y);
+                particle.body->ApplyLinearImpulse(b2Force, particle.body->GetWorldCenter() );
             }
         }
     }

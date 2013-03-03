@@ -10,13 +10,12 @@
             "userData": { "nodeType": "minor"},
             "d": {}
         },
-        "d": {
-            "userData": { "nodeType": "major"},
-            "e": {},
-            "f": {}
+        "b": {
+             "userData": { "nodeType": "major"},
+            "c": {},
+            "g": {}
         }
-        
     }
-    
+
 }
 

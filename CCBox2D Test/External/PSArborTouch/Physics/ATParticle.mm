@@ -58,7 +58,10 @@
         
         self.mass = 1;
         b2BodyDef bodyDef;
+        
 		bodyDef.type = b2_dynamicBody;
+        bodyDef.fixedRotation = YES;
+       // bodyDef.preventRotation = true
 		bodyDef.allowSleep = true;
 		bodyDef.position.Set(POINTS_TO_METERS(position.x), POINTS_TO_METERS(position.y));
 		bodyDef.userData =  self;
@@ -159,8 +162,11 @@
     NSLog(@"applyForce x:%f y:%f",force.x,force.y);
     // get force and location in world coordinates
     b2Vec2 b2Force(force.x , force.y );
+   // self.mass = 1;
     b2Vec2 point = self.body->GetPosition();
     self.body->ApplyForce(b2Force, point);
+    
+    
 
 }
 
@@ -179,15 +185,12 @@
 
 -(CGPoint)attraction:(ATParticle*)target{
    
-    CGPoint d = CGPointSubtract(self.physicsPosition, target.position);
+    CGPoint d = CGPointSubtract(self.physicsPosition, target.physicsPosition);
     CGFloat distance = MAX(1.0f, CGPointMagnitude(d));
     CGPoint direction = ( CGPointMagnitude(d) > 0.0 ) ? d : CGPointNormalize( CGPointRandom(1.0) );
 
     CGPoint a = CGPointScale(direction, (self.body->GetMass()*(target.body->GetMass()) ));
     CGPoint force = CGPointDivideFloat(a , (distance * distance) );
-
-    //float strength = (g * mass * m.mass) / (distance * distance);
-   // force.mult(strength);
 
     CGLog(@"force %@",force);
     CGLog(@"direction %@",direction);

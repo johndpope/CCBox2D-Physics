@@ -305,8 +305,8 @@
     if (self.stiffness > 0.0) [self applySprings];
     [self applyCenterDrift];
     if (self.gravity) [self applyCenterGravity];
-   // [self updateVelocity:deltaTime];
-    //[self updatePosition:deltaTime];
+    [self updateVelocity:deltaTime];
+    [self updatePosition:deltaTime];
 }
 
 - (void) applyBruteForceRepulsion 

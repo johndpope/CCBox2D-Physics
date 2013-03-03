@@ -7,6 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		83286F5816E31E5400E4EF14 /* ParticleEmitter.mm in Sources */ = {isa = PBXBuildFile; fileRef = 83286F5716E31E5400E4EF14 /* ParticleEmitter.mm */; };
+		83286F6316E33F2D00E4EF14 /* africa.json in Resources */ = {isa = PBXBuildFile; fileRef = 83286F5916E33F2C00E4EF14 /* africa.json */; };
+		83286F6416E33F2D00E4EF14 /* america.json in Resources */ = {isa = PBXBuildFile; fileRef = 83286F5A16E33F2C00E4EF14 /* america.json */; };
+		83286F6516E33F2D00E4EF14 /* asia.json in Resources */ = {isa = PBXBuildFile; fileRef = 83286F5B16E33F2C00E4EF14 /* asia.json */; };
+		83286F6616E33F2D00E4EF14 /* europe.json in Resources */ = {isa = PBXBuildFile; fileRef = 83286F5C16E33F2C00E4EF14 /* europe.json */; };
+		83286F6716E33F2D00E4EF14 /* example.json in Resources */ = {isa = PBXBuildFile; fileRef = 83286F5D16E33F2C00E4EF14 /* example.json */; };
+		83286F6816E33F2D00E4EF14 /* mideast.json in Resources */ = {isa = PBXBuildFile; fileRef = 83286F5E16E33F2D00E4EF14 /* mideast.json */; };
+		83286F6916E33F2D00E4EF14 /* r15bl29-m.json in Resources */ = {isa = PBXBuildFile; fileRef = 83286F5F16E33F2D00E4EF14 /* r15bl29-m.json */; };
+		83286F6A16E33F2D00E4EF14 /* risk.json in Resources */ = {isa = PBXBuildFile; fileRef = 83286F6016E33F2D00E4EF14 /* risk.json */; };
+		83286F6B16E33F2D00E4EF14 /* usofa.json in Resources */ = {isa = PBXBuildFile; fileRef = 83286F6116E33F2D00E4EF14 /* usofa.json */; };
+		83286F6C16E33F2D00E4EF14 /* usofa0.json in Resources */ = {isa = PBXBuildFile; fileRef = 83286F6216E33F2D00E4EF14 /* usofa0.json */; };
 		834F392C16DB71E800307AB3 /* CCTestLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 834F392B16DB71E700307AB3 /* CCTestLayer.mm */; };
 		834F393016DB810D00307AB3 /* CCAddPair.mm in Sources */ = {isa = PBXBuildFile; fileRef = 834F392F16DB810D00307AB3 /* CCAddPair.mm */; };
 		834F393316DC15D300307AB3 /* CCApplyForce.mm in Sources */ = {isa = PBXBuildFile; fileRef = 834F393216DC15D300307AB3 /* CCApplyForce.mm */; };
@@ -44,8 +55,6 @@
 		836FFE8516DA097500EE2A69 /* r2-ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 836FFE7316DA097500EE2A69 /* r2-ipad.png */; };
 		836FFE8616DA097500EE2A69 /* r2.png in Resources */ = {isa = PBXBuildFile; fileRef = 836FFE7416DA097500EE2A69 /* r2.png */; };
 		836FFE8B16DA2ACB00EE2A69 /* CCBox2DView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 836FFE8A16DA2ACA00EE2A69 /* CCBox2DView.mm */; };
-		838D842316E0BA6400F6E4A8 /* example.json in Resources */ = {isa = PBXBuildFile; fileRef = 838D842216E0BA6400F6E4A8 /* example.json */; };
-		838D842516E16C1600F6E4A8 /* r15bl29-m.json in Resources */ = {isa = PBXBuildFile; fileRef = 838D842416E16C1600F6E4A8 /* r15bl29-m.json */; };
 		83F9A0B816DC9B2500F5B406 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 83F9A0B716DC9B2500F5B406 /* Icon.png */; };
 		83F9A0E916DD590F00F5B406 /* ATEdge.mm in Sources */ = {isa = PBXBuildFile; fileRef = 83F9A0CA16DD590F00F5B406 /* ATEdge.mm */; };
 		83F9A0EA16DD590F00F5B406 /* ATNode.mm in Sources */ = {isa = PBXBuildFile; fileRef = 83F9A0CC16DD590F00F5B406 /* ATNode.mm */; };
@@ -59,12 +68,23 @@
 		83F9A0F216DD590F00F5B406 /* ATSystem.mm in Sources */ = {isa = PBXBuildFile; fileRef = 83F9A0E316DD590F00F5B406 /* ATSystem.mm */; };
 		83F9A0F316DD590F00F5B406 /* ATSystemParams.mm in Sources */ = {isa = PBXBuildFile; fileRef = 83F9A0E516DD590F00F5B406 /* ATSystemParams.mm */; };
 		83F9A0F416DD590F00F5B406 /* ATSystemState.mm in Sources */ = {isa = PBXBuildFile; fileRef = 83F9A0E816DD590F00F5B406 /* ATSystemState.mm */; };
-		83F9A0F816DD5A8C00F5B406 /* usofa.json in Resources */ = {isa = PBXBuildFile; fileRef = 83F9A0F716DD5A8C00F5B406 /* usofa.json */; };
 		B6B0BBFECE1F45E3A9CC5EA9 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 91D1B226CAFA40E6AC4DC9C5 /* libPods.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		02D99875F5E74F17B89F9CF7 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
+		83286F5616E31E5400E4EF14 /* ParticleEmitter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParticleEmitter.h; sourceTree = "<group>"; };
+		83286F5716E31E5400E4EF14 /* ParticleEmitter.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ParticleEmitter.mm; sourceTree = "<group>"; };
+		83286F5916E33F2C00E4EF14 /* africa.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = africa.json; sourceTree = "<group>"; };
+		83286F5A16E33F2C00E4EF14 /* america.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = america.json; sourceTree = "<group>"; };
+		83286F5B16E33F2C00E4EF14 /* asia.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = asia.json; sourceTree = "<group>"; };
+		83286F5C16E33F2C00E4EF14 /* europe.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = europe.json; sourceTree = "<group>"; };
+		83286F5D16E33F2C00E4EF14 /* example.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = example.json; sourceTree = "<group>"; };
+		83286F5E16E33F2D00E4EF14 /* mideast.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = mideast.json; sourceTree = "<group>"; };
+		83286F5F16E33F2D00E4EF14 /* r15bl29-m.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "r15bl29-m.json"; sourceTree = "<group>"; };
+		83286F6016E33F2D00E4EF14 /* risk.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = risk.json; sourceTree = "<group>"; };
+		83286F6116E33F2D00E4EF14 /* usofa.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = usofa.json; sourceTree = "<group>"; };
+		83286F6216E33F2D00E4EF14 /* usofa0.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = usofa0.json; sourceTree = "<group>"; };
 		834F392A16DB71E700307AB3 /* CCTestLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCTestLayer.h; sourceTree = "<group>"; };
 		834F392B16DB71E700307AB3 /* CCTestLayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CCTestLayer.mm; sourceTree = "<group>"; };
 		834F392E16DB80B800307AB3 /* CCAddPair.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CCAddPair.h; path = "CCBox2D Test/CCBox2DTests/CCAddPair.h"; sourceTree = "<group>"; };
@@ -113,8 +133,6 @@
 		836FFE7416DA097500EE2A69 /* r2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = r2.png; sourceTree = "<group>"; };
 		836FFE8916DA2AC900EE2A69 /* CCBox2DView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCBox2DView.h; sourceTree = "<group>"; };
 		836FFE8A16DA2ACA00EE2A69 /* CCBox2DView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CCBox2DView.mm; sourceTree = "<group>"; };
-		838D842216E0BA6400F6E4A8 /* example.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = example.json; sourceTree = "<group>"; };
-		838D842416E16C1600F6E4A8 /* r15bl29-m.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "r15bl29-m.json"; sourceTree = "<group>"; };
 		83F9A0B716DC9B2500F5B406 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		83F9A0B916DCAA4200F5B406 /* BGLibraryMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BGLibraryMacros.h; sourceTree = "<group>"; };
 		83F9A0C916DD590F00F5B406 /* ATEdge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATEdge.h; sourceTree = "<group>"; };
@@ -145,7 +163,6 @@
 		83F9A0E716DD590F00F5B406 /* ATSystemState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATSystemState.h; sourceTree = "<group>"; };
 		83F9A0E816DD590F00F5B406 /* ATSystemState.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ATSystemState.mm; sourceTree = "<group>"; };
 		83F9A0F516DD5A3C00F5B406 /* Defs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Defs.h; sourceTree = "<group>"; };
-		83F9A0F716DD5A8C00F5B406 /* usofa.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = usofa.json; sourceTree = "<group>"; };
 		91D1B226CAFA40E6AC4DC9C5 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -213,6 +230,8 @@
 		836FFDB116D9EB1000EE2A69 /* CCBox2D Test */ = {
 			isa = PBXGroup;
 			children = (
+				83286F5616E31E5400E4EF14 /* ParticleEmitter.h */,
+				83286F5716E31E5400E4EF14 /* ParticleEmitter.mm */,
 				834F392A16DB71E700307AB3 /* CCTestLayer.h */,
 				834F392B16DB71E700307AB3 /* CCTestLayer.mm */,
 				836FFDC816D9EEB000EE2A69 /* Box2DAppDelegate.h */,
@@ -368,9 +387,16 @@
 		83F9A0F616DD5A8B00F5B406 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				838D842416E16C1600F6E4A8 /* r15bl29-m.json */,
-				838D842216E0BA6400F6E4A8 /* example.json */,
-				83F9A0F716DD5A8C00F5B406 /* usofa.json */,
+				83286F5916E33F2C00E4EF14 /* africa.json */,
+				83286F5A16E33F2C00E4EF14 /* america.json */,
+				83286F5B16E33F2C00E4EF14 /* asia.json */,
+				83286F5C16E33F2C00E4EF14 /* europe.json */,
+				83286F5D16E33F2C00E4EF14 /* example.json */,
+				83286F5E16E33F2D00E4EF14 /* mideast.json */,
+				83286F5F16E33F2D00E4EF14 /* r15bl29-m.json */,
+				83286F6016E33F2D00E4EF14 /* risk.json */,
+				83286F6116E33F2D00E4EF14 /* usofa.json */,
+				83286F6216E33F2D00E4EF14 /* usofa0.json */,
 			);
 			name = Model;
 			path = "CCBox2D Test/Model";
@@ -455,9 +481,16 @@
 				834F393A16DC7D2700307AB3 /* fabric.png in Resources */,
 				834F393B16DC7D2700307AB3 /* fabric@2x.png in Resources */,
 				83F9A0B816DC9B2500F5B406 /* Icon.png in Resources */,
-				83F9A0F816DD5A8C00F5B406 /* usofa.json in Resources */,
-				838D842316E0BA6400F6E4A8 /* example.json in Resources */,
-				838D842516E16C1600F6E4A8 /* r15bl29-m.json in Resources */,
+				83286F6316E33F2D00E4EF14 /* africa.json in Resources */,
+				83286F6416E33F2D00E4EF14 /* america.json in Resources */,
+				83286F6516E33F2D00E4EF14 /* asia.json in Resources */,
+				83286F6616E33F2D00E4EF14 /* europe.json in Resources */,
+				83286F6716E33F2D00E4EF14 /* example.json in Resources */,
+				83286F6816E33F2D00E4EF14 /* mideast.json in Resources */,
+				83286F6916E33F2D00E4EF14 /* r15bl29-m.json in Resources */,
+				83286F6A16E33F2D00E4EF14 /* risk.json in Resources */,
+				83286F6B16E33F2D00E4EF14 /* usofa.json in Resources */,
+				83286F6C16E33F2D00E4EF14 /* usofa0.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -505,6 +538,7 @@
 				83F9A0F216DD590F00F5B406 /* ATSystem.mm in Sources */,
 				83F9A0F316DD590F00F5B406 /* ATSystemParams.mm in Sources */,
 				83F9A0F416DD590F00F5B406 /* ATSystemState.mm in Sources */,
+				83286F5816E31E5400E4EF14 /* ParticleEmitter.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

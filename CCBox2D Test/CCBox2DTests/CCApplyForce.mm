@@ -22,8 +22,9 @@
         m_world->SetGravity(b2Vec2(0.0f, 0.0f));
         
         [self createTestBody];
-        [self loadMapData];
-        [self createNodes]; //- not needed
+        //[self loadMapDataForFileName:@"usofa"];
+        [self loadMapDataForFileName:@"africa"];
+        //[self createNodes]; //- not needed
         [self performSelector:@selector(createJoints) withObject:nil afterDelay:3];
         [self createCartesianBounds]; // 0,0 in center
 
@@ -47,6 +48,7 @@
     [centerBody configureSpriteForWorld:m_world bodyDef:bodyDef];
     centerBody.position = ccp(-130,-130);
     [self addChild:centerBody z:-100];
+    
     //[self generateNodesWithParent:centerBody];
 
 }
@@ -57,14 +59,29 @@
     for (ATParticle *particle in appDelegate.system.physics.particles) {
         [particle update:delta];
         
-        [self attractNode:particle target:centerBody];
+       // [self attractNodeToOrigin:particle];
     }
 }
--(void)attractNode:(ATParticle*)p1 target:(ATParticle*)p2{
-    CGPoint pt = [p1 attraction:p2];
-    [p1 applyForce:pt];
+-(void)attractNodeToOrigin:(ATParticle*)p1{
+
+    b2Body *body1 = p1.body;
+    b2Body *body2 = centerBody.body;
+    b2Vec2 position = body1->GetWorldCenter();
+    NSLog(@"(%f, %f)",position.x,position.y);
+    
+    b2Vec2 position1 = body2->GetWorldCenter();
+   // NSLog(@"(%f, %f)",position1.x,position1.y);
+    
+    b2Vec2 direction = body1->GetWorldCenter() - body2->GetWorldCenter();
+    direction.Normalize();
+
+    float magnitude = 10000;
+    body1->ApplyForce( -magnitude * direction, body1->GetWorldCenter() ); //flip to cause repulsion
+    body2->ApplyForce( magnitude * direction, body2->GetWorldCenter() );//flip to cause repulsion
     
 }
+
+
 -(void)generateChildrenByParent:(ATParticle*)parentParticle{
     
     //TODO make this cleaner
@@ -168,14 +185,17 @@
         radius = b2Sqrt(2.0f * I / mass);
         
         //b2FrictionJointDef jd;
-        b2FrictionJointDef jd;
-        jd.localAnchorA.SetZero();
-        jd.localAnchorB.SetZero();
+        b2DistanceJointDef jd;
+        jd.length = 250;
+        jd.frequencyHz = 60;
+        jd.dampingRatio = 1;
+       // jd.localAnchorA.SetZero();
+       // jd.localAnchorB.SetZero();
         jd.bodyA = parentSprite.body;
         jd.bodyB = particle.body;
         jd.collideConnected = true;
-        jd.maxForce = mass * gravity;
-        jd.maxTorque = mass * radius * gravity;
+        //jd.maxForce = mass * gravity;
+        //jd.maxTorque = mass * radius * gravity;
         m_world->CreateJoint(&jd);
         
         
@@ -186,10 +206,10 @@
 
 
 
--(void) loadMapData
+-(void) loadMapDataForFileName:(NSString*)filename
 {
     // Find the file
-    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"usofa" ofType:@"json"];
+    NSString *filePath = [[NSBundle mainBundle] pathForResource:filename ofType:@"json"];
     if (filePath) {
         // Load data in the file
         NSData *theJSONData = [NSData dataWithContentsOfFile:filePath];
@@ -275,7 +295,6 @@
         float32 mass = [currentBody mass];
         
         b2FrictionJointDef jd;
-        
         jd.localAnchorA.SetZero();
         jd.localAnchorB.SetZero();
         jd.bodyA = currentBody.body;
@@ -284,7 +303,16 @@
         jd.maxForce = mass * gravity;
         jd.maxTorque = mass * radius * gravity;
         m_world->CreateJoint(&jd);
+
         
+        /*b2PrismaticJointDef jd;
+        jd.localAnchorA.SetZero();
+        jd.localAnchorB.SetZero();
+        jd.bodyA = currentBody.body;
+        jd.bodyB = neighborBody.body;
+        jd.collideConnected = true;
+        jd.upperTranslation = 80;
+        jd.lowerTranslation = 60;*/
     }
 }
 
