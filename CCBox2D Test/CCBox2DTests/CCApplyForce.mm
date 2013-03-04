@@ -61,9 +61,38 @@
         
        // [self attractNodeToOrigin:particle];
     }
+    /*for (ATSpring *spring in appDelegate.system.physics.springs) {
+        // Connect the joints
+        ATParticle *currentBody = spring.point1;
+        ATParticle *neighborBody = spring.point2;
+        
+        b2Body *body1 = currentBody.body;
+        b2Body *body2 = neighborBody.body;
+   
+        
+        b2Vec2 pA = body1->GetWorldPoint(b2Vec2(spr.box2Db1x, spr.box2Db1y))
+        b2Vec2 pB = body2->GetWorldPoint(b2Vec2(spr.box2Db2x, spr.box2Db2y))
+        b2Vec2 lenVector = pB - pA
+        length = lenVector.Length()
+        deltaL = length - spr.initialLength
+        force = spr.K * deltaL
+
+        if length == 0:
+            lenVector = b2Vec2(0.70710678118654757, 0.70710678118654757)
+            else:
+                lenVector = b2Vec2(lenVector.x / length, lenVector.y / length)
+                sprForce = b2Vec2(lenVector.x * force, lenVector.y * force)
+                body1.ApplyForce(sprForce, pA)
+                body2.ApplyForce(-sprForce, pB)
+    }*/
+   
+  
+    
+    
 }
 -(void)attractNodeToOrigin:(ATParticle*)p1{
 
+    
     b2Body *body1 = p1.body;
     b2Body *body2 = centerBody.body;
     b2Vec2 position = body1->GetWorldCenter();
@@ -294,7 +323,19 @@
         float32 I = [currentBody inertia];
         float32 mass = [currentBody mass];
         
-        b2FrictionJointDef jd;
+        
+        b2RopeJointDef jd;
+         jd.localAnchorA.SetZero();
+         jd.localAnchorB.SetZero();
+         jd.bodyA = currentBody.body;
+         jd.bodyB = neighborBody.body;
+         jd.collideConnected = true;
+        jd.maxLength = 200;
+        // jd.maxForce = mass * gravity;
+        // jd.maxTorque = mass * radius * gravity;
+         m_world->CreateJoint(&jd);
+        
+        /*b2FrictionJointDef jd;
         jd.localAnchorA.SetZero();
         jd.localAnchorB.SetZero();
         jd.bodyA = currentBody.body;
@@ -302,7 +343,7 @@
         jd.collideConnected = true;
         jd.maxForce = mass * gravity;
         jd.maxTorque = mass * radius * gravity;
-        m_world->CreateJoint(&jd);
+        m_world->CreateJoint(&jd);*/
 
         
         /*b2PrismaticJointDef jd;
@@ -313,6 +354,9 @@
         jd.collideConnected = true;
         jd.upperTranslation = 80;
         jd.lowerTranslation = 60;*/
+        
+        
+        
     }
 }
 

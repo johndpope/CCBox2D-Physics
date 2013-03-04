@@ -25,17 +25,20 @@ Podfile
 	pod 'cocos2d'
 	pod 'CCBox2D' , :podspec => 'https://raw.github.com/jdp-global/CCBox2D/master/CCBox2D.podspec'
 
+![Alt text](/screenshots/physics.png "Physics sample")
+
 
 Useful links
-http://arborjs.org/
-http://arborjs.org/docs/barnes-hut
-http://murderandcreate.com/physics/
-http://www.cs.princeton.edu/courses/archive/fall03/cs126/assignments/barnes-hut.html
-http://arxiv.org/abs/1209.0748
-http://arxiv.org/pdf/1201.3011v1.pdf
-http://www.kickstarter.com/projects/shiffman/the-nature-of-code-book-project
-http://natureofcode.com/book/chapter-2-forces/
-http://natureofcode.com/book/chapter-5-physics-libraries/
+============
+	http://arborjs.org/
+	http://arborjs.org/docs/barnes-hut
+	http://murderandcreate.com/physics/
+	http://www.cs.princeton.edu/courses/archive/fall03/cs126/assignments/barnes-hut.html
+	http://arxiv.org/abs/1209.0748
+	http://arxiv.org/pdf/1201.3011v1.pdf
+	http://www.kickstarter.com/projects/shiffman/the-nature-of-code-book-project
+	http://natureofcode.com/book/chapter-2-forces/
+	http://natureofcode.com/book/chapter-5-physics-libraries/
 
 
 

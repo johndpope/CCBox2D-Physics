@@ -221,7 +221,7 @@ typedef enum {
 }
 
 -(void)setBounds:(CGRect)bounds{
-    self.bounds = CGRectMake(bounds.origin.x, bounds.origin.y, bounds.size.width*PTM_RATIO, bounds.size.height*PTM_RATIO);
+    self.bounds = CGRectMake(bounds.origin.x, bounds.origin.y, bounds.size.width*PTM_RATIO*kBoundsRatioToScreen, bounds.size.height*PTM_RATIO*kBoundsRatioToScreen);
 
 }
 - (void) applyForces:(ATParticle *)particle andRepulsion:(CGFloat)repulsion 

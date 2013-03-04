@@ -56,7 +56,7 @@
         springs_        = [[NSMutableArray arrayWithCapacity:32] retain];
         energy_         = [[ATEnergy alloc] init];
         bounds_         = CGRectMake(-1.0, -1.0, 2.0, 2.0);
-        speedLimit_     = 1000;
+        speedLimit_     = 100000;
         deltaTime_      = 1;
         stiffness_      = 1000;
         repulsion_      = 600;
@@ -353,7 +353,7 @@
     
     //keep the bound strangled to window layout for now
     if (1){ // old-fashioned Cartesian one with (0,0) in the center  
-       self.bounds  = CGRectMake(-widthInMeters/2, -heightInMeters/2, widthInMeters,heightInMeters); 
+       self.bounds  = CGRectMake(-widthInMeters/2*kBoundsRatioToScreen, -heightInMeters/2*kBoundsRatioToScreen, widthInMeters*kBoundsRatioToScreen,heightInMeters*kBoundsRatioToScreen);
     }else{
        self.bounds  = CGRectMake(0, 0, widthInMeters,heightInMeters);
     }
