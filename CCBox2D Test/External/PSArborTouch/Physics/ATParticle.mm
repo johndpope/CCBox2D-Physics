@@ -65,6 +65,7 @@
 		bodyDef.allowSleep = true;
 		bodyDef.position.Set(POINTS_TO_METERS(position.x), POINTS_TO_METERS(position.y));
 		bodyDef.userData =  self;
+ 
 		bodyDef.angle = CC_DEGREES_TO_RADIANS(angle);
 		_body = _world->CreateBody(&bodyDef);
         
@@ -78,6 +79,18 @@
 }
 
 
+const int16	k_smallGroup = 1;
+const int16 k_largeGroup = -1;
+
+const uint16 k_defaultCategory = 0x0001;
+const uint16 k_triangleCategory = 0x0002;
+const uint16 k_boxCategory = 0x0004;
+const uint16 k_circleCategory = 0x0008;
+
+const uint16 k_triangleMask = 0xFFFF;
+const uint16 k_boxMask = 0xFFFF ^ k_triangleCategory;
+const uint16 k_circleMask = 0xFFFF;
+
 - (void) createPhysicsObject{
     // Center is the position of the circle that is in the center (inner circle)
     b2Vec2 center = b2Vec2(self.position.x/PTM_RATIO, self.position.y/PTM_RATIO);
@@ -89,6 +102,13 @@
     fixtureDef.density = 0.1;
     fixtureDef.restitution = 0.05;
     fixtureDef.friction = 1.0;
+    /*fixtureDef.filter.groupIndex = k_smallGroup;
+    fixtureDef.filter.categoryBits = k_circleCategory;
+    fixtureDef.filter.maskBits = k_circleMask;*/
+    fixtureDef.filter.groupIndex = -1; //don't collide
+
+    
+    
         
     // Circle at the center (inner circle)
     b2BodyDef innerCircleBodyDef;

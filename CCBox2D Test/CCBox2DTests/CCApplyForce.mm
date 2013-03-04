@@ -21,12 +21,14 @@
 
         m_world->SetGravity(b2Vec2(0.0f, 0.0f));
         
-        [self createTestBody];
-        //[self loadMapDataForFileName:@"usofa"];
-        [self loadMapDataForFileName:@"africa"];
-        //[self createNodes]; //- not needed
-        [self performSelector:@selector(createJoints) withObject:nil afterDelay:3];
         [self createCartesianBounds]; // 0,0 in center
+        [self createTestBody];
+        NSArray *arr = [NSArray arrayWithObjects:@"bk42w74", @"bk43w73", @"bk70bk62", @"bk95bk3", @"g81w58", @"g83w57", @"pk60gr7", @"r15bl29", @"r17pu46", nil];
+        float rnd = RandomFloat(0, [arr count]);
+  
+        [self loadMapDataForFileName:[arr objectAtIndex:rnd]];
+        [self performSelector:@selector(createJoints) withObject:nil afterDelay:3];
+       
 
 
     }
@@ -48,8 +50,7 @@
     [centerBody configureSpriteForWorld:m_world bodyDef:bodyDef];
     centerBody.position = ccp(-130,-130);
     [self addChild:centerBody z:-100];
-    
-    //[self generateNodesWithParent:centerBody];
+
 
 }
 
@@ -59,32 +60,9 @@
     for (ATParticle *particle in appDelegate.system.physics.particles) {
         [particle update:delta];
         
-       // [self attractNodeToOrigin:particle];
+      //  [self attractNodeToOrigin:particle];
     }
-    /*for (ATSpring *spring in appDelegate.system.physics.springs) {
-        // Connect the joints
-        ATParticle *currentBody = spring.point1;
-        ATParticle *neighborBody = spring.point2;
-        
-        b2Body *body1 = currentBody.body;
-        b2Body *body2 = neighborBody.body;
    
-        
-        b2Vec2 pA = body1->GetWorldPoint(b2Vec2(spr.box2Db1x, spr.box2Db1y))
-        b2Vec2 pB = body2->GetWorldPoint(b2Vec2(spr.box2Db2x, spr.box2Db2y))
-        b2Vec2 lenVector = pB - pA
-        length = lenVector.Length()
-        deltaL = length - spr.initialLength
-        force = spr.K * deltaL
-
-        if length == 0:
-            lenVector = b2Vec2(0.70710678118654757, 0.70710678118654757)
-            else:
-                lenVector = b2Vec2(lenVector.x / length, lenVector.y / length)
-                sprForce = b2Vec2(lenVector.x * force, lenVector.y * force)
-                body1.ApplyForce(sprForce, pA)
-                body2.ApplyForce(-sprForce, pB)
-    }*/
    
   
     
@@ -104,7 +82,7 @@
     b2Vec2 direction = body1->GetWorldCenter() - body2->GetWorldCenter();
     direction.Normalize();
 
-    float magnitude = 10000;
+    float magnitude = 1;
     body1->ApplyForce( -magnitude * direction, body1->GetWorldCenter() ); //flip to cause repulsion
     body2->ApplyForce( magnitude * direction, body2->GetWorldCenter() );//flip to cause repulsion
     
@@ -335,16 +313,38 @@
         // jd.maxTorque = mass * radius * gravity;
          m_world->CreateJoint(&jd);
         
-        /*b2FrictionJointDef jd;
+        /*b2DistanceJointDef jd;
         jd.localAnchorA.SetZero();
         jd.localAnchorB.SetZero();
         jd.bodyA = currentBody.body;
         jd.bodyB = neighborBody.body;
         jd.collideConnected = true;
-        jd.maxForce = mass * gravity;
-        jd.maxTorque = mass * radius * gravity;
+        //jd.maxForce = mass * gravity;
+        //jd.maxTorque = mass * radius * gravity;
+        
+        // d = p2 - p1;
+        jd.length = 250;//d.Length();
+        jd.frequencyHz = 2.0f;
+        jd.dampingRatio = 0.0f;
+        
         m_world->CreateJoint(&jd);*/
-
+        
+       /*b2DistanceJointDef jd;
+        jd.localAnchorA.SetZero();
+        jd.localAnchorB.SetZero();
+        jd.bodyA = currentBody.body;
+        jd.bodyB = neighborBody.body;
+        jd.collideConnected = true;
+        //jd.maxForce = mass * gravity;
+        //jd.maxTorque = mass * radius * gravity;
+        
+       // d = p2 - p1;
+        jd.length = 250;//d.Length();
+        jd.frequencyHz = 2.0f;
+        jd.dampingRatio = 0.0f;
+        
+        m_world->CreateJoint(&jd);*/
+        
         
         /*b2PrismaticJointDef jd;
         jd.localAnchorA.SetZero();
@@ -355,6 +355,34 @@
         jd.upperTranslation = 80;
         jd.lowerTranslation = 60;*/
         
+
+        // Distance joint
+        /*float dampingRatio = 0.0;
+        float frequencyHz = 0;
+        // Rope joint
+        float kMaxWidth = 150.1;
+        // Bodies
+        int countBodyInChain = 15;
+        b2Body *body = currentBody.body;
+        b2Body* prevBody = neighborBody.body;
+        
+        //Create distance joint
+        b2DistanceJointDef distJDef;
+        b2Vec2 anchor1 = prevBody->GetWorldCenter();
+        b2Vec2 anchor2 = body->GetWorldCenter();
+        distJDef.Initialize(prevBody, body, anchor1, anchor2);
+        distJDef.collideConnected = false;
+        distJDef.dampingRatio = dampingRatio;
+        distJDef.frequencyHz = frequencyHz;
+        m_world->CreateJoint(&distJDef);*/
+        
+        //Create rope joint
+       /* b2RopeJointDef rDef;
+        rDef.maxLength = (body->GetPosition() - prevBody->GetPosition()).Length() * kMaxWidth;
+        rDef.localAnchorA = rDef.localAnchorB = b2Vec2_zero;
+        rDef.bodyA = prevBody;
+        rDef.bodyB = body;
+        m_world->CreateJoint(&rDef);*/
         
         
     }

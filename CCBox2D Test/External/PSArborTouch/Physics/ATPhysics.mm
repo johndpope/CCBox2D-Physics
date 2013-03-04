@@ -154,7 +154,7 @@
 
 - (BOOL) update; 
 {
-    //[self tendParticles];
+   // [self tendParticles];
     [self eulerIntegrator:deltaTime_];
     
 //    CGFloat motion = (self.energy.mean + self.energy.max) / 2; 
@@ -294,19 +294,19 @@
     
     if (self.repulsion > 0.0) {
         
-        if (self.theta > 0.0) {
+       // if (self.theta > 0.0) {
             [self applyBarnesHutRepulsion];
-        } else {
-            [self applyBruteForceRepulsion];
-        }
+       // } else {
+       //     [self applyBruteForceRepulsion];
+       // }
         
     }
     
     if (self.stiffness > 0.0) [self applySprings];
-    [self applyCenterDrift];
-    if (self.gravity) [self applyCenterGravity];
-    [self updateVelocity:deltaTime];
-    [self updatePosition:deltaTime];
+   // [self applyCenterDrift];
+   // if (self.gravity) [self applyCenterGravity];
+   // [self updateVelocity:deltaTime];
+   // [self updatePosition:deltaTime];
 }
 
 - (void) applyBruteForceRepulsion 
@@ -373,12 +373,11 @@
 
 - (void) applySprings 
 {
+    return;
     NSLog(@"applySprings");
     for (ATSpring *spring in activeSprings_) {
-        CGPoint d = CGPointSubtract(spring.target.physicsPosition, spring.source.physicsPosition); // the direction of the spring
-        
-        
-         NSLog(@"spring.target.physicsPosition.x:%f",spring.target.physicsPosition.x);
+        CGPoint d = CGPointSubtract(spring.target.position, spring.source.position); // the direction of the spring
+        NSLog(@"spring.target.physicsPosition.x:%f",spring.target.physicsPosition.x);
         NSLog(@"spring.target.physicsPosition.y:%f",spring.target.physicsPosition.y);
         NSLog(@"spring.source.physicsPosition.x:%f",spring.source.physicsPosition.x);
         NSLog(@"spring.source.physicsPosition.y:%f",spring.source.physicsPosition.y);

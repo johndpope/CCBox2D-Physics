@@ -1,15 +1,13 @@
 
 SPEC CHECKSUMS: 
-  box2d: 091fdf7e8b74bc74f20803734370b8492096ea04
-  CCBox2D: 3e9d9f42c105976bbe977be7d175068ba1de8902
   cocos2d: c6d26b9c0abdbb26bed2e771baf94ce6fa7dd523
+  box2d: 091fdf7e8b74bc74f20803734370b8492096ea04
+  CCBox2D: 43a6f37bebada351e09eb97c131e11b8fa47bcc7
 
-PODS: 
-- CCBox2D (0.0.1): 
-  - box2d
-  - cocos2d
-- box2d (2.3.0)
-- cocos2d (2.1.rc0)
+DEPENDENCIES: 
+- CCBox2D (from `https://raw.github.com/jdp-global/CCBox2D/master/CCBox2D.podspec')
+- box2d
+- cocos2d
 
 COCOAPODS: 0.16.2
 
@@ -17,7 +15,9 @@ EXTERNAL SOURCES:
   CCBox2D: 
     :podspec: https://raw.github.com/jdp-global/CCBox2D/master/CCBox2D.podspec
 
-DEPENDENCIES: 
-- CCBox2D (from `https://raw.github.com/jdp-global/CCBox2D/master/CCBox2D.podspec')
-- box2d
-- cocos2d
+PODS: 
+- CCBox2D (0.0.1): 
+  - box2d
+  - cocos2d
+- box2d (2.3.0)
+- cocos2d (2.1.rc0)
